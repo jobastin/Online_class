@@ -1,6 +1,7 @@
 <?php 
 require('fun.php');
 sessiondelete();
+if (!isset($_POST['submit'])){
 ?><!DOCTYPE html>
 <html>
 <head>
@@ -14,13 +15,14 @@ sessiondelete();
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function(){
                 if (!(this.readyState == 4 && this.status == 200)) return;
+                console.log('"'+this.responseText+'"')
                 if (this.responseText == 'true'){
                     ### VALID USER CODE HERE ###
                 } else if (this.responseText == 'false'){
                     ### INVALID USER CODE HERE ###
                 }
             }
-            ajax.open("get", "checkuser.php?user=### USERNAMEHERE ###", );
+            ajax.open("get", "checkuser.php?user="+username);
             ajax.send();
         }
     </script>
@@ -36,7 +38,7 @@ sessiondelete();
 			<img src="img/thumpnail.png">
 		</div>
 		<div class="login-content">
-			<form action="student_login.html" method="post">
+			<form action="login.php" method="post">
 				<img src="img/avathar.png" style="border-radius: 50%;">
 				<h2 class="title">LOGIN</h2>
            		<div class="input-div one">
@@ -45,7 +47,7 @@ sessiondelete();
            		   </div>
            		   <div class="div">
            		   		<h5>Student ID</h5>
-           		   		<input type="text" class="input" name="username">
+           		   		<input type="text" class="input" name="username" oninput='checkuser(this.value);'>
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -57,10 +59,17 @@ sessiondelete();
            		    	<input type="password" class="input" name="password">
             	   </div>
             	</div>
-            	<input type="submit" class="btn" value="Login">
+            	<input type="submit" class="btn" value="Login" name='submit'>
             </form>
         </div>
     </div>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
+<?php 
+} else {
+    if (!(isset($_POST['username']) and isset($_POST['password'])))
+        header('Location: login.php');
+    signin($_POST['username'], $_POST['password']);
+}
+?>
