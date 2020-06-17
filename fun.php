@@ -24,12 +24,13 @@ function signin($username, $password){
         session_start();
         $_SESSION['user'] = new user($row['id'], $row['username'], $row['password'], $row['isstaff'], $row['isadmin']);
         if ($_SESSION['user']->isstaff()){
-//            die('going to staff/');
             header('Location: staff/');
+            return;
         }
         else{
-//            die('going to student/');
+            die('going to student/');
             header('Location: student/');
+            return;
         }
     }
     header("Location: login.php");
