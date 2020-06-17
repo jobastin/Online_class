@@ -30,7 +30,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_delete.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_stastictis.html">
         <div class="sidebar-brand-icon rotate-n-15">
         </div>
         <div class="sidebar-brand-text mx-3">Admin Panel</div>
@@ -38,6 +38,15 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link" href="admin_stastictis.html">
+          <i class="fa fa-cogs"></i>
+          <span>STATISTICS</span></a>
+      </li>
+      <hr class="sidebar-divider my-0">
+
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
@@ -67,70 +76,6 @@
           <i class="fa fa-trash"></i>
           <span>DELETE</span></a>
       </li>
-
-      <!-- Divider -->
-      <hr class="sidebar-divider">
-
-      <!-- Heading -->
-      <div class="sidebar-heading">
-        DETAILS
-      </div>
-
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>KINDERGARTEN</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">LKG</a>
-            <a class="collapse-item" href="#">UKG</a>
-            <div class="collapse-divider"></div>
-          </div>
-        </div>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>PRIMARY SECTION</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">I</a>
-            <a class="collapse-item" href="#">II</a>
-            <a class="collapse-item" href="#">III</a>
-            <a class="collapse-item" href="#">IV</a>
-            <a class="collapse-item" href="#">V</a>
-            <a class="collapse-item" href="#">VI</a>
-          </div>
-        </div>
-      </li>
-
-     <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>HIGH SCHOOL</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="#">VII</a>
-            <a class="collapse-item" href="#">VIII</a>
-            <a class="collapse-item" href="#">IX</a>
-            <a class="collapse-item" href="#">X</a>
-          </div>
-        </div>
-      </li>
-     
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>STAFF</span></a>
-      </li>
-
-
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
     </ul>
@@ -179,14 +124,14 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <table class="table table-dark">
+          <table class="table">
   <thead>
     <tr>
       <th scope="col">SINO</th>
       <th scope="col">CLASS</th>
       <th scope="col">SUBJECT</th>
       <th scope="col">CHAPTER NUMBER</th>
-      <th scope="col">DESCRIPTION</th>
+      <th scope="col">TITLE</th>
       <th scope="col">YOUTUBE LINK</th>
       <th scope="col">ACTION</th>
     </tr>
@@ -233,7 +178,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="index.html">Logout</a>
+          <a class="btn btn-primary" href="login.html">Logout</a>
         </div>
       </div>
     </div>
