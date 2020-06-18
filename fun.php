@@ -17,6 +17,8 @@ function signin($username, $password){
     $user = mysqli_real_escape_string($con, $username);
     $pass = mysqli_real_escape_string($con, $password);
     $res = mysqli_query($con, "select * from `user` where username='$user' and password='$password'") or die("Sign in Error");
+    mysqli_close($con);
+    
     if (mysqli_num_rows($res)==1){
         $row = mysqli_fetch_array($res);
 //        print_r($row);die();
@@ -53,6 +55,54 @@ function sessiondelete(){
     session_destroy();
 }
 
+function classes($userid){
+    //returns an array of class objects, having classes that user attend
+    
+    $con = connect();
+    $q = "select `clas`.`id`, `subj_id`, `subjectname` from `clas` inner join `subj` on `clas`.`subj_id`=`subj`.`id` where `clas`.`user_id`=$userid";
+    $res = mysqli_query($con, $q) or die('Unable to Fetch Data');
+    mysqli_close($con);
+    
+    $subjects = array();
+    while($row = mysqli_fetch_array($res)){
+        array_push($subjects, new subject($row['id'], $row['subj_id'], $row['subjectname']));
+    }
+    return $subjects;
+}
+function vidlink($clas){
+    //returns an array of arrays containing links to the subjects in $clas variable
+    $alllinks = array();
+    $con = connect();
+    foreach ($clas as $sub){
+        $q = "select * from `vids` where `class_id`=$sub->id";
+        $res = mysqli_query($con, $q) or die("Unable to Fetch Classes");
+        $links = array();
+        while ($row = mysqli_fetch_array($res)){
+            array_push($links, new ytlink($row['id'], $row['staff_id'], $row['class_id'], $row['title'], $row['link'], $row['chapter']));
+        }
+        array_push($alllinks, $links);
+    }
+    mysqli_close($con);
+    return $alllinks;
+}
+
+class ytlink{
+    function __construct($id, $staffid, $classid, $title, $vlink, $chapter){
+        $this->id = $id;
+        $this->staffid = $staffid;
+        $this->classid = $classid;
+        $this->title = $title;
+        $this->vlink = $vlink;
+        $this->chapter = $chapter;
+    }
+}
+class subject{
+    function __construct($id, $subjid, $subjectname){
+        $this->id = $id;
+        $this->subjid = $subjid;
+        $this->subjectname = $subjectname;
+    }
+}
 class user{
     function __construct($id, $username, $password, $isstaff, $isadmin){
         $this->id = $id;
