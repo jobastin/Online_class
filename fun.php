@@ -17,6 +17,8 @@ function signin($username, $password){
     $user = mysqli_real_escape_string($con, $username);
     $pass = mysqli_real_escape_string($con, $password);
     $res = mysqli_query($con, "select * from `user` where username='$user' and password='$password'") or die("Sign in Error");
+    mysqli_close($con);
+    
     if (mysqli_num_rows($res)==1){
         $row = mysqli_fetch_array($res);
 //        print_r($row);die();
@@ -53,6 +55,28 @@ function sessiondelete(){
     session_destroy();
 }
 
+function subjects($userid){
+    //returns an array of class objects, having classes that user attend
+    
+    $con = connect();
+    $q = "select `clas`.`id`, `subj_id`, `subjectname` from `clas` inner join `subj` on `clas`.`subj_id`=`subj`.`id` where `clas`.`user_id`=$userid";
+    $res = mysqli_query($con, $q) or die('Unable to Fetch Data');
+    mysqli_close($con);
+    
+    $subjects = array();
+    while($row = mysqli_fetch_array($res)){
+        array_push($subjects, new subject($row['id'], $row['subj_id'], $row['subjectname']));
+    }
+    return $subjects;
+}
+
+class subject{
+    function __construct($id, $subjid, $subjectname){
+        $this->id = $id;
+        $this->subjid = $subjid;
+        $this->subjectname = $subjectname;
+    }
+}
 class user{
     function __construct($id, $username, $password, $isstaff, $isadmin){
         $this->id = $id;

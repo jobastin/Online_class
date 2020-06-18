@@ -1,4 +1,4 @@
--
+- 
 - make sure usernames got only chars%nums in db, inputs
 - make sure login.php shows wrong password and invalid email info
 - add encryption to passwords
