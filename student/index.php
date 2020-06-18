@@ -29,8 +29,9 @@ else {
     <!-- Custom styles for this template-->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../css/media.css" rel="stylesheet">
-
+    
     <title><?php echo $user->username; ?> | St. Aloysius School</title>
+    <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
     <script>
         
     </script>

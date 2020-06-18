@@ -6,7 +6,7 @@ if (!isset($_POST['submit'])){
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/favicon.ico">
+<link rel="shortcut icon" href="img/thumpnail.png" type="image/png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>Login | St. Aloysius School</title>
 <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
@@ -49,10 +49,7 @@ if (!isset($_POST['submit'])){
 	<div class="navbar-collapse collapse" id="navbarColor02" style="">
 		<ul class="navbar-nav mr-auto d-flex align-items-center">
 			<li class="nav-item">
-			<a class="nav-link" href="#">Home</a>
-			</li>
-			<li class="nav-item">
-			<a class="nav-link" href="#">Contact</a>
+			<a class="nav-link" href="index.html">Home</a>
 			</li>
 		</ul>
 	</div>
