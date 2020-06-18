@@ -31,15 +31,17 @@ function signin($username, $password){
             header('Location: student/');
             return;
         }
-    }
-    header("Location: login.php");
+    } else
+        header("Location: login.php");
 }
 
 function sessioncheck(){
     //checks if a user has logged in, returns to signinpage otherwise
     session_start();
     if (!isset($_SESSION['user'])){
-        header('Location: login.php');
+        return false;
+    } else {
+        return true;
     }
 }
 function sessiondelete(){
