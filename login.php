@@ -72,7 +72,7 @@ if (!isset($_POST['submit'])){
   background-attachment: fixed;
   background-size: 700px auto;
   background-position:right top;
-  opacity: 0.6;">
+  opacity: 1;">
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
 			<form class="border rounded p-5" style="background-color: white;opacity: 1;" action="login.php" method="post">
 				<h3 class="mb-4 text-center">Sign In</h3>
