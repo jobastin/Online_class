@@ -28,7 +28,6 @@ function signin($username, $password){
             return;
         }
         else{
-            die('going to student/');
             header('Location: student/');
             return;
         }
