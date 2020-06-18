@@ -41,7 +41,7 @@ if (!isset($_POST['submit'])){
 </head>
     
 <body> 
-<nav class="topnav navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<nav class="topnav navbar navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
 <div class="container-fluid">
 	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
 	<span class="navbar-toggler-icon"></span>
