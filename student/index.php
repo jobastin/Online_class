@@ -9,7 +9,8 @@ else {
         //redirect to staff landing if user is a staff member
         header('Location: ../staff/');
     } else {
-        $clas = subjects($user->id);
+        $clas = classes($user->id); //array of clas-subs of usr
+        $vids = vidlink($clas); //array of (array of links)
 ?><!DOCTYPE html>
 <html lang="en">
 

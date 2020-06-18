@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2020 at 01:25 PM
+-- Generation Time: Jun 18, 2020 at 03:12 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -72,7 +72,47 @@ INSERT INTO `clas` (`id`, `user_id`, `subj_id`) VALUES
 (31, 10, 5),
 (32, 11, 5),
 (33, 12, 5),
-(34, 13, 5);
+(34, 13, 5),
+(35, 15, 1),
+(36, 16, 1),
+(37, 17, 1),
+(38, 18, 1),
+(39, 19, 1),
+(40, 15, 3),
+(41, 16, 3),
+(42, 17, 3),
+(43, 18, 3),
+(44, 19, 3),
+(45, 15, 2),
+(46, 16, 2),
+(47, 17, 2),
+(48, 18, 2),
+(49, 19, 2),
+(50, 15, 4),
+(51, 16, 4),
+(52, 17, 4),
+(53, 18, 4),
+(54, 19, 4),
+(55, 15, 7),
+(56, 16, 7),
+(57, 17, 7),
+(58, 18, 7),
+(59, 19, 7),
+(60, 15, 8),
+(61, 16, 8),
+(62, 17, 8),
+(63, 18, 8),
+(64, 19, 8),
+(65, 15, 9),
+(66, 16, 9),
+(67, 17, 9),
+(68, 18, 9),
+(69, 19, 9),
+(70, 15, 10),
+(71, 16, 10),
+(72, 17, 10),
+(73, 18, 10),
+(74, 19, 10);
 
 -- --------------------------------------------------------
 
@@ -95,7 +135,11 @@ INSERT INTO `subj` (`id`, `subjectname`) VALUES
 (3, 'English'),
 (4, 'Maths'),
 (5, 'EVS'),
-(6, 'Rhymes');
+(6, 'Rhymes'),
+(7, 'Physical Science'),
+(8, 'Natural Science'),
+(9, 'Social Science'),
+(10, 'Computer Science');
 
 -- --------------------------------------------------------
 
@@ -124,7 +168,12 @@ INSERT INTO `user` (`id`, `username`, `password`, `isstaff`, `isadmin`) VALUES
 (11, 'class03', 'class03', 0, 0),
 (12, 'class04', 'class04', 0, 0),
 (13, 'class05', 'class05', 0, 0),
-(14, 'classlkg', 'classlkg', 0, 0);
+(14, 'classlkg', 'classlkg', 0, 0),
+(15, 'class06', 'class06', 0, 0),
+(16, 'class07', 'class07', 0, 0),
+(17, 'class08', 'class08', 0, 0),
+(18, 'class09', 'class09', 0, 0),
+(19, 'class10', 'class10', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -176,19 +225,19 @@ ALTER TABLE `vids`
 -- AUTO_INCREMENT for table `clas`
 --
 ALTER TABLE `clas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `subj`
 --
 ALTER TABLE `subj`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `vids`
