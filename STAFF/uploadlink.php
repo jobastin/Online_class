@@ -1,6 +1,6 @@
 <?php
 require('../fun.php');
-if (!sessioncheck())
+if (!sessioncheck() or !isset($_POST['class']) or !isset($_POST['subject']) or !isset($_POST['title']) or !isset($_POST['vlink']) or !isset($_POST['chapter']))
     header('Location: ../');
 $staff = $_SESSION['user'];
 $class = $_POST['class'];

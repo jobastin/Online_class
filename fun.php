@@ -66,7 +66,7 @@ function classes($userid, $returnsubject = false){
     
     $subjects = array();
     while($row = mysqli_fetch_array($res)){
-        if (!returnsubject)
+        if (!$returnsubject)
             array_push($subjects, new subject($row['id'], $row['subj_id'], $row['subjectname']));
         else
             if ($row['subjectname'] == $returnsubject)

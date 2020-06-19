@@ -6,6 +6,7 @@ ADMIN
 
 STUDENTS
 - display links in student landing
+- decide on forgot password actions
 
 - fade bgs on login and home
 - make sure login.php shows wrong password and [invalid email info] and disables login if email is invalid
