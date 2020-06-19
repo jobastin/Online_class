@@ -44,6 +44,24 @@ if (!isset($_POST['submit'])){
             ajax.open("get", "checkuser.php?user="+username);
             ajax.send();
         }
+        
+        
+        function checkuser(username){
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                console.log('"'+this.responseText+'"')
+                if (this.responseText == 'true'){
+                    document.getElementById("exampleInputEmail1").style.borderColor = "green";
+                }else if (this.responseText == 'false'){
+            
+                }
+            }
+            document.getElementById("exampleInputEmail1").style.borderColor = "red";
+            ajax.open("get", "checkuser.php?user="+username);
+            ajax.send();
+        }
+        
     </script>
 </head>
     
@@ -59,6 +77,7 @@ if (!isset($_POST['submit'])){
 			<a class="nav-link" href="index.html">Home</a>
 			</li>
 		</ul>
+		
 	</div>
 </div>
 </nav>
@@ -81,13 +100,16 @@ if (!isset($_POST['submit'])){
 			<form class="border rounded p-5" style="background-color: white;opacity: 1;" action="login.php" method="post">
 				<h3 class="mb-4 text-center">Sign In</h3>
 				<div class="form-group" id="check">
-					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login ID" required="" oninput="checkuser(this.value);" name="username">
+					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login ID" required="" oninput="checkuser(this.value);" name="username" autofocus>
 				</div>
 				<div class="form-group">
 					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="" name="password">
 				</div>
 				<button type="submit" class="btn btn-success btn-round btn-block shadow-sm" name="submit">Sign in</button>
+				<br>
+				<a href="#!" class="forgot-password-link" >Forgot password?</a>
 			</form>
+			
 		</div>
 	</div>
 </div>    
