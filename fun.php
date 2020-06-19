@@ -55,8 +55,9 @@ function sessiondelete(){
     session_destroy();
 }
 
-function classes($userid){
+function classes($userid, $returnsubject = false){
     //returns an array of class objects, having classes that user attend
+    //if returnsubject is not false, it returns the id of clas the user attends
     
     $con = connect();
     $q = "select `clas`.`id`, `subj_id`, `subjectname` from `clas` inner join `subj` on `clas`.`subj_id`=`subj`.`id` where `clas`.`user_id`=$userid";
@@ -65,7 +66,11 @@ function classes($userid){
     
     $subjects = array();
     while($row = mysqli_fetch_array($res)){
-        array_push($subjects, new subject($row['id'], $row['subj_id'], $row['subjectname']));
+        if (!returnsubject)
+            array_push($subjects, new subject($row['id'], $row['subj_id'], $row['subjectname']));
+        else
+            if ($row['subjectname'] == $returnsubject)
+                return $row['id'];
     }
     return $subjects;
 }
@@ -78,17 +83,26 @@ function vidlink($clas){
         $res = mysqli_query($con, $q) or die("Unable to Fetch Classes");
         $links = array();
         while ($row = mysqli_fetch_array($res)){
-            array_push($links, new ytlink($row['id'], $row['staff_id'], $row['class_id'], $row['title'], $row['link'], $row['chapter']));
+            array_push($links, new ytlink($row['staff_id'], $row['class_id'], $row['title'], $row['link'], $row['chapter']));
         }
         array_push($alllinks, $links);
     }
     mysqli_close($con);
     return $alllinks;
 }
+function fetchclasses(){
+    //returns all the classes going on in school
+    $con = connect();
+    $res = mysqli_query($con, "select username from `user` where isstaff=0") or die("Unable to fetch Users.");
+    $users = array();
+    while ($row = mysqli_fetch_array($res))
+        array_push($users, $row['username']);
+    mysqli_close($con);
+    return $users;
+}
 
 class ytlink{
-    function __construct($id, $staffid, $classid, $title, $vlink, $chapter){
-        $this->id = $id;
+    function __construct($staffid, $classid, $title, $vlink, $chapter){
         $this->staffid = $staffid;
         $this->classid = $classid;
         $this->title = $title;

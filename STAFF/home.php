@@ -20,7 +20,7 @@ else{
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>St. ALOYSIUS SCHOOL | Admin</title>
+  <title>St. Aloysius School | <?php echo $user->username; ?></title>
   <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -32,34 +32,63 @@ else{
   
   
   <script>
-  function show2()
-      {
-        document.getElementById("uploads").style.display = "inline"; 
-        document.getElementById("statistics").style.display = "none"; 
-        document.getElementById("edit").style.display = "none"; 
-        document.getElementById("delete").style.display = "none"; 
-      }
-      function show1()
-      {
-        document.getElementById("statistics").style.display = "inline"; 
-        document.getElementById("uploads").style.display = "none"; 
-        document.getElementById("edit").style.display = "none"; 
-        document.getElementById("delete").style.display = "none"; 
-      }
-      function show3()
-      {
-        document.getElementById("edit").style.display = "inline"; 
-        document.getElementById("statistics").style.display = "none"; 
-        document.getElementById("uploads").style.display = "none"; 
-        document.getElementById("delete").style.display = "none"; 
-      }
-       function show4()
-      {
-        document.getElementById("delete").style.display = "inline"; 
-        document.getElementById("statistics").style.display = "none"; 
-        document.getElementById("uploads").style.display = "none"; 
-        document.getElementById("edit").style.display = "none"; 
-      }
+function show2(){
+    document.getElementById("uploads").style.display = "inline"; 
+    document.getElementById("statistics").style.display = "none"; 
+    document.getElementById("edit").style.display = "none"; 
+    document.getElementById("delete").style.display = "none"; 
+}
+function show1(){
+    document.getElementById("statistics").style.display = "inline"; 
+    document.getElementById("uploads").style.display = "none"; 
+    document.getElementById("edit").style.display = "none"; 
+    document.getElementById("delete").style.display = "none"; 
+}
+function show3(){
+    document.getElementById("edit").style.display = "inline"; 
+    document.getElementById("statistics").style.display = "none"; 
+    document.getElementById("uploads").style.display = "none"; 
+    document.getElementById("delete").style.display = "none"; 
+}
+function show4(){
+    document.getElementById("delete").style.display = "inline"; 
+    document.getElementById("statistics").style.display = "none"; 
+    document.getElementById("uploads").style.display = "none"; 
+    document.getElementById("edit").style.display = "none"; 
+}
+function loadsubjects(classname){
+    var ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function(){
+        //exit of data not ready
+        if (!(this.readyState == 4 && this.status == 200))
+            return;
+        //obtain data from db
+//        console.log(this.responseText);
+        var subjects = [];
+        for (x of this.responseText.split("<br/>"))
+            subjects.push(x);
+        subjects.pop();
+        console.log(subjects);
+        
+        //clear data list options
+        var datalist = document.getElementById("subjects");
+        var datalistparent = datalist.parentElement;
+        datalistparent.removeChild(datalist);
+        datalist = document.createElement("datalist");
+        datalist.id = "subjects";
+        datalistparent.appendChild(datalist);
+        
+        //add options to the data list
+        subjects.forEach(item => {
+            let option = document.createElement('option');
+            option.value = item;
+            option.className = "subjectlist"
+            datalist.appendChild(option);
+        });
+    }
+    ajax.open("get", "getsubjects.php?user="+classname);
+    ajax.send();
+}
 </script>
   
 </head>
@@ -177,35 +206,39 @@ else{
  <div class="container-fluid" id="uploads" name="section" style="display: none;">
 
           <!-- Page Heading -->
+          <form method="post" action="uploadlink.php">
           <table class="table">
     <tbody>
         <tr>
             <th scope="row">Select class</th>
             <td>
-            <select name="class" class="form-control" >
-        <option value="LKG">LKG</option>
-        <option value="UKG">UKG</option>
-        </select>
+                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)"/>
+                <datalist id="classes">
+<?php
+        $classes = fetchclasses();
+        foreach($classes as $class){ ?>
+                    <option value="<?php echo $class; ?>"> 
+<?php   } ?>
+                </datalist>
             </td>
         </tr>
         <tr>
             <th scope="row">Select subject</th>
             <td>
-                <select name="SUBLECT" class="form-control">
-    <option value="ENG">ENGLISH</option>
-  </select>
+                <input list="subjects" name="subject" class="form-control">
+                <datalist id="subjects"></datalist>
             </td>
         </tr>
         <tr>
             <th scope="row">Select chapter</th>
             <td>
-                 <select name="CHAPTER" class="form-control">
-    <option value="one">1</option>
-    <option value="two">2</option>
-    <option value="three">3</option>
-    <option value="four">4</option>
-    <option value="five">5</option>
-    <option value="six">6</option>
+                 <select name="chapter" class="form-control">
+    <option value="1">Chapter 1</option>
+    <option value="2">Chapter 2</option>
+    <option value="3">Chapter 3</option>
+    <option value="4">Chapter 4</option>
+    <option value="5">Chapter 5</option>
+    <option value="6">Chapter 6</option>
   </select>
             </td>
         </tr>
@@ -213,7 +246,7 @@ else{
             <th scope="row">Video Title</th>
             <td>
                 <div class="dropdown">
-                    <input class="form-control" type="text">
+                    <input name="title" class="form-control" type="text">
                 </div>
             </td>
         </tr>
@@ -221,18 +254,18 @@ else{
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input class="form-control" type="text">
+                    <input name="vlink" class="form-control" type="text">
                 </div>
             </td>
         </tr>
         <tr>
            <td colspan="2">
-                <center><input class="btn btn-success btn-primary btn-lg" type="button" value="Upload"></center>
+                <center><input class="btn btn-success btn-primary btn-lg" type="submit" value="Upload"></center>
             </td>
         </tr>
     </tbody>
 </table>
-
+</form>
         </div>    
         
 <!--edit page -->       

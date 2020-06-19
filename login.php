@@ -36,11 +36,11 @@ if (!isset($_POST['submit'])){
                 console.log('"'+this.responseText+'"')
                 if (this.responseText == 'true'){
                     document.getElementById("exampleInputEmail1").style.borderColor = "green";
-                }else if (this.responseText == 'false'){
-            
+                }else {
+                    //if (this.responseText == 'false')
+                    document.getElementById("exampleInputEmail1").style.borderColor = "red";
                 }
             }
-            document.getElementById("exampleInputEmail1").style.borderColor = "red";
             ajax.open("get", "checkuser.php?user="+username);
             ajax.send();
         }
