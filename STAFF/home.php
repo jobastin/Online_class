@@ -36,25 +36,16 @@ function show2(){
     document.getElementById("uploads").style.display = "inline"; 
     document.getElementById("statistics").style.display = "none"; 
     document.getElementById("edit").style.display = "none"; 
-    document.getElementById("delete").style.display = "none"; 
 }
 function show1(){
     document.getElementById("statistics").style.display = "inline"; 
     document.getElementById("uploads").style.display = "none"; 
     document.getElementById("edit").style.display = "none"; 
-    document.getElementById("delete").style.display = "none"; 
 }
 function show3(){
     document.getElementById("edit").style.display = "inline"; 
     document.getElementById("statistics").style.display = "none"; 
     document.getElementById("uploads").style.display = "none"; 
-    document.getElementById("delete").style.display = "none"; 
-}
-function show4(){
-    document.getElementById("delete").style.display = "inline"; 
-    document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("uploads").style.display = "none"; 
-    document.getElementById("edit").style.display = "none"; 
 }
 function loadsubjects(classname){
     var ajax = new XMLHttpRequest();
@@ -141,13 +132,6 @@ function loadsubjects(classname){
           <i class="fas fa-fw fa-cog"></i>
           <span>EDIT</span></a>
       </li>
-      
-      
-      <li class="nav-item">
-        <a class="nav-link"  href="#delete" onclick="show4()">
-          <i class="fa fa-trash"></i>
-          <span>DELETE</span></a>
-      </li>
 
       <!-- Divider -->
       <hr class="sidebar-divider">
@@ -178,7 +162,7 @@ function loadsubjects(classname){
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Principal</span>
-                <img class="img-profile rounded-circle " src="C:\Users\Adhin Babu\Desktop\sr\New folder\thumpnail.png"> 
+                <img class="img-profile rounded-circle " src="../img/thumpnail.png"> 
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -292,7 +276,8 @@ function loadsubjects(classname){
       <td>Otto</td>
       <td>Otto</td>
       <td>Otto</td>
-      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button></td>
+      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
     </tr>
     <tr>
       <th scope="row">1</th>
@@ -301,44 +286,12 @@ function loadsubjects(classname){
       <td>Otto</td>
       <td>Otto</td>
       <td>Otto</td>
-      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button></td>
+      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
     </tr>
   </tbody>
 </table>
         </div>           
-               
-<!--delete model -->                       
- <div class="container-fluid" id="delete" name="section" style="display: none;">
-
-          <!-- Page Heading -->
-          <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">SINO</th>
-      <th scope="col">CLASS</th>
-      <th scope="col">SUBJECT</th>
-      <th scope="col">CHAPTER NUMBER</th>
-      <th scope="col">TITLE</th>
-      <th scope="col">YOUTUBE LINK</th>
-      <th scope="col">ACTION</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
-    </tr>
-  </tbody>
-</table>
-        </div>     
-                            
-        
-       
       </div>
       <!-- End of Main Content -->
 
