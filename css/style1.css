@@ -657,11 +657,10 @@ p {
       .navbar-area .navbar .navbar-collapse {
         position: absolute;
         top: 108%;
-        left: 0;
-        width: 100%;
-        background-color: #f4f6f7;
+        right: 0;
+        width: 30%;
+        background-color: deepskyblue;
         z-index: 8;
-        padding: 10px 16px;
         -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
         -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); } }
@@ -669,11 +668,10 @@ p {
       .navbar-area .navbar .navbar-collapse {
         position: absolute;
         top: 108%;
-        left: 0;
-        width: 100%;
-        background-color: #f4f6f7;
+        right: 0;
+        width: 30%;
+        background-color: deepskyblue;
         z-index: 8;
-        padding: 10px 16px;
         -webkit-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
         -moz-box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16);
         box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.16); } }
