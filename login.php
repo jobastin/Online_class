@@ -22,6 +22,12 @@ if (!isset($_POST['submit'])){
     
 <!-- Animation CSS -->
 <link href="./assets/css/vendor/aos.css" rel="stylesheet"/>
+    <style>
+    .error{
+    color: red;
+    font-size: 12px;
+  }
+  </style>
     <script>
         function checkuser(username){
             var ajax = new XMLHttpRequest();
@@ -29,11 +35,12 @@ if (!isset($_POST['submit'])){
                 if (!(this.readyState == 4 && this.status == 200)) return;
                 console.log('"'+this.responseText+'"')
                 if (this.responseText == 'true'){
-                    ### VALID USER CODE HERE ###
-                } else if (this.responseText == 'false'){
-                    ### INVALID USER CODE HERE ###
+                    document.getElementById("exampleInputEmail1").style.borderColor = "green";
+                }else if (this.responseText == 'false'){
+            
                 }
             }
+            document.getElementById("exampleInputEmail1").style.borderColor = "red";
             ajax.open("get", "checkuser.php?user="+username);
             ajax.send();
         }
@@ -73,7 +80,7 @@ if (!isset($_POST['submit'])){
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
 			<form class="border rounded p-5" style="background-color: white;opacity: 1;" action="login.php" method="post">
 				<h3 class="mb-4 text-center">Sign In</h3>
-				<div class="form-group">
+				<div class="form-group" id="check">
 					<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login ID" required="" oninput="checkuser(this.value);" name="username">
 				</div>
 				<div class="form-group">
