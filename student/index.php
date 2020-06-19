@@ -33,7 +33,29 @@ else {
     <title><?php echo $user->username; ?> | St. Aloysius School</title>
     <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
     <script>
-        
+        class link{
+            construct(id, staffid, classid, title, vlink, chapter){
+                this.id = id;
+                this.staffid = staffid;
+                this.classid = classid;
+                this.title = title;
+                this.vlink = vlink;
+                this.chapter = chapter;
+            }
+        }
+        <?php
+        echo "var vids=[";
+        foreach($vids as $sublinks){
+            echo "[";
+            foreach($sublinks as $link){
+                echo "new link($link->id, $link->staffid, $link->classid, '$link->title', '$link->vlink', $link->chapter)";
+            }
+            echo "],";
+        }
+        echo "];";
+        ?>
+        console.log(vids);
+        console.table(vids);
     </script>
 
 </head>
