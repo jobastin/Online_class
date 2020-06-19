@@ -30,12 +30,11 @@ else {
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
     <link href="../css/media.css" rel="stylesheet">
     
-    <title><?php echo $user->username; ?> | St. Aloysius School</title>
+    <title>St. Aloysius School | <?php echo $user->username; ?></title>
     <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
     <script>
         class link{
-            construct(id, staffid, classid, title, vlink, chapter){
-                this.id = id;
+            construct(staffid, classid, title, vlink, chapter){
                 this.staffid = staffid;
                 this.classid = classid;
                 this.title = title;
@@ -48,7 +47,7 @@ else {
         foreach($vids as $sublinks){
             echo "[";
             foreach($sublinks as $link){
-                echo "new link($link->id, $link->staffid, $link->classid, '$link->title', '$link->vlink', $link->chapter)";
+                echo "new link($link->staffid, $link->classid, '$link->title', '$link->vlink', $link->chapter)";
             }
             echo "],";
         }
