@@ -8,36 +8,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <title>St. ALOYSIUS SCHOOL TANIKALLA</title>
 
+  <title>St. ALOYSIUS SCHOOL | Admin</title>
+  <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="css/media.css" rel="stylesheet">
-  <style>
-    .separator {
-    border-right: 1px solid #dfdfe0; 
-}
-.icon-btn-save {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-.input-group {
-    margin-bottom:10px; 
-}
-.btn-save-label {
-    position: relative;
-    left: -12px;
-    display: inline-block;
-    padding: 6px 12px;
-    background: rgba(0,0,0,0.15);
-    border-radius: 3px 0 0 3px;
-}
-    </style>
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/media.css" rel="stylesheet">
+  
+  
+  <script>
+  function show2()
+      {
+        document.getElementById("section2").style.display = "inline"; 
+        document.getElementById("section1").style.display = "none"; 
+        document.getElementById("section3").style.display = "none"; 
+        document.getElementById("section4").style.display = "none"; 
+      }
+      function show1()
+      {
+        document.getElementById("section1").style.display = "inline"; 
+        document.getElementById("section2").style.display = "none"; 
+        document.getElementById("section3").style.display = "none"; 
+        document.getElementById("section4").style.display = "none"; 
+      }
+      function show3()
+      {
+        document.getElementById("section3").style.display = "inline"; 
+        document.getElementById("section1").style.display = "none"; 
+        document.getElementById("section2").style.display = "none"; 
+        document.getElementById("section4").style.display = "none"; 
+      }
+       function show4()
+      {
+        document.getElementById("section4").style.display = "inline"; 
+        document.getElementById("section1").style.display = "none"; 
+        document.getElementById("section2").style.display = "none"; 
+        document.getElementById("section3").style.display = "none"; 
+      }
+</script>
+  
 </head>
 
 <body id="page-top">
@@ -46,10 +59,11 @@
   <div id="wrapper">
 
     <!-- Sidebar -->
+    <div id="wrapper">
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_stastictis.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
         </div>
         <div class="sidebar-brand-text mx-3">Admin Panel</div>
@@ -60,7 +74,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="admin_stastictis.html">
+        <a class="nav-link" href="#section1"  onclick="show1()">
           <i class="fa fa-cogs"></i>
           <span>STATISTICS</span></a>
       </li>
@@ -68,7 +82,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="admin_home.html">
+        <a class="nav-link"  href="#section2" onclick="show2()">
           <i class="fa fa-upload"></i>
           <span>UPLOAD</span></a>
       </li>
@@ -83,14 +97,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="admin_edit.html">
+        <a class="nav-link"  href="#section3" onclick="show3()">
           <i class="fas fa-fw fa-cog"></i>
           <span>EDIT</span></a>
       </li>
       
       
       <li class="nav-item">
-        <a class="nav-link" href="admin_delete.html">
+        <a class="nav-link"  href="#section4" onclick="show4()">
           <i class="fa fa-trash"></i>
           <span>DELETE</span></a>
       </li>
@@ -100,6 +114,7 @@
 
       <!-- Heading -->
     </ul>
+    </div>
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
@@ -140,10 +155,18 @@
             </li>
           </ul>
         </nav>
-        <!-- End of Topbar -->
 
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
+       
+<!--Stastictis page -->
+        <div class="container-fluid" id="section1" name="section" style="display: inline;">
+
+          <!-- Page Heading -->
+          Stastictis page
+        </div>    
+        
+
+<!--upload page -->
+ <div class="container-fluid" id="section2" name="section" style="display: none;">
 
           <!-- Page Heading -->
           <table class="table">
@@ -202,9 +225,79 @@
     </tbody>
 </table>
 
-        </div>
-        <!-- /.container-fluid -->
+        </div>    
+        
+<!--edit page -->       
+     <div class="container-fluid" id="section3" name="section" style="display: none;">
 
+          <!-- Page Heading -->
+                  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">SINO</th>
+      <th scope="col">CLASS</th>
+      <th scope="col">SUBJECT</th>
+      <th scope="col">CHAPTER NUMBER</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">YOUTUBE LINK</th>
+      <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button></td>
+    </tr>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button></td>
+    </tr>
+  </tbody>
+</table>
+        </div>           
+               
+<!--delete model -->                       
+ <div class="container-fluid" id="section4" name="section" style="display: none;">
+
+          <!-- Page Heading -->
+          <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">SINO</th>
+      <th scope="col">CLASS</th>
+      <th scope="col">SUBJECT</th>
+      <th scope="col">CHAPTER NUMBER</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">YOUTUBE LINK</th>
+      <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td>Otto</td>
+      <td><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+        </div>     
+                            
+        
+       
       </div>
       <!-- End of Main Content -->
 
@@ -232,14 +325,13 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
+          <a class="btn btn-primary" href="../login.php" onclick="logout()" id="logout">Logout</a>
         </div>
       </div>
     </div>
   </div>
   
-  
-    <!-- Profile Modal-->
+   <!-- Profile Modal-->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -270,7 +362,94 @@
     </div>
   </div>
   
+ <!--edit model -->
+       <div class="modal fade" id="myModal3">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">Update</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body">
+          <table class="table table-dark">
+    <thead>
+      <tr>
+        <th>Class</th>
+        <th>Subject</th>
+        <th>Chapter</th>
+        <th>Video Description</th>
+        <th>Video link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><select name="class" >
+        <option value="LKG">LKG</option>
+        <option value="UKG">UKG</option>
+        </select></td>
+      <td>
+           <select name="SUBLECT">
+    <option value="ENG">ENGLISH</option>
+  </select>
+      </td>
+      <td>
+          <select name="CHAPTER">
+    <option value="one">1</option>
+    <option value="two">2</option>
+    <option value="three">3</option>
+    <option value="four">4</option>
+    <option value="five">5</option>
+    <option value="six">6</option>
+  </select>
+      </td>
+      <td><div class="dropdown"><input type="text"></div>
+      </td>
+   <td>
+       <div class="dropdown"><input type="text"></div>
+   </td>
+        </tr>
+    </tbody>
+  </table>
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
   
+  
+  <!-- delete model -->
+  <div class="modal" id="myModal4">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Do you want to remove this ??
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+  
+        
 
   <!-- Bootstrap core JavaScript-->
   <script src="vendor/jquery/jquery.min.js"></script>

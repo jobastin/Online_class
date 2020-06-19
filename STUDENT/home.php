@@ -55,7 +55,6 @@ else {
         echo "];";
         ?>
         console.log(vids);
-        console.table(vids);
     </script>
 
 </head>

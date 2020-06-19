@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<?php
+require('../fun.php');
+if(sessioncheck() == false)
+    //redirect to login if session isn't set
+    header('Location: ../login.php');
+else{
+    $user = $_SESSION['user'];
+    if (!$user->isstaff()){
+        //redirects to student landing if user is a student
+        header('Location: ../student/');
+    } else {
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -10,44 +21,44 @@
   <meta name="author" content="">
 
   <title>St. ALOYSIUS SCHOOL | Admin</title>
-  <link rel="shortcut icon" href="img/thumpnail.png" type="image/png">
+  <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
-  <link href="css/media.css" rel="stylesheet">
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/media.css" rel="stylesheet">
   
   
   <script>
   function show2()
       {
-        document.getElementById("section2").style.display = "inline"; 
-        document.getElementById("section1").style.display = "none"; 
-        document.getElementById("section3").style.display = "none"; 
-        document.getElementById("section4").style.display = "none"; 
+        document.getElementById("uploads").style.display = "inline"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("edit").style.display = "none"; 
+        document.getElementById("delete").style.display = "none"; 
       }
       function show1()
       {
-        document.getElementById("section1").style.display = "inline"; 
-        document.getElementById("section2").style.display = "none"; 
-        document.getElementById("section3").style.display = "none"; 
-        document.getElementById("section4").style.display = "none"; 
+        document.getElementById("statistics").style.display = "inline"; 
+        document.getElementById("uploads").style.display = "none"; 
+        document.getElementById("edit").style.display = "none"; 
+        document.getElementById("delete").style.display = "none"; 
       }
       function show3()
       {
-        document.getElementById("section3").style.display = "inline"; 
-        document.getElementById("section1").style.display = "none"; 
-        document.getElementById("section2").style.display = "none"; 
-        document.getElementById("section4").style.display = "none"; 
+        document.getElementById("edit").style.display = "inline"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("uploads").style.display = "none"; 
+        document.getElementById("delete").style.display = "none"; 
       }
        function show4()
       {
-        document.getElementById("section4").style.display = "inline"; 
-        document.getElementById("section1").style.display = "none"; 
-        document.getElementById("section2").style.display = "none"; 
-        document.getElementById("section3").style.display = "none"; 
+        document.getElementById("delete").style.display = "inline"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("uploads").style.display = "none"; 
+        document.getElementById("edit").style.display = "none"; 
       }
 </script>
   
@@ -74,7 +85,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="#section1"  onclick="show1()">
+        <a class="nav-link" href="#statistics"  onclick="show1()">
           <i class="fa fa-cogs"></i>
           <span>STATISTICS</span></a>
       </li>
@@ -82,7 +93,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link"  href="#section2" onclick="show2()">
+        <a class="nav-link"  href="#uploads" onclick="show2()">
           <i class="fa fa-upload"></i>
           <span>UPLOAD</span></a>
       </li>
@@ -97,14 +108,14 @@
 
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link"  href="#section3" onclick="show3()">
+        <a class="nav-link"  href="#edit" onclick="show3()">
           <i class="fas fa-fw fa-cog"></i>
           <span>EDIT</span></a>
       </li>
       
       
       <li class="nav-item">
-        <a class="nav-link"  href="#section4" onclick="show4()">
+        <a class="nav-link"  href="#delete" onclick="show4()">
           <i class="fa fa-trash"></i>
           <span>DELETE</span></a>
       </li>
@@ -147,10 +158,7 @@
                   Profile
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Logout
-                </a>
+                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</a>
               </div>
             </li>
           </ul>
@@ -158,7 +166,7 @@
 
        
 <!--Stastictis page -->
-        <div class="container-fluid" id="section1" name="section" style="display: inline;">
+        <div class="container-fluid" id="statistics" name="section" style="display: inline;">
 
           <!-- Page Heading -->
           Stastictis page
@@ -166,7 +174,7 @@
         
 
 <!--upload page -->
- <div class="container-fluid" id="section2" name="section" style="display: none;">
+ <div class="container-fluid" id="uploads" name="section" style="display: none;">
 
           <!-- Page Heading -->
           <table class="table">
@@ -202,7 +210,7 @@
             </td>
         </tr>
         <tr>
-            <th scope="row">Video Description</th>
+            <th scope="row">Video Title</th>
             <td>
                 <div class="dropdown">
                     <input class="form-control" type="text">
@@ -228,7 +236,7 @@
         </div>    
         
 <!--edit page -->       
-     <div class="container-fluid" id="section3" name="section" style="display: none;">
+     <div class="container-fluid" id="edit" name="section" style="display: none;">
 
           <!-- Page Heading -->
                   <table class="table">
@@ -267,7 +275,7 @@
         </div>           
                
 <!--delete model -->                       
- <div class="container-fluid" id="section4" name="section" style="display: none;">
+ <div class="container-fluid" id="delete" name="section" style="display: none;">
 
           <!-- Page Heading -->
           <table class="table">
@@ -325,7 +333,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.php" onclick="logout()" id="logout">Logout</a>
+          <a class="btn btn-primary" href="../logout.php" id="logout">Logout</a>
         </div>
       </div>
     </div>
@@ -452,15 +460,19 @@
         
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
 </body>
 
 </html>
+<?php
+    }
+}
+?>

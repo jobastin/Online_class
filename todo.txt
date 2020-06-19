@@ -1,5 +1,5 @@
-
+- login page scalability
 - make sure login inputs are first to focus
 - make sure usernames got only chars%nums in db, inputs
-- make sure login.php shows wrong password and invalid email info
+- make sure login.php shows wrong password and [invalid email info] and disables login if email is invalid
 - add encryption to passwords
