@@ -9,29 +9,26 @@ $title = $_POST['title'];
 $vlink = $_POST['vlink'];
 $chapt = $_POST['chapter'];
 
-
-$con = connect();
-$q = "select `user`.`username`, `title`, `link` from (`vids` inner join `clas` on `vids`.`class_id`=`clas`.`id`) inner join `user` on `clas`.`user_id`=`user`.`id` where `link`='$vlink' and `username`='$class'";
-$res = mysqli_query($con, $q);
-if (mysqli_num_rows($res)>0){
+if (linkexists($class, $vlink)){
     ?>
     <script>
-           var x=alert("The provided Link alredy exist");
+           alert("The provided Link alredy exist");
            window.location.replace("../staff/");
-</script>
+    </script>
 <?php } else {
+    $con = connect();
     $q = "insert into `vids` values (NULL, $staff->id, (select `id` from `clas` where `user_id` = (select `id` from `user` where `username`='$class') and `subj_id`=(select `id` from `subj` where `subjectname`='$subj')), '$title', '$vlink', $chapt)";
     $res = mysqli_query($con, $q);
     if ($res){?>
        <script>
-           var x=alert("Uploaded Successfully");
+           alert("Uploaded Successfully");
            window.location.replace("../staff/");
 </script>
         <?php
       
     } else { ?>
         <script>
-           var x=alert("Unable to connect to Database");
+           alert("Unable to connect to Database");
            window.location.replace("../staff/");
         </script>
         <?php die ("Error on database insert : ".mysqli_error($con));

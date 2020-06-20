@@ -217,7 +217,7 @@ function loadsubjects(classname){
             <th scope="row">Select chapter</th>
             <td>
                  <select name="chapter" class="form-control" required>
-    <option value="">------Select One------</option>
+    <option value="" selected disabled>Select Chapter</option>
     <option value="1">Chapter 1</option>
     <option value="2">Chapter 2</option>
     <option value="3">Chapter 3</option>
@@ -260,7 +260,6 @@ function loadsubjects(classname){
                   <table class="table">
   <thead>
     <tr>
-      <th scope="col">SINO</th>
       <th scope="col">CLASS</th>
       <th scope="col">SUBJECT</th>
       <th scope="col">CHAPTER NUMBER</th>
@@ -270,26 +269,35 @@ function loadsubjects(classname){
     </tr>
   </thead>
   <tbody>
+<?php
+            $data = getLinks();
+            if (mysqli_num_rows($data) == 0)
+            { ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
+        
+        
+        
+<!--        @@@###   ROW INDICATING NO DATA   ###@@@ -->
+        
+        
+        
     </tr>
+<?php
+            } else {
+                while ($row = mysqli_fetch_array($data)){ ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
-    </tr>
+        <td><?php echo $row['classname']; ?></td>
+        <td><?php echo $row['subjectname']; ?></td>
+        <td><?php echo $row['chapter']; ?></td>
+        <td><?php echo $row['title']; ?></td>
+        <td><?php echo $row['link']; ?></td>
+        <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
+    </tr>       
+<?php
+                }
+            }
+?>
   </tbody>
 </table>
         </div>           

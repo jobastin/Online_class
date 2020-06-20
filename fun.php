@@ -100,6 +100,26 @@ function fetchclasses(){
     mysqli_close($con);
     return $users;
 }
+function linkexists($user, $vlink){
+    //returns whether or on the link already exists for the user
+    $con = connect();
+    $q = "select `user`.`username`, `title`, `link` from (`vids` inner join `clas` on `vids`.`class_id`=`clas`.`id`) inner join `user` on `clas`.`user_id`=`user`.`id` where `link`='$vlink' and `username`='$user'";
+    $res = mysqli_query($con, $q) or die('Data checks not working');
+    mysqli_close($con);
+    if (mysqli_num_rows($res)>0)
+        return true;
+    else return false;
+}
+function getLinks(){
+    //returns ALL the links published in school - COULD be restricted to staff id
+    //class_id, classname, subjectname, title, link, chapter
+    $con = connect();
+    $q = "select `clas`.`id` as `class_id`, `username` as `classname`, `subjectname`, `vids`.`title`, `vids`.`link`, `vids`.`chapter` from `user` inner join `clas` on `user`.`id`=`clas`.`user_id` inner join `subj` on `subj`.`id`=`clas`.`subj_id` inner join `vids` on `clas`.`id` = `vids`.`class_id`";
+    $res = mysqli_query($con, $q) or die('Unable to Fetch Links');
+    mysqli_close($con);
+
+    return $res;
+}
 
 class ytlink{
     function __construct($staffid, $classid, $title, $vlink, $chapter){
