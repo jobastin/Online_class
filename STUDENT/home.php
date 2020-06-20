@@ -21,6 +21,7 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- Custom fonts for this template-->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -81,9 +82,9 @@ else {
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-<?php foreach($clas as $subject){ ?>
+<?php $i=0; foreach($clas as $subject){ ?>
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="javascript:anchorScr()" id="<?php echo $i++; ?>" >
           <i class="fa fa-book"></i>
           <span><?php echo $subject->subjectname; ?></span></a>
       </li>
@@ -110,7 +111,7 @@ else {
             
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-                              <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal">
+                              <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal" id="logout">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
@@ -124,33 +125,16 @@ else {
           <!-- Page Heading -->
         <B><div id="accordion" class="accordion">
         <div class="card mb-0">
-            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
-                <a class="card-title">
-                    Chapter 1
-                </a>
+            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne" id="div">
+                <script>
+                    jQuery('a').click(function (event) {
+                    var id = $(this).attr("id");
+                        if(id!='logout')
+                        alert(id);
+                    });
+</script>
             </div>
-            
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
-                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 1.1</a>
-            </div>
-            
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
-                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 1.2</a>
-            </div>
-            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                <a class="card-title">
-                  Chapter 2
-                </a>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 2.1</a>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-                <a href="#">link 2.2</a>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-                <a href="#">link 2.3</a>
-            </div>
+
         </div>
     </div></B>
 

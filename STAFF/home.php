@@ -196,8 +196,8 @@ function loadsubjects(classname){
         <tr>
             <th scope="row">Select class</th>
             <td>
-                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)"/>
-                <datalist id="classes">
+                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
+                <datalist id="classes" >
 <?php
         $classes = fetchclasses();
         foreach($classes as $class){ ?>
@@ -209,14 +209,15 @@ function loadsubjects(classname){
         <tr>
             <th scope="row">Select subject</th>
             <td>
-                <input list="subjects" name="subject" class="form-control">
+                <input list="subjects" name="subject" class="form-control" requireds>
                 <datalist id="subjects"></datalist>
             </td>
         </tr>
         <tr>
             <th scope="row">Select chapter</th>
             <td>
-                 <select name="chapter" class="form-control">
+                 <select name="chapter" class="form-control" required>
+    <option value="">------Select One------</option>
     <option value="1">Chapter 1</option>
     <option value="2">Chapter 2</option>
     <option value="3">Chapter 3</option>
@@ -230,7 +231,7 @@ function loadsubjects(classname){
             <th scope="row">Video Title</th>
             <td>
                 <div class="dropdown">
-                    <input name="title" class="form-control" type="text">
+                    <input name="title" class="form-control" type="text" required>
                 </div>
             </td>
         </tr>
@@ -238,7 +239,7 @@ function loadsubjects(classname){
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text">
+                    <input name="vlink" class="form-control" type="text" required>
                 </div>
             </td>
         </tr>
