@@ -123,18 +123,41 @@ else {
 
         <!-- Begin Page Content -->
           <!-- Page Heading -->
-        <B><div id="accordion" class="accordion">
-        <div class="card mb-0">
-            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne" id="div">
-                <script>
+          <script>
                     jQuery('a').click(function (event) {
                     var id = $(this).attr("id");
                         if(id!='logout')
                         console.log(id);
                     });
 </script>
+           <B><div id="accordion" class="accordion">
+        <div class="card mb-0">
+            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                <a class="card-title">
+                    Chapter 1
+                </a>
             </div>
-
+            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
+                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 1.1</a>
+            </div>
+            
+            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
+                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 1.2</a>
+            </div>
+            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                <a class="card-title">
+                  Chapter 2
+                </a>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
+                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 2.1</a>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
+                <a href="#">link 2.2</a>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
+                <a href="#">link 2.3</a>
+            </div>
         </div>
     </div></B>
 
