@@ -285,12 +285,12 @@ function loadsubjects(classname){
 <?php
             } else {
                 while ($row = mysqli_fetch_array($data)){ ?>
-    <tr>
-        <td><?php echo $row['classname']; ?></td>
+    <tr id="<?php echo $row['vids_id'];     ?>">
+        <td><?php echo $row['classname'];   ?></td>
         <td><?php echo $row['subjectname']; ?></td>
-        <td><?php echo $row['chapter']; ?></td>
-        <td><?php echo $row['title']; ?></td>
-        <td><?php echo $row['link']; ?></td>
+        <td><?php echo $row['chapter'];     ?></td>
+        <td><?php echo $row['title'];       ?></td>
+        <td><?php echo $row['link'];        ?></td>
         <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
     </tr>       

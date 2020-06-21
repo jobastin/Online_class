@@ -2,7 +2,9 @@ ADMIN
 - upload:center inputs
 - upload:verify datalist arrow design
 - upload:complete design on uploadlink.php
-- edit  :complete row indicating no data
+- edit  :design row indicating no data
+- edit  :table should scroll (instead of stacking below) on window width change
+- add a classes and subjects option on sidebar
 - make sure usernames got only chars%nums in db, inputs
 
 STUDENTS
