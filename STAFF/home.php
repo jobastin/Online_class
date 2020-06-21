@@ -102,7 +102,11 @@ function loadsubjects(classname){
     ajax.send();
 }
 </script>
-  
+<style>
+    .borderless td, .borderless th {
+    border: none;
+}
+    </style>
 </head>
 
 <body id="page-top">
@@ -362,7 +366,7 @@ function loadsubjects(classname){
       <td>class name</td>
       <td>password</td>
       <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
-         <button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          <button type="button" class="btn btn-danger">Delete</button>
           </td>
     </tr>
     <tr>
@@ -370,11 +374,12 @@ function loadsubjects(classname){
       <td>class name</td>
       <td>password</td>
       <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
-         <button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+         <button type="button" class="btn btn-danger">Delete</button>
           </td>
     </tr>
   </tbody>
 </table>
+       <button type="button" class="btn btn-primary" style="position:absolute;right:40px;">ADD CLASS</button>
         </div>               
 
             <!-- edit subjects -->     
@@ -388,20 +393,19 @@ function loadsubjects(classname){
             <div id="collapseOne" class="card-body collapse" data-parent="#accordion"> 
                 <table><tr>
                        <td>Subject 1</td>
-                       <td style="width:150px;"><center><button type="button">
-                       <i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
                    </tr></table>
             </div>
              <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
                 <table><tr>
                        <td>Subject 2</td>
-                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
                    </tr></table>
             </div>
             <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
                <table><tr>
                        <td>Subject 3</td>
-                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
                    </tr></table>
             </div>
             <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
@@ -413,20 +417,19 @@ function loadsubjects(classname){
             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
                 <table><tr>
                        <td>Subject 1</td>
-                       <td style="width:150px;"><center><button type="button">
-                       <i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
                    </tr></table>
             </div>
              <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
                 <table><tr>
                        <td>Subject 2</td>
-                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
                    </tr></table>
             </div>
              <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
                <table><tr>
                        <td>Subject 3</td>
-                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
                    </tr></table>
             </div>
             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" > 
@@ -639,14 +642,85 @@ function loadsubjects(classname){
 
       <!-- Modal Header -->
       <div class="modal-header">
-        Change Class Password
+        Change Class Info
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
+         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new class ID" />
+         <br>
         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new Password" />
-      </div>
+        <br>
+        
+       <table class="table borderless">
+  <thead>
+    <tr>
+        <td colspan="2"><h4><b>Subjects Included</b></h4></td>
+    </tr>
+  </thead>
+  <!-- Table head -->
+  <tbody>
+   <tr>
+      <th>
+        <!-- Default unchecked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
+          <label class="custom-control-label" for="tableDefaultCheck1">Subject 1</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2">
+          <label class="custom-control-label" for="tableDefaultCheck2">Subject 2</label>
+        </div>
+      </th>
+    </tr>
+    <tr>
+       <th>
+        <!-- Default unchecked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck3">
+          <label class="custom-control-label" for="tableDefaultCheck3">Subject 3</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck4">
+          <label class="custom-control-label" for="tableDefaultCheck4">Subject 4</label>
+        </div>
+      </th>
+    </tr>
+    <tr>
+       <th>
+        <!-- Default unchecked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck5">
+          <label class="custom-control-label" for="tableDefaultCheck5">Subject 5</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck6" >
+          <label class="custom-control-label" for="tableDefaultCheck6">Subject 6</label>
+        </div>
+      </th>
+    </tr>
+    <tr>
+       <th>
+        <!-- Default unchecked -->
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck7">
+          <label class="custom-control-label" for="tableDefaultCheck7">Subject 7</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck8" >
+          <label class="custom-control-label" for="tableDefaultCheck8">Subject 8</label>
+        </div>
+      </th>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
