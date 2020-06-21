@@ -119,7 +119,7 @@ else{
                     // #INCOMPLETE : display db edit link error message
                 }
             }
-            ajax.open("post", "updatelink.php");
+            ajax.open("post", "link_update.php");
             ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             ajax.send(params);
@@ -139,7 +139,7 @@ else{
                     // #INCOMPLETE : display db delete link error message
                 }
             };
-            ajax.open("get", "deletelink.php?id="+vidid);
+            ajax.open("get", "link_delete.php?id="+vidid);
             ajax.send();
             console.log('delete : '+vidid);
         };
@@ -823,7 +823,7 @@ else{
         <button type="button" class="close" data-dismiss="modal">&times;</button>  
       </div>
       <div class="modal-body modal-md">
-         <form method="post" action="uploadlink.php">
+         <form method="post" action="link_upload.php">
           <center><table class="table-sm"  style="width:400px;height:350px;">
     <tbody>
         <tr>
