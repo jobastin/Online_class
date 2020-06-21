@@ -130,7 +130,7 @@ else {
                     jQuery('a').click(function (event) {
                     var id = $(this).attr("id");
                         if(id!='logout')
-                        alert(id);
+                        console.log(id);
                     });
 </script>
             </div>
