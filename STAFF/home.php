@@ -32,17 +32,8 @@ else{
   
   
   <script>
-function show2(){
-    document.getElementById("uploads").style.display = "inline"; 
-    document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("edit").style.display = "none"; 
-    document.getElementById("edit_class").style.display = "none"; 
-    document.getElementById("edit_sub").style.display = "none";
-    
-}
 function show1(){
     document.getElementById("statistics").style.display = "inline"; 
-    document.getElementById("uploads").style.display = "none"; 
     document.getElementById("edit").style.display = "none"; 
     document.getElementById("edit_class").style.display = "none"; 
     document.getElementById("edit_sub").style.display = "none";
@@ -50,21 +41,18 @@ function show1(){
 function show3(){
     document.getElementById("edit").style.display = "inline"; 
     document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("uploads").style.display = "none"; 
     document.getElementById("edit_class").style.display = "none"; 
     document.getElementById("edit_sub").style.display = "none";
 }
 function show4(){
     document.getElementById("edit").style.display = "none"; 
     document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("uploads").style.display = "none"; 
     document.getElementById("edit_class").style.display = "inline"; 
     document.getElementById("edit_sub").style.display = "none";
 }
 function show5(){
     document.getElementById("edit").style.display = "none"; 
     document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("uploads").style.display = "none"; 
     document.getElementById("edit_class").style.display = "none"; 
     document.getElementById("edit_sub").style.display = "inline";
 }
@@ -138,9 +126,9 @@ function loadsubjects(classname){
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link"  href="#uploads" onclick="show2()">
+        <a class="nav-link"  href="#edit" onclick="show3()">
           <i class="fa fa-upload"></i>
-          <span>UPLOAD</span></a>
+          <span>UPLOADS</span></a>
       </li>
 
       <!-- Divider -->
@@ -151,23 +139,12 @@ function loadsubjects(classname){
         CHANGES
       </div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link"  href="#edit" onclick="show3()">
-          <i class="fas fa-fw fa-cog"></i>
-          <span>EDIT UPLOADS</span></a>
-      </li>
-
-      <!-- Divider -->
-      
-
-     <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link"  href="#edit" onclick="show4()">
           <i class="fas fa-fw fa-cog"></i>
           <span>EDIT CLASS</span></a>
       </li>
-      
+      <hr class="sidebar-divider my-0">
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link"  href="#edit" onclick="show5()">
@@ -224,68 +201,7 @@ function loadsubjects(classname){
           <!-- Page Heading -->
           Stastictis page
         </div>    
-        
-
-<!--upload page -->
- <div class="container-fluid" id="uploads" name="section" style="display: none;width:100px;">
-
-          <!-- Page Heading -->
-          <form method="post" action="uploadlink.php">
-          <center><table class="table-sm"  style="margin-top:50px;width:550px;height:350px;">
-    <tbody>
-        <tr>
-            <th scope="row">Select class</th>
-            <td>
-                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
-                <datalist id="classes">
-<?php
-        $classes = fetchclasses();
-        foreach($classes as $class){ ?>
-                    <option value="<?php echo $class; ?>"> 
-<?php   } ?>
-                </datalist>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Select subject</th>
-            <td>
-                <input list="subjects" name="subject" class="form-control" requireds>
-                <datalist id="subjects"></datalist>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Select chapter</th>
-            <td>
-                 <input name="chapter" class="form-control" type="number" required>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Video Title</th>
-            <td>
-                <div class="dropdown">
-                    <input name="title" class="form-control" type="text" required>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">Video Link</th>
-            <td>
-                <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text" required>
-                </div>
-            </td>
-        </tr>
-        <tr>
-           <td colspan="2">
-                <center><input class="btn btn-success btn-primary btn-lg form-control" type="submit"  value="Upload"></center>
-            </td>
-        </tr>
-    </tbody>
-</table>
-</center>
-</form>
-        </div>    
-        
+               
 <!--edit page -->       
      <div class="container-fluid" id="edit" name="section" style="display: none;">
 
@@ -322,6 +238,10 @@ function loadsubjects(classname){
       <td>Otto</td>
       <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
+    </tr>
+    <tr>
+        <td colspan="7"><button type="button" class="btn btn-primary" style="float:right;position:absolute;right:97px;" data-toggle="modal" data-target="#newupload">New Upload</button>
+        </td>
     </tr>
   </tbody>
 </table>
@@ -827,7 +747,75 @@ function loadsubjects(classname){
     </div>
   </div>
 </div>   
-        
+<div id="newupload" class="modal fade " role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+       <h3>Upload New Video</h3>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>  
+      </div>
+      <div class="modal-body modal-md">
+         <form method="post" action="uploadlink.php">
+          <center><table class="table-sm"  style="width:400px;height:350px;">
+    <tbody>
+        <tr>
+            <th scope="row">Select class</th>
+            <td>
+                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
+                <datalist id="classes">
+<?php
+        $classes = fetchclasses();
+        foreach($classes as $class){ ?>
+                    <option value="<?php echo $class; ?>"> 
+<?php   } ?>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Select subject</th>
+            <td>
+                <input list="subjects" name="subject" class="form-control" requireds>
+                <datalist id="subjects"></datalist>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Select chapter</th>
+            <td>
+                 <input name="chapter" class="form-control" type="number" required>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Video Title</th>
+            <td>
+                <div class="dropdown">
+                    <input name="title" class="form-control" type="text" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Video Link</th>
+            <td>
+                <div class="dropdown">
+                    <input name="vlink" class="form-control" type="text" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+           <td colspan="2">
+                <center><input class="btn btn-success btn-primary btn-lg form-control" type="submit"  value="Upload"></center>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</center>
+</form>
+      </div>
+    </div>
+
+  </div>
+</div>
 
   <!-- Bootstrap core JavaScript-->
   <script src="../vendor/jquery/jquery.min.js"></script>
