@@ -1,7 +1,11 @@
 ADMIN
-- upload:complete design on uploadlink.php
-- edit  :design row indicating no data
-- edit  :scroll table (instead of stacking below) on window width change
+- links :complete design on uploadlink.php
+- links :column spacing
+- links :design row indicating no data
+- links :scroll table (instead of stacking below) on window width change
+- links :allow update only if changes are validated
+- search for #INCOMPLETE
+- sidebar shouldn't scroll with content
 - make sure usernames got only chars%nums in db, inputs
 
 STUDENTS

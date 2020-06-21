@@ -32,63 +32,138 @@ else{
   
   
   <script>
-function show1(){
-    document.getElementById("statistics").style.display = "inline"; 
-    document.getElementById("edit").style.display = "none"; 
-    document.getElementById("edit_class").style.display = "none"; 
-    document.getElementById("edit_sub").style.display = "none";
-}
-function show3(){
-    document.getElementById("edit").style.display = "inline"; 
-    document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("edit_class").style.display = "none"; 
-    document.getElementById("edit_sub").style.display = "none";
-}
-function show4(){
-    document.getElementById("edit").style.display = "none"; 
-    document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("edit_class").style.display = "inline"; 
-    document.getElementById("edit_sub").style.display = "none";
-}
-function show5(){
-    document.getElementById("edit").style.display = "none"; 
-    document.getElementById("statistics").style.display = "none"; 
-    document.getElementById("edit_class").style.display = "none"; 
-    document.getElementById("edit_sub").style.display = "inline";
-}
-function loadsubjects(classname){
-    var ajax = new XMLHttpRequest();
-    ajax.onreadystatechange = function(){
-        //exit of data not ready
-        if (!(this.readyState == 4 && this.status == 200))
-            return;
-        //obtain data from db
-//        console.log(this.responseText);
-        var subjects = [];
-        for (x of this.responseText.split("<br/>"))
-            subjects.push(x);
-        subjects.pop();
-        console.log(subjects);
-        
-        //clear data list options
-        var datalist = document.getElementById("subjects");
-        var datalistparent = datalist.parentElement;
-        datalistparent.removeChild(datalist);
-        datalist = document.createElement("datalist");
-        datalist.id = "subjects";
-        datalistparent.appendChild(datalist);
-        
-        //add options to the data list
-        subjects.forEach(item => {
-            let option = document.createElement('option');
-            option.value = item;
-            option.className = "subjectlist"
-            datalist.appendChild(option);
-        });
+    function show1(){
+        document.getElementById("links").style.display = "none"; 
+        document.getElementById("statistics").style.display = "inline"; 
+        document.getElementById("classes").style.display = "none"; 
+        document.getElementById("subjects").style.display = "none";
     }
-    ajax.open("get", "getsubjects.php?user="+classname);
-    ajax.send();
-}
+    function show3(){
+        document.getElementById("links").style.display = "inline"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("classes").style.display = "none"; 
+        document.getElementById("subjects").style.display = "none";
+    }
+    function show4(){
+        document.getElementById("links").style.display = "none"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("classes").style.display = "inline"; 
+        document.getElementById("subjects").style.display = "none";
+    }
+    function show5(){
+        document.getElementById("links").style.display = "none"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("classes").style.display = "none"; 
+        document.getElementById("subjects").style.display = "inline";
+    }
+    function loadsubjects(classname){
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function(){
+            //exit of data not ready
+            if (!(this.readyState == 4 && this.status == 200)) return;
+            //obtain data from db
+    //        console.log(this.responseText);
+            var subjects = [];
+            for (x of this.responseText.split("<br/>"))
+                subjects.push(x);
+            subjects.pop();
+            console.log(subjects);
+
+            //clear data list options
+            var datalist = document.getElementById("fetchsubjects");
+            var datalistparent = datalist.parentElement;
+            datalistparent.removeChild(datalist);
+            datalist = document.createElement("datalist");
+            datalist.id = "fetchsubjects";
+            datalistparent.appendChild(datalist);
+
+            //add options to the data list
+            subjects.forEach(item => {
+                let option = document.createElement('option');
+                option.value = item;
+                option.className = "subjectlist"
+                datalist.appendChild(option);
+            });
+        };
+        ajax.open("get", "getsubjects.php?user="+classname);
+        ajax.send();
+    }
+    function links_edit(editonsuccess, vidid){
+        //set default values to edit modal
+        var chapter = document.getElementById('link_edit_chapter');
+        var title = document.getElementById('link_edit_title');
+        var link = document.getElementById('link_edit_link');
+        document.getElementById('link_edit_classname').value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
+        document.getElementById('link_edit_subjectname').value = editonsuccess.getElementsByTagName('td')[1].innerHTML;
+        document.getElementById('link_edit_vidid').value = vidid;
+        chapter.value = editonsuccess.getElementsByTagName('td')[2].innerHTML;
+        title.value = editonsuccess.getElementsByTagName('td')[3].innerHTML;
+        link.value = editonsuccess.getElementsByTagName('td')[4].innerHTML;
+        
+        document.getElementById('link_edit_submit').onclick = function(){
+            var ajax = new XMLHttpRequest();
+            params = encodeURIComponent('chapter')+'='+encodeURIComponent(chapter.value)+'&'+
+                encodeURIComponent('title')+'='+encodeURIComponent(title.value)+'&'+
+                encodeURIComponent('link')+'='+encodeURIComponent(link.value)+'&'+
+                encodeURIComponent('id')+'='+encodeURIComponent(vidid);
+            ajax.onreadystatechange = function(){
+                //exit if data not ready
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                var result = this.responseText.split('<br>');
+                if (result[0] == 'edit success'){
+                    for (x of result) console.log(x);
+                    editonsuccess.getElementsByTagName('td')[2].innerHTML = result[2];
+                    editonsuccess.getElementsByTagName('td')[3].innerHTML = result[1];
+                    editonsuccess.getElementsByTagName('td')[4].innerHTML = result[3];
+                } else {
+                    // #INCOMPLETE : display db edit link error message
+                }
+            }
+            ajax.open("post", "updatelink.php");
+            ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            ajax.send(params);
+            console.log('edit : '+vidid);
+        }
+    }
+    function links_delete(vidid, deleteonsuccess){
+        document.getElementById('links_delete').onclick=function(){            
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                //exit if data not ready
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                console.log(this.responseText);
+                if (this.responseText == "delete success")
+                    deleteonsuccess.remove();
+                else{
+                    // #INCOMPLETE : display db delete link error message
+                }
+            };
+            ajax.open("get", "deletelink.php?id="+vidid);
+            ajax.send();
+            console.log('delete : '+vidid);
+        };
+    }
+    function loadsection(){
+        url = window.location.href;
+//        console.log(url.split('#')[1])
+        switch (url.split('#')[1]){
+            case 'statistics':
+                show1();
+                break;
+            case 'links':
+                show3();
+                break;
+            case 'classes':
+                show4();
+                break;
+            case 'subjects':
+                show5();
+                break;
+            default:
+                break;
+        }
+    } 
 </script>
 <style>
     .borderless td, .borderless th {
@@ -126,7 +201,7 @@ function loadsubjects(classname){
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link"  href="#edit" onclick="show3()">
+        <a class="nav-link"  href="#links" onclick="show3()">
           <i class="fa fa-upload"></i>
           <span>UPLOADS</span></a>
       </li>
@@ -140,14 +215,14 @@ function loadsubjects(classname){
       </div>
 
       <li class="nav-item">
-        <a class="nav-link"  href="#edit" onclick="show4()">
+        <a class="nav-link"  href="#classes" onclick="show4()">
           <i class="fas fa-fw fa-cog"></i>
           <span>EDIT CLASS</span></a>
       </li>
       <hr class="sidebar-divider my-0">
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link"  href="#edit" onclick="show5()">
+        <a class="nav-link"  href="#subjects" onclick="show5()">
           <i class="fas fa-fw fa-cog"></i>
           <span>EDIT SUBJECTS</span></a>
       </li>
@@ -203,13 +278,16 @@ function loadsubjects(classname){
         </div>    
                
 <!--edit page -->       
-     <div class="container-fluid" id="edit" name="section" style="display: none;">
+     <div class="container-fluid" id="links" name="section" style="display: none;">
 
           <!-- Page Heading -->
     <table class="table borderless">
   <thead>
+<!--
+  IF YOU EDIT THE COLUMN ORDER MAKE SURE YOU EDIT THE links_edit() ACCORDINGLY.
+  It relies on the order of columns to obtain that specific data
+   -->
     <tr>
-      <th scope="col">SINO</th>
       <th scope="col">CLASS</th>
       <th scope="col">SUBJECT</th>
       <th scope="col">CHAPTER NUMBER</th>
@@ -219,28 +297,24 @@ function loadsubjects(classname){
     </tr>
   </thead>
   <tbody>
+<?php
+            $links = getLinks();
+            while ($link = mysqli_fetch_array($links)){ ?>
     <tr>
-      <th>1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
-    </tr>
+        <td><?php echo $link['classname']; ?></td>
+        <td><?php echo $link['subjectname']; ?></td>
+        <td><?php echo $link['chapter']; ?></td>
+        <td><?php echo $link['title']; ?></td>
+        <td><?php echo $link['link']; ?></td>
+        <td>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3" onclick="links_edit(this.parentElement.parentElement, <?php echo $link['vids_id']; ?>)">Edit</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4" onclick="links_delete(<?php echo $link['vids_id']; ?>, this.parentElement.parentElement)">Delete</button>
+        </td>
+    </tr>                
+<?php       } ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td>Otto</td>
-      <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3">Edit</button>
-      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4">Delete</button></td>
-    </tr>
-    <tr>
-        <td colspan="7"><button type="button" class="btn btn-primary" style="float:right;position:absolute;right:97px;" data-toggle="modal" data-target="#newupload">New Upload</button>
+        <td colspan="7">
+            <button type="button" class="btn btn-primary" style="float:right;position:absolute;right:97px;" data-toggle="modal" data-target="#newupload">New Upload</button>
         </td>
     </tr>
   </tbody>
@@ -248,7 +322,7 @@ function loadsubjects(classname){
         </div> 
                  
      <!-- edit class DETAILS -->            
-<div class="container-fluid" id="edit_class" name="section" style="display: none;">
+<div class="container-fluid" id="classes" name="section" style="display: none;">
   <table class="table borderless" >
   <thead>
     <tr>
@@ -285,7 +359,7 @@ function loadsubjects(classname){
         </div>               
 
             <!-- edit subjects -->     
-<div class="container-fluid" id="edit_sub" name="section" style="display: none;">
+<div class="container-fluid" id="subjects" name="section" style="display: none;">
 
            <B><div id="accordion" class="accordion">
         <div class="card mb-0">
@@ -414,7 +488,6 @@ function loadsubjects(classname){
        <div class="modal fade" id="myModal3">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
-
         <div class="modal-header">
           <h4 class="modal-title">Update</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -427,34 +500,26 @@ function loadsubjects(classname){
         <tr>
             <th scope="row">Select class</th>
             <td>
-                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
-                <datalist id="classes">
-<?php
-        $classes = fetchclasses();
-        foreach($classes as $class){ ?>
-                    <option value="<?php echo $class; ?>"> 
-<?php   } ?>
-                </datalist>
+                <input disabled name="classname" class="form-control" id="link_edit_classname" required/>
             </td>
         </tr>
         <tr>
             <th scope="row">Select subject</th>
             <td>
-                <input list="subjects" name="subject" class="form-control" requireds>
-                <datalist id="subjects"></datalist>
+                <input disabled name="subjectname" class="form-control" id="link_edit_subjectname" required>
             </td>
         </tr>
         <tr>
             <th scope="row">Select chapter</th>
             <td>
-                 <input name="chapter" class="form-control" type="number" required>
+                 <input name="chapter" class="form-control" type="number" min="0" id="link_edit_chapter" required>
             </td>
         </tr>
         <tr>
             <th scope="row">Video Title</th>
             <td>
                 <div class="dropdown">
-                    <input name="title" class="form-control" type="text" required>
+                    <input name="title" class="form-control" type="text" id="link_edit_title" required>
                 </div>
             </td>
         </tr>
@@ -462,7 +527,7 @@ function loadsubjects(classname){
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text" required>
+                    <input name="vlink" class="form-control" type="text" id="link_edit_link" required>
                 </div>
             </td>
         </tr>
@@ -472,8 +537,9 @@ function loadsubjects(classname){
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+            <button name="submit" type="submit" class="btn btn-success" data-dismiss="modal" id="link_edit_submit">Update</button>
         </div>
+        <input type="number" hidden id="link_edit_vidid" name="vids_id">
       </div>
     </div>
   </div>
@@ -496,7 +562,7 @@ function loadsubjects(classname){
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="links_delete">Yes</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
       </div>
 
@@ -543,7 +609,7 @@ function loadsubjects(classname){
 
       <!-- Modal body -->
       <div class="modal-body">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="SUBJECT NAME" />
+        <input type="text" class="form-control" placeholder="SUBJECT NAME" />
       </div>
 
       <!-- Modal footer -->
@@ -569,9 +635,9 @@ function loadsubjects(classname){
 
       <!-- Modal body -->
       <div class="modal-body">
-         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new class ID" />
+         <input type="text" class="form-control" placeholder="Enter new class ID" />
          <br>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new Password" />
+        <input type="text" class="form-control" placeholder="Enter new Password" />
         <br>
         
        <table class="table borderless">
@@ -667,11 +733,11 @@ function loadsubjects(classname){
 
       <!-- Modal body -->
       <div class="modal-body">
-         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new class ID" />
+         <input type="text" class="form-control" placeholder="Enter new class ID" />
          <br>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new Password" />
+        <input type="text" class="form-control" placeholder="Enter new Password" />
         <br>
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Re-enter Password" />
+        <input type="text" class="form-control" placeholder="Re-enter Password" />
         <br>
         
        <table class="table borderless">
@@ -763,8 +829,8 @@ function loadsubjects(classname){
         <tr>
             <th scope="row">Select class</th>
             <td>
-                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
-                <datalist id="classes">
+                <input list="fetchclasses" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
+                <datalist id="fetchclasses">
 <?php
         $classes = fetchclasses();
         foreach($classes as $class){ ?>
@@ -776,14 +842,14 @@ function loadsubjects(classname){
         <tr>
             <th scope="row">Select subject</th>
             <td>
-                <input list="subjects" name="subject" class="form-control" requireds>
-                <datalist id="subjects"></datalist>
+                <input list="fetchsubjects" name="subject" class="form-control" requireds>
+                <datalist id="fetchsubjects"></datalist>
             </td>
         </tr>
         <tr>
             <th scope="row">Select chapter</th>
             <td>
-                 <input name="chapter" class="form-control" type="number" required>
+                 <input name="chapter" class="form-control" type="number" required min="0">
             </td>
         </tr>
         <tr>
@@ -826,6 +892,7 @@ function loadsubjects(classname){
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
+  <script>loadsection();</script>
 </body>
 
 </html>

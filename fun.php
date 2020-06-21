@@ -24,7 +24,7 @@ function signin($username, $password){
 //        print_r($row);die();
 //        print_r($_SESSION); die();
         session_start();
-        $_SESSION['user'] = new user($row['id'], $row['username'], $row['password'], $row['isstaff'], $row['isadmin']);
+        $_SESSION['user'] = new user($row['id'], $row['username'], $row['isstaff'], $row['isadmin']);
         if ($_SESSION['user']->isstaff()){
             header('Location: staff/');
             return;
@@ -112,9 +112,9 @@ function linkexists($user, $vlink){
 }
 function getLinks(){
     //returns ALL the links published in school - COULD be restricted to staff id
-    //class_id, classname, subjectname, title, link, chapter
+    //vids_id, classname, subjectname, title, link, chapter
     $con = connect();
-    $q = "select `vids`.`id` as `vids_id`, `username` as `classname`, `subjectname`, `vids`.`title`, `vids`.`link`, `vids`.`chapter` from `user` inner join `clas` on `user`.`id`=`clas`.`user_id` inner join `subj` on `subj`.`id`=`clas`.`subj_id` inner join `vids` on `clas`.`id` = `vids`.`class_id`";
+    $q = "select `vids`.`id` as `vids_id`, `username` as `classname`, `subjectname`, `vids`.`title`, `vids`.`link`, `vids`.`chapter` from `user` inner join `clas` on `user`.`id`=`clas`.`user_id` inner join `subj` on `subj`.`id`=`clas`.`subj_id` inner join `vids` on `clas`.`id` = `vids`.`class_id` order by `username`, `subjectname`, `chapter`";
     $res = mysqli_query($con, $q) or die('Unable to Fetch Links');
     mysqli_close($con);
 
@@ -138,10 +138,9 @@ class subject{
     }
 }
 class user{
-    function __construct($id, $username, $password, $isstaff, $isadmin){
+    function __construct($id, $username, $isstaff, $isadmin){
         $this->id = $id;
         $this->username = $username;
-        $this->password = $password;
         $this->isstaff = $isstaff;
         $this->isadmin = $isadmin;
 //        print_r($this);die;
