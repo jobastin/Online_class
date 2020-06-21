@@ -5,6 +5,7 @@ ADMIN
 - links :scroll table (instead of stacking below) on window width change
 - links :allow update only if changes are validated
 - class :validate new class pop-up
+- CLASS :add deletion db code, and edit code
 - search for #INCOMPLETE
 - sidebar shouldn't scroll with content
 - make sure usernames got only chars%nums in db, inputs

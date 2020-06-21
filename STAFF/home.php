@@ -127,11 +127,12 @@ else{
         }
     }
     function links_delete(vidid, deleteonsuccess){
-        document.getElementById('links_delete').onclick=function(){            
+        document.getElementById('links_delete').onclick=function(){
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function(){
                 //exit if data not ready
                 if (!(this.readyState == 4 && this.status == 200)) return;
+                
                 console.log(this.responseText);
                 if (this.responseText == "delete success")
                     deleteonsuccess.remove();
@@ -141,8 +142,27 @@ else{
             };
             ajax.open("get", "link_delete.php?id="+vidid);
             ajax.send();
-            console.log('delete : '+vidid);
+            console.log('link delete : '+vidid);
         };
+    }
+    function class_delete(id, deleteonsuccess){
+        document.getElementById('class_delete').onclick=function(){
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                //exit if data not ready
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                
+                console.log(this.responseText);
+                if (this.responseText == "delete success")
+                    deleteonsuccess.remove();
+                else{
+                    // #INCOMPLETE : display db delete class error message
+                }
+            };
+            ajax.open("get", "class_delete.php?id="+id);
+            ajax.send();
+            console.log('class delete : '+id);
+        }
     }
     function loadsection(){
         url = window.location.href;
@@ -300,7 +320,7 @@ else{
 <?php
             $links = getLinks();
             if ($links == false){
-//                #INCOMPLETE NO LINKS HAVE BEEN ADDED
+//                #INCOMPLETE NO LINKS HAVE BEEN ADDED message
             } else while ($link = mysqli_fetch_array($links)){ ?>
     <tr>
         <td><?php echo $link['classname']; ?></td>
@@ -337,15 +357,15 @@ else{
   <tbody>
 <?php
             $classes = getUsers(false);
-            if ($links == false){
-//                #INCOMPLETE NO CLASSES HAVE BEEN ADDED
+            if ($classes == false){
+//                #INCOMPLETE NO CLASSES HAVE BEEN ADDED message
             } else while ($class = mysqli_fetch_array($classes)){ ?>
     <tr>
 <!--      <th scope="row">1</th>-->
       <td><?php echo $class['username']; ?></td>
       <td><?php echo $class['password']; ?></td>
-      <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
+        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editclass">Edit</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="class_delete(<?php echo $class['id']; ?>, this.parentElement.parentElement)" >Delete</button>
           </td>
     </tr>
 <?php       } ?>
@@ -588,7 +608,7 @@ else{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="class_delete">Yes</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
       </div>
 
