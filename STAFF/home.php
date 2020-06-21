@@ -36,16 +36,37 @@ function show2(){
     document.getElementById("uploads").style.display = "inline"; 
     document.getElementById("statistics").style.display = "none"; 
     document.getElementById("edit").style.display = "none"; 
+    document.getElementById("edit_class").style.display = "none"; 
+    document.getElementById("edit_sub").style.display = "none";
+    
 }
 function show1(){
     document.getElementById("statistics").style.display = "inline"; 
     document.getElementById("uploads").style.display = "none"; 
     document.getElementById("edit").style.display = "none"; 
+    document.getElementById("edit_class").style.display = "none"; 
+    document.getElementById("edit_sub").style.display = "none";
 }
 function show3(){
     document.getElementById("edit").style.display = "inline"; 
     document.getElementById("statistics").style.display = "none"; 
     document.getElementById("uploads").style.display = "none"; 
+    document.getElementById("edit_class").style.display = "none"; 
+    document.getElementById("edit_sub").style.display = "none";
+}
+function show4(){
+    document.getElementById("edit").style.display = "none"; 
+    document.getElementById("statistics").style.display = "none"; 
+    document.getElementById("uploads").style.display = "none"; 
+    document.getElementById("edit_class").style.display = "inline"; 
+    document.getElementById("edit_sub").style.display = "none";
+}
+function show5(){
+    document.getElementById("edit").style.display = "none"; 
+    document.getElementById("statistics").style.display = "none"; 
+    document.getElementById("uploads").style.display = "none"; 
+    document.getElementById("edit_class").style.display = "none"; 
+    document.getElementById("edit_sub").style.display = "inline";
 }
 function loadsubjects(classname){
     var ajax = new XMLHttpRequest();
@@ -130,12 +151,27 @@ function loadsubjects(classname){
       <li class="nav-item">
         <a class="nav-link"  href="#edit" onclick="show3()">
           <i class="fas fa-fw fa-cog"></i>
-          <span>EDIT</span></a>
+          <span>EDIT UPLOADS</span></a>
       </li>
 
       <!-- Divider -->
-      <hr class="sidebar-divider">
+      
 
+     <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link"  href="#edit" onclick="show4()">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>EDIT CLASS</span></a>
+      </li>
+      
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link"  href="#edit" onclick="show5()">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>EDIT SUBJECTS</span></a>
+      </li>
+      
+      <hr class="sidebar-divider">
       <!-- Heading -->
     </ul>
     </div>
@@ -187,17 +223,17 @@ function loadsubjects(classname){
         
 
 <!--upload page -->
- <div class="container-fluid" id="uploads" name="section" style="display: none;">
+ <div class="container-fluid" id="uploads" name="section" style="display: none;width:100px;">
 
           <!-- Page Heading -->
           <form method="post" action="uploadlink.php">
-          <table class="table">
+          <center><table class="table-sm"  style="margin-top:50px;width:550px;height:350px;">
     <tbody>
         <tr>
             <th scope="row">Select class</th>
             <td>
                 <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
-                <datalist id="classes" >
+                <datalist id="classes">
 <?php
         $classes = fetchclasses();
         foreach($classes as $class){ ?>
@@ -224,6 +260,20 @@ function loadsubjects(classname){
     <option value="4">Chapter 4</option>
     <option value="5">Chapter 5</option>
     <option value="6">Chapter 6</option>
+    <option value="6">Chapter 7</option>
+    <option value="6">Chapter 8</option>
+    <option value="6">Chapter 9</option>
+    <option value="6">Chapter 10</option>
+    <option value="6">Chapter 11</option>
+    <option value="6">Chapter 12</option>
+    <option value="6">Chapter 13</option>
+    <option value="6">Chapter 14</option>
+    <option value="6">Chapter 15</option>
+    <option value="6">Chapter 16</option>
+    <option value="6">Chapter 17</option>
+    <option value="6">Chapter 18</option>
+    <option value="6">Chapter 19</option>
+    <option value="6">Chapter 20</option>
   </select>
             </td>
         </tr>
@@ -245,11 +295,12 @@ function loadsubjects(classname){
         </tr>
         <tr>
            <td colspan="2">
-                <center><input class="btn btn-success btn-primary btn-lg" type="submit" value="Upload"></center>
+                <center><input class="btn btn-success btn-primary btn-lg form-control" type="submit"  value="Upload"></center>
             </td>
         </tr>
     </tbody>
 </table>
+</center>
 </form>
         </div>    
         
@@ -300,7 +351,104 @@ function loadsubjects(classname){
 ?>
   </tbody>
 </table>
-        </div>           
+        </div> 
+                 
+     <!-- edit class DETAILS -->            
+<div class="container-fluid" id="edit_class" name="section" style="display: none;">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">SINO</th>
+      <th scope="col">CLASS LOGIN ID</th>
+      <th scope="col">PASSWORD</th>
+      <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>class name</td>
+      <td>password</td>
+      <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
+         <button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </td>
+    </tr>
+    <tr>
+      <th scope="row">1</th>
+      <td>class name</td>
+      <td>password</td>
+      <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
+         <button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button>
+          </td>
+    </tr>
+  </tbody>
+</table>
+        </div>               
+
+            <!-- edit subjects -->     
+<div class="container-fluid" id="edit_sub" name="section" style="display: none;">
+
+           <B><div id="accordion" class="accordion">
+        <div class="card mb-0">
+            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                        <b>Class LKG</b>
+            </div>
+            <div id="collapseOne" class="card-body collapse" data-parent="#accordion"> 
+                <table><tr>
+                       <td>Subject 1</td>
+                       <td style="width:150px;"><center><button type="button">
+                       <i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                   </tr></table>
+            </div>
+             <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
+                <table><tr>
+                       <td>Subject 2</td>
+                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                   </tr></table>
+            </div>
+            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
+               <table><tr>
+                       <td>Subject 3</td>
+                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                   </tr></table>
+            </div>
+            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
+            <button type="button" class="btn btn-success" align="left" data-toggle="modal" data-target="#addsubject">ADD SUBJECTS</button>
+            </div>
+            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                <b>Class UKG</b>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
+                <table><tr>
+                       <td>Subject 1</td>
+                       <td style="width:150px;"><center><button type="button">
+                       <i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                   </tr></table>
+            </div>
+             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
+                <table><tr>
+                       <td>Subject 2</td>
+                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                   </tr></table>
+            </div>
+             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
+               <table><tr>
+                       <td>Subject 3</td>
+                       <td style="width:150px;"><center><button type="button"><i class="fa fa-trash" aria-hidden="true"></i></button></center></td>
+                   </tr></table>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" > 
+            <button type="button" class="btn btn-success" align="left" data-toggle="modal" data-target="#addsubject">ADD SUBJECTS</button>
+            </div>
+        </div>
+    </div></B>
+        </div> 
+                  
+                  
+                  
+                  
+
+                  
       </div>
       <!-- End of Main Content -->
 
@@ -406,6 +554,20 @@ function loadsubjects(classname){
     <option value="four">4</option>
     <option value="five">5</option>
     <option value="six">6</option>
+    <option value="six">7</option>
+    <option value="six">8</option>
+    <option value="six">9</option>
+    <option value="six">10</option>
+    <option value="six">11</option>
+    <option value="six">12</option>
+    <option value="six">13</option>
+    <option value="six">14</option>
+    <option value="six">15</option>
+    <option value="six">16</option>
+    <option value="six">17</option>
+    <option value="six">18</option>
+    <option value="six">19</option>
+    <option value="six">20</option>
   </select>
       </td>
       <td><div class="dropdown"><input type="text"></div>
@@ -451,7 +613,58 @@ function loadsubjects(classname){
     </div>
   </div>
 </div>
+   
+ <!-- subject add model -->
+  <div class="modal" id="addsubject">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        Add Subject
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="SUBJECT NAME" />
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">ADD</button>
+      </div>
+
+    </div>
+  </div>
+</div>
   
+       
+<!-- subject add model -->
+  <div class="modal" id="editclass">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        Change Class Password
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new Password" />
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+       
         
 
   <!-- Bootstrap core JavaScript-->
@@ -463,7 +676,6 @@ function loadsubjects(classname){
 
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
-
 </body>
 
 </html>
