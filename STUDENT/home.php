@@ -35,7 +35,7 @@ else {
     <link rel="shortcut icon" href="../img/thumpnail.png" type="image/png">
     <script>
         class link{
-            construct(staffid, classid, title, vlink, chapter){
+            constructor(staffid, classid, title, vlink, chapter){
                 this.staffid = staffid;
                 this.classid = classid;
                 this.title = title;
@@ -44,17 +44,17 @@ else {
             }
         }
         <?php
-        echo "var vids=[";
+        echo "var allvids=[";
         foreach($vids as $sublinks){
             echo "[";
             foreach($sublinks as $link){
-                echo "new link($link->staffid, $link->classid, '$link->title', '$link->vlink', $link->chapter)";
+                echo "new link($link->staffid, $link->classid, '$link->title', '$link->vlink', $link->chapter),";
             }
             echo "],";
         }
         echo "];";
         ?>
-        console.log(vids);
+        console.log(allvids);
     </script>
 
 </head>
@@ -123,41 +123,38 @@ else {
 
         <!-- Begin Page Content -->
           <!-- Page Heading -->
-          <script>
-                    jQuery('a').click(function (event) {
-                    var id = $(this).attr("id");
-                        if(id!='logout')
-                        console.log(id);
-                    });
-</script>
+        <script>
+            jQuery('a').click(function (event) {
+            var id = $(this).attr("id");
+                if(id!='logout')
+                var vids = allvids[id]; //gets all the links to that subject
+                if (vids.length == 0){
+                    
+                    
+//                    ### NO VIDEOS DIV OVER HERE ###
+                    
+                    
+                }
+                //fetch all chapters for which links are available
+                var chap = [];
+                for (x of vids) chap.push(x.chapter);
+                chap = [...(new Set(chap))].sort();
+                console.log(chap);
+                
+                //display
+                var parent = document.getElementsByClassName('card')[0];
+                parent.innerHTML = "";
+                for (x of chap){
+                    parent.innerHTML += "<div class='card-header collapsed' data-toggle='collapse' href='#collapseOne'><a class='card-title'>Chapter "+x+"</a></div>";
+                    for (y of vids) if (y.chapter == x){
+                        parent.innerHTML += '<div id="collapseOne" class="card-body collapse" data-parent="#accordion" ><a href="'+y.vlink+'" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">'+y.title+'</a></div>';
+                    }
+                }
+                
+            });
+        </script>
            <B><div id="accordion" class="accordion">
         <div class="card mb-0">
-            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
-                <a class="card-title">
-                    Chapter 1
-                </a>
-            </div>
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
-                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 1.1</a>
-            </div>
-            
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" >
-                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 1.2</a>
-            </div>
-            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                <a class="card-title">
-                  Chapter 2
-                </a>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-                <a href="#" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">Link 2.1</a>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-                <a href="#">link 2.2</a>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" >
-                <a href="#">link 2.3</a>
-            </div>
         </div>
     </div></B>
 
