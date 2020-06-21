@@ -256,29 +256,7 @@ function loadsubjects(classname){
         <tr>
             <th scope="row">Select chapter</th>
             <td>
-                 <select name="chapter" class="form-control" required>
-    <option value="">------Select One------</option>
-    <option value="1">Chapter 1</option>
-    <option value="2">Chapter 2</option>
-    <option value="3">Chapter 3</option>
-    <option value="4">Chapter 4</option>
-    <option value="5">Chapter 5</option>
-    <option value="6">Chapter 6</option>
-    <option value="6">Chapter 7</option>
-    <option value="6">Chapter 8</option>
-    <option value="6">Chapter 9</option>
-    <option value="6">Chapter 10</option>
-    <option value="6">Chapter 11</option>
-    <option value="6">Chapter 12</option>
-    <option value="6">Chapter 13</option>
-    <option value="6">Chapter 14</option>
-    <option value="6">Chapter 15</option>
-    <option value="6">Chapter 16</option>
-    <option value="6">Chapter 17</option>
-    <option value="6">Chapter 18</option>
-    <option value="6">Chapter 19</option>
-    <option value="6">Chapter 20</option>
-  </select>
+                 <input name="chapter" class="form-control" type="number" required>
             </td>
         </tr>
         <tr>
@@ -379,7 +357,7 @@ function loadsubjects(classname){
     </tr>
   </tbody>
 </table>
-       <button type="button" class="btn btn-primary" style="position:absolute;right:40px;">ADD CLASS</button>
+       <button type="button" class="btn btn-primary" style="position:absolute;right:40px;" data-toggle="modal" data-target="#addclass">ADD CLASS</button>
         </div>               
 
             <!-- edit subjects -->     
@@ -508,9 +486,9 @@ function loadsubjects(classname){
     </div>
   </div>
   
- <!--edit model -->
+ <!--upload edit model -->
        <div class="modal fade" id="myModal3">
-    <div class="modal-dialog modal-xl">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
 
         <div class="modal-header">
@@ -520,59 +498,52 @@ function loadsubjects(classname){
         
         <!-- Modal body -->
         <div class="modal-body">
-          <table class="table table-dark">
-    <thead>
-      <tr>
-        <th>Class</th>
-        <th>Subject</th>
-        <th>Chapter</th>
-        <th>Video Description</th>
-        <th>Video link</th>
-      </tr>
-    </thead>
+         <table class="table borderless" >
     <tbody>
-      <tr>
-        <td><select name="class" >
-        <option value="LKG">LKG</option>
-        <option value="UKG">UKG</option>
-        </select></td>
-      <td>
-           <select name="SUBLECT">
-    <option value="ENG">ENGLISH</option>
-  </select>
-      </td>
-      <td>
-          <select name="CHAPTER">
-    <option value="one">1</option>
-    <option value="two">2</option>
-    <option value="three">3</option>
-    <option value="four">4</option>
-    <option value="five">5</option>
-    <option value="six">6</option>
-    <option value="six">7</option>
-    <option value="six">8</option>
-    <option value="six">9</option>
-    <option value="six">10</option>
-    <option value="six">11</option>
-    <option value="six">12</option>
-    <option value="six">13</option>
-    <option value="six">14</option>
-    <option value="six">15</option>
-    <option value="six">16</option>
-    <option value="six">17</option>
-    <option value="six">18</option>
-    <option value="six">19</option>
-    <option value="six">20</option>
-  </select>
-      </td>
-      <td><div class="dropdown"><input type="text"></div>
-      </td>
-   <td>
-       <div class="dropdown"><input type="text"></div>
-   </td>
+        <tr>
+            <th scope="row">Select class</th>
+            <td>
+                <input list="classes" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
+                <datalist id="classes">
+<?php
+        $classes = fetchclasses();
+        foreach($classes as $class){ ?>
+                    <option value="<?php echo $class; ?>"> 
+<?php   } ?>
+                </datalist>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Select subject</th>
+            <td>
+                <input list="subjects" name="subject" class="form-control" requireds>
+                <datalist id="subjects"></datalist>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Select chapter</th>
+            <td>
+                 <input name="chapter" class="form-control" type="number" required>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Video Title</th>
+            <td>
+                <div class="dropdown">
+                    <input name="title" class="form-control" type="text" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Video Link</th>
+            <td>
+                <div class="dropdown">
+                    <input name="vlink" class="form-control" type="text" required>
+                </div>
+            </td>
         </tr>
     </tbody>
-  </table>
+</table>
         </div>
         
         <!-- Modal footer -->
@@ -635,7 +606,7 @@ function loadsubjects(classname){
 </div>
   
        
-<!-- subject add model -->
+<!-- EDIT CLASS >> UPDATE class INFO model -->
   <div class="modal" id="editclass">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -730,7 +701,102 @@ function loadsubjects(classname){
     </div>
   </div>
 </div>
+      
+
        
+<!--EDIT CLASS >> CLASS ADD MODEL -->
+  <div class="modal" id="addclass">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        Add New Class
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+         <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new class ID" />
+         <br>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Enter new Password" />
+        <br>
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Re-enter Password" />
+        <br>
+        
+       <table class="table borderless">
+  <thead>
+    <tr>
+        <td colspan="2"><h4><b>Subjects To Included</b></h4></td>
+    </tr>
+  </thead>
+  <!-- Table head -->
+  <tbody>
+   <tr>
+      <th>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
+          <label class="custom-control-label" for="tableDefaultCheck1">Subject 1</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2">
+          <label class="custom-control-label" for="tableDefaultCheck2">Subject 2</label>
+        </div>
+      </th>
+    </tr>
+    <tr>
+       <th>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck3">
+          <label class="custom-control-label" for="tableDefaultCheck3">Subject 3</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck4">
+          <label class="custom-control-label" for="tableDefaultCheck4">Subject 4</label>
+        </div>
+      </th>
+    </tr>
+    <tr>
+       <th>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck5">
+          <label class="custom-control-label" for="tableDefaultCheck5">Subject 5</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck6" >
+          <label class="custom-control-label" for="tableDefaultCheck6">Subject 6</label>
+        </div>
+      </th>
+    </tr>
+    <tr>
+       <th>
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck7">
+          <label class="custom-control-label" for="tableDefaultCheck7">Subject 7</label>
+        </div>
+      </th>
+      <th><div class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck8" >
+          <label class="custom-control-label" for="tableDefaultCheck8">Subject 8</label>
+        </div>
+      </th>
+    </tr>
+  </tbody>
+</table>
+
+    </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">ADD CLASS</button>
+      </div>
+
+    </div>
+  </div>
+</div>   
         
 
   <!-- Bootstrap core JavaScript-->
