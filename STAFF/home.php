@@ -290,7 +290,7 @@ function loadsubjects(classname){
      <div class="container-fluid" id="edit" name="section" style="display: none;">
 
           <!-- Page Heading -->
-                  <table class="table">
+    <table class="table borderless">
   <thead>
     <tr>
       <th scope="col">SINO</th>
@@ -329,7 +329,7 @@ function loadsubjects(classname){
                  
      <!-- edit class DETAILS -->            
 <div class="container-fluid" id="edit_class" name="section" style="display: none;">
-  <table class="table">
+  <table class="table borderless" >
   <thead>
     <tr>
       <th scope="col">SINO</th>
@@ -355,9 +355,13 @@ function loadsubjects(classname){
          <button type="button" class="btn btn-danger">Delete</button>
           </td>
     </tr>
+    <tr>
+        <td colspan="4"><button type="button" class="btn btn-primary" style="float:right;position:absolute;right:226px;" data-toggle="modal" data-target="#addclass">ADD CLASS</button>
+        </td>
+    </tr>
   </tbody>
 </table>
-       <button type="button" class="btn btn-primary" style="position:absolute;right:40px;" data-toggle="modal" data-target="#addclass">ADD CLASS</button>
+       
         </div>               
 
             <!-- edit subjects -->     
