@@ -344,7 +344,7 @@ function loadsubjects(classname){
       <td>class name</td>
       <td>password</td>
       <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
-          <button type="button" class="btn btn-danger">Delete</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
           </td>
     </tr>
     <tr>
@@ -352,7 +352,7 @@ function loadsubjects(classname){
       <td>class name</td>
       <td>password</td>
       <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
-         <button type="button" class="btn btn-danger">Delete</button>
+         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
           </td>
     </tr>
     <tr>
@@ -559,7 +559,7 @@ function loadsubjects(classname){
   </div>
   
   
-  <!-- delete model -->
+  <!-- EDIT UPLOAD >> delete model -->
   <div class="modal" id="myModal4">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -572,6 +572,32 @@ function loadsubjects(classname){
       <!-- Modal body -->
       <div class="modal-body">
         Do you want to remove this ??
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">Yes</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+  
+  
+<!-- EDIT CLASS >> delete model -->
+  <div class="modal" id="myModal5">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Do you want to remove this class ??
       </div>
 
       <!-- Modal footer -->
