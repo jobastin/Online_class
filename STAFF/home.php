@@ -299,7 +299,9 @@ else{
   <tbody>
 <?php
             $links = getLinks();
-            while ($link = mysqli_fetch_array($links)){ ?>
+            if ($links == false){
+//                #INCOMPLETE NO LINKS HAVE BEEN ADDED
+            } else while ($link = mysqli_fetch_array($links)){ ?>
     <tr>
         <td><?php echo $link['classname']; ?></td>
         <td><?php echo $link['subjectname']; ?></td>
@@ -326,29 +328,27 @@ else{
   <table class="table borderless" >
   <thead>
     <tr>
-      <th scope="col">SINO</th>
+<!--      <th scope="col">SINO</th>-->
       <th scope="col">CLASS LOGIN ID</th>
       <th scope="col">PASSWORD</th>
       <th scope="col">ACTION</th>
     </tr>
   </thead>
   <tbody>
+<?php
+            $classes = getUsers(false);
+            if ($links == false){
+//                #INCOMPLETE NO CLASSES HAVE BEEN ADDED
+            } else while ($class = mysqli_fetch_array($classes)){ ?>
     <tr>
-      <th scope="row">1</th>
-      <td>class name</td>
-      <td>password</td>
+<!--      <th scope="row">1</th>-->
+      <td><?php echo $class['username']; ?></td>
+      <td><?php echo $class['password']; ?></td>
       <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
           </td>
     </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>class name</td>
-      <td>password</td>
-      <td><input type="button" class="btn btn-info" value="Edit" data-toggle="modal" data-target="#editclass" />
-         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
-          </td>
-    </tr>
+<?php       } ?>
     <tr>
         <td colspan="4"><button type="button" class="btn btn-primary" style="float:right;position:absolute;right:226px;" data-toggle="modal" data-target="#addclass">ADD CLASS</button>
         </td>
@@ -724,7 +724,7 @@ else{
   <div class="modal" id="addclass">
   <div class="modal-dialog">
     <div class="modal-content">
-
+    <form action="class_add.php" method="post">
       <!-- Modal Header -->
       <div class="modal-header">
         Add New Class
@@ -810,6 +810,7 @@ else{
         <button type="button" class="btn btn-success" data-dismiss="modal">ADD CLASS</button>
       </div>
 
+  </form>
     </div>
   </div>
 </div>   
@@ -832,7 +833,7 @@ else{
                 <input list="fetchclasses" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
                 <datalist id="fetchclasses">
 <?php
-        $classes = fetchclasses();
+        $classes = getUsers();
         foreach($classes as $class){ ?>
                     <option value="<?php echo $class; ?>"> 
 <?php   } ?>

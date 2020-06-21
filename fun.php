@@ -90,16 +90,6 @@ function vidlink($clas){
     mysqli_close($con);
     return $alllinks;
 }
-function fetchclasses(){
-    //returns all the classes going on in school
-    $con = connect();
-    $res = mysqli_query($con, "select username from `user` where isstaff=0") or die("Unable to fetch Users.");
-    $users = array();
-    while ($row = mysqli_fetch_array($res))
-        array_push($users, $row['username']);
-    mysqli_close($con);
-    return $users;
-}
 function linkexists($user, $vlink){
     //returns whether or on the link already exists for the user
     $con = connect();
@@ -110,6 +100,21 @@ function linkexists($user, $vlink){
         return true;
     else return false;
 }
+function getUsers($textonlymode=true){
+    //returns all the classes going on in school
+    $con = connect();
+    $res = mysqli_query($con, "select * from `user` where isstaff=0") or die("Unable to fetch Users.");
+    mysqli_close($con);
+    
+    if ($textonlymode){
+        $users = array();
+        while ($row = mysqli_fetch_array($res))
+            array_push($users, $row['username']);
+        return $users;
+    } else
+        if (mysqli_num_rows($res) == 0) return false;
+        else return $res;
+}
 function getLinks(){
     //returns ALL the links published in school - COULD be restricted to staff id
     //vids_id, classname, subjectname, title, link, chapter
@@ -118,7 +123,8 @@ function getLinks(){
     $res = mysqli_query($con, $q) or die('Unable to Fetch Links');
     mysqli_close($con);
 
-    return $res;
+    if (mysqli_num_rows($res) == 0) return false;
+    else return $res;
 }
 
 class ytlink{
