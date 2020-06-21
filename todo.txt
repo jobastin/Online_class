@@ -1,20 +1,21 @@
 ADMIN
-- upload:center inputs
-- upload:verify datalist arrow design
 - upload:complete design on uploadlink.php
 - edit  :design row indicating no data
-- edit  :table should scroll (instead of stacking below) on window width change
-- add a classes and subjects option on sidebar
+- edit  :scroll table (instead of stacking below) on window width change
 - make sure usernames got only chars%nums in db, inputs
 
 STUDENTS
-- display links in student landing
+- display no links uploaded option
 - decide on forgot password actions
 
 - fade bgs on login and home
-- make sure login.php shows wrong password and [invalid email info] and disables login if email is invalid
-
+- shows wrong password and [invalid email info] and disables login if invalid
 - add encryption to passwords
 
+-------------------------------------------------------------------------------
+x add a classes and subjects option on sidebar
+x upload:verify datalist arrow design
+x upload:center inputs
+x display links in student landing
 x make sure login inputs are first to focus
 x login page scalability
