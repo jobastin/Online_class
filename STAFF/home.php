@@ -897,7 +897,7 @@ else{
   <div class="modal" id="addclass">
   <div class="modal-dialog">
     <div class="modal-content">
-    <form action="class_add.php" method="post">
+    <form action="class_upload.php" method="post">
       <!-- Modal Header -->
       <div class="modal-header">
         Add New Class
@@ -906,11 +906,11 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-         <input type="text" class="form-control" placeholder="Enter new class ID" />
+         <input type="text" class="form-control" placeholder="Class Name" name="username"/>
          <br>
-        <input type="text" class="form-control" placeholder="Enter new Password" />
+        <input type="text" class="form-control" placeholder="Password" name="password"/>
         <br>
-        <input type="text" class="form-control" placeholder="Re-enter Password" />
+        <input type="text" class="form-control" placeholder="Confirm Password" name="password2" />
         <br>
         
        <table class="table borderless">
@@ -921,58 +921,29 @@ else{
   </thead>
   <!-- Table head -->
   <tbody>
-   <tr>
+<?php
+            $subs = getSubjects();
+            $alternate = false;
+            if ($subs == false){
+//                #INCOMPLETE : SHOW MESSAGE : NO SUBJECTS TO ADD
+            } else while ($sub = mysqli_fetch_array($subs)){
+                if (!$alternate){ ?>
+    <tr>
+<?php           } ?>
       <th>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check1">
-          <label class="custom-control-label" for="Check1">Subject 1</label>
+          <input name='subjects[]' value="<?php echo $sub['id']; ?>" type="checkbox" class="custom-control-input" id="Subject<?php echo $sub['id']; ?>">
+          <label class="custom-control-label" for="Subject<?php echo $sub['id']; ?>"><?php echo $sub['subjectname']; ?></label>
         </div>
       </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check2">
-          <label class="custom-control-label" for="Check2">Subject 2</label>
-        </div>
-      </th>
+<?php           if ($alternate){ ?>
     </tr>
-    <tr>
-       <th>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check3">
-          <label class="custom-control-label" for="Check3">Subject 3</label>
-        </div>
-      </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check4">
-          <label class="custom-control-label" for="Check4">Subject 4</label>
-        </div>
-      </th>
+<?php           }
+                $alternate = !$alternate;
+            }
+            if ($alternate){ ?>
     </tr>
-    <tr>
-       <th>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check5">
-          <label class="custom-control-label" for="Check5">Subject 5</label>
-        </div>
-      </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check6" >
-          <label class="custom-control-label" for="Check6">Subject 6</label>
-        </div>
-      </th>
-    </tr>
-    <tr>
-       <th>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check7">
-          <label class="custom-control-label" for="Check7">Subject 7</label>
-        </div>
-      </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="Check8" >
-          <label class="custom-control-label" for="Check8">Subject 8</label>
-        </div>
-      </th>
-    </tr>
+<?php       } ?>
   </tbody>
 </table>
 
@@ -980,7 +951,7 @@ else{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">ADD CLASS</button>
+        <input type="submit" class="btn btn-success" value="ADD CLASS" /><!-- data-dismiss="modal" -->
       </div>
 
   </form>

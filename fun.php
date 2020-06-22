@@ -100,6 +100,16 @@ function linkexists($user, $vlink){
         return true;
     else return false;
 }
+function userexists($username){
+    //return whether or not the class-user already exists
+    $con = connect();
+    $q = "select `username` from `user` where `username`='$username'";
+    $res = mysqli_query($con, $q) or die("User Checks not working");
+    mysqli_close($con);
+    if (mysqli_num_rows($res)>0)
+        return true;
+    else return false;
+}
 function getUsers($textonlymode=true){
     //returns all the classes going on in school
     $con = connect();
@@ -114,6 +124,16 @@ function getUsers($textonlymode=true){
     } else
         if (mysqli_num_rows($res) == 0) return false;
         else return $res;
+}
+function getSubjects(){
+    //returns all subjects
+    $con = connect();
+    $q = "select * from `subj`";
+    $res = mysqli_query($con, $q) or die("Unable to Fetch Subjects");
+    mysqli_close($con);
+    
+    if (mysqli_num_rows($res) == 0) return false;
+    else return $res;
 }
 function getLinks(){
     //returns ALL the links published in school - COULD be restricted to staff id

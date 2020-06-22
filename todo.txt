@@ -5,7 +5,9 @@ ADMIN
 - links :scroll table (instead of stacking below) on window width change
 - links :allow update only if changes are validated
 - class :validate new class pop-up
-- CLASS :add deletion db code, and edit code
+-- CLASS :add deletion db code, and edit code
+- class :validate passwords before adding class
+- class :make sure new classname doesn't exist
 - search for #INCOMPLETE
 - sidebar shouldn't scroll with content
 - make sure usernames got only chars%nums in db, inputs
@@ -18,6 +20,7 @@ STUDENTS
 - shows wrong password and [invalid email info] and disables login if invalid
 - add encryption to passwords
 - colors and symbols
+- security table to log actions
 
 -------------------------------------------------------------------------------
 x add a classes and subjects option on sidebar
