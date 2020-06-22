@@ -37,24 +37,35 @@ else{
         document.getElementById("statistics").style.display = "inline"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
+        document.getElementById("profile").style.display = "none";
     }
     function show3(){
         document.getElementById("links").style.display = "inline"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
+        document.getElementById("profile").style.display = "none";
     }
     function show4(){
         document.getElementById("links").style.display = "none"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "inline"; 
         document.getElementById("subjects").style.display = "none";
+        document.getElementById("profile").style.display = "none";
     }
     function show5(){
         document.getElementById("links").style.display = "none"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "inline";
+        document.getElementById("profile").style.display = "none";
+    }
+    function show6(){
+        document.getElementById("links").style.display = "none"; 
+        document.getElementById("statistics").style.display = "none"; 
+        document.getElementById("classes").style.display = "none"; 
+        document.getElementById("subjects").style.display = "none";
+        document.getElementById("profile").style.display = "inline";
     }
     function loadsubjects(classname){
         var ajax = new XMLHttpRequest();
@@ -160,6 +171,9 @@ else{
             case 'subjects':
                 show5();
                 break;
+            case 'profile':
+                show6();
+                break;
             default:
                 break;
         }
@@ -227,6 +241,15 @@ else{
           <span>EDIT SUBJECTS</span></a>
       </li>
       
+      
+      <hr class="sidebar-divider my-0">
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link"  href="#profile" onclick="show6()">
+          <i class="fas fa-user"></i>
+          <span>PROFILE</span></a>
+      </li>
+      
       <hr class="sidebar-divider">
       <!-- Heading -->
     </ul>
@@ -244,27 +267,16 @@ else{
 
           <!-- Sidebar Toggle (Topbar) -->
           <!-- Topbar Navbar -->
-          <h3>St. ALOYSIUS ENGLISH MEDIUM SCHOOL TANIKALLA</h3>
+          <h3>St. ALOYSIUS ENGLISH MEDIUM SCHOOL THANIKALLA</h3>
           <ul class="navbar-nav ml-auto">
-
-           
             <div class="topbar-divider d-none d-sm-block"></div>
-            
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Principal</span>
-                <img class="img-profile rounded-circle " src="../img/thumpnail.png"> 
-              </a>
-              <!-- Dropdown - User Information -->
-              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">
-                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                              <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal" id="logout">
+                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Logout
                 </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout</a>
-              </div>
+              <!-- Dropdown - User Information -->
             </li>
           </ul>
         </nav>
@@ -276,7 +288,136 @@ else{
           <!-- Page Heading -->
           Stastictis page
         </div>    
+<!--profile edit -->
+        <div class="container-fluid" id="profile" name="section" style="display: none;">
+        <table class="table borderless" style="margin: auto;width: 50% !important;">
+  <thead>
+    <tr>
+      <th scope="col">SINO</th>
+      <th scope="col">ADMIN ID</th>
+      <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Staff name</td>
+      <td>
+         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
+         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteprofile">Delete</button>
+          </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Staff name</td>
+      <td>
+         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
+         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteprofile">Delete</button>
+          </td>
+    </tr>
+    <tr>
+       <td colspan="2"></td>
+        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addprofile">ADD NEW PROFILE</button>
+        </td>
+    </tr>
+  </tbody>
+</table>
+</div> 
+          
+<!-- PROFILE >> change password -->
+  <div class="modal" id="changepassword">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+       Change Password
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       <div class="input-group">
+                <input class="form-control" type="password" placeholder="Current Password">
+            </div>
+            <br>
+            <div class="input-group">
+                <input class="form-control" type="password" placeholder="New Password">
+            </div>
+            <br>
+            <div class="input-group">
+                <input class="form-control" type="password" placeholder="Confrim New Password">
+            </div>
+            <br>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+   
+<!-- PROFILE >> delete -->
+  <div class="modal" id="deleteprofile">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Do you want to remove this profile ??
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE >> add new profile -->
+  <div class="modal" id="addprofile">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+       Create New Admin User
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       <div class="input-group">
+                <input class="form-control" type="text" placeholder="New Admin ID">
+            </div>
+            <br>
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Set Password">
+            </div>
+            <br>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+   
                
+                                             
 <!--edit page -->       
      <div class="container-fluid" id="links" name="section" style="display: none;">
 
@@ -363,58 +504,39 @@ else{
             <!-- edit subjects -->     
 <div class="container-fluid" id="subjects" name="section" style="display: none;">
 
-           <B><div id="accordion" class="accordion">
-        <div class="card mb-0">
-            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
-                        <b>Class LKG</b>
-            </div>
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion"> 
-                <table><tr>
-                       <td>Subject 1</td>
-                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
-                   </tr></table>
-            </div>
-             <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
-                <table><tr>
-                       <td>Subject 2</td>
-                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
-                   </tr></table>
-            </div>
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
-               <table><tr>
-                       <td>Subject 3</td>
-                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
-                   </tr></table>
-            </div>
-            <div id="collapseOne" class="card-body collapse" data-parent="#accordion" > 
-            <button type="button" class="btn btn-success" align="left" data-toggle="modal" data-target="#addsubject">ADD SUBJECTS</button>
-            </div>
-            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                <b>Class UKG</b>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
-                <table><tr>
-                       <td>Subject 1</td>
-                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
-                   </tr></table>
-            </div>
-             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
-                <table><tr>
-                       <td>Subject 2</td>
-                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
-                   </tr></table>
-            </div>
-             <div id="collapseTwo" class="card-body collapse" data-parent="#accordion"> 
-               <table><tr>
-                       <td>Subject 3</td>
-                       <td style="width:150px;"><center><button type="button" class="btn btn-danger">Delete</button></center></td>
-                   </tr></table>
-            </div>
-            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion" > 
-            <button type="button" class="btn btn-success" align="left" data-toggle="modal" data-target="#addsubject">ADD SUBJECTS</button>
-            </div>
-        </div>
-    </div></B>
+            <table class="table borderless" style="margin: auto;width: 50% !important;">
+  <thead>
+    <tr>
+      <th scope="col">SINO</th>
+      <th scope="col">SUBJECTS</th>
+      <th scope="col">ACTION</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>subject name</td>
+      <td>
+         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject">Edit</button>
+         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
+          </td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>subject name</td>
+      <td>
+         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject">Edit</button>
+         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
+          </td>
+    </tr>
+    <tr>
+       <td colspan="2"></td>
+        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addsubject">ADD SUBJECT</button>
+        </td>
+    </tr>
+  </tbody>
+</table>
+
         </div> 
                   
                   
@@ -623,7 +745,36 @@ else{
   </div>
 </div>
   
-       
+
+<!-- EDIT SUBJECTS >> subject edit model -->
+  <div class="modal" id="editsubject">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        Edit Subject Name
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="SUBJECT NAME" />
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">ADD</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
 <!-- EDIT CLASS >> UPDATE class INFO model -->
   <div class="modal" id="editclass">
   <div class="modal-dialog">
@@ -815,7 +966,20 @@ else{
   </form>
     </div>
   </div>
-</div>   
+</div> 
+
+  
+    
+     
+
+     
+     
+     
+     
+     
+     
+     
+<!-- UPLOAD >>>upload new video -->     
 <div id="newupload" class="modal fade " role="dialog">
   <div class="modal-dialog">
 
