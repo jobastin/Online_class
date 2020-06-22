@@ -170,7 +170,7 @@ else{
                     // #INCOMPLETE : display db delete class error message
                 }
             };
-            ajax.open("get", "class_delete.php?id="+id);
+            ajax.open("get", "class_delete.php?delete_id="+id);
             ajax.send();
             console.log('class delete : '+id);
         }
