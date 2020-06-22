@@ -1,6 +1,6 @@
 <?php
 require('../fun.php');
-if (!sessioncheck()) die('invalid authentication');
+if (!sessioncheck() or !$_SESSION['user']->isstaff) die('invalid authentication');
 if (!isset($_GET['id'])) die('invalid parameters');
 $id = $_GET['id'];
 if (!is_numeric($id)) die('invalid input format');
