@@ -315,8 +315,9 @@ else{
     </tr>                
 <?php       } ?>
     <tr>
-        <td colspan="7">
-            <button type="button" class="btn btn-primary" style="float:right;position:absolute;right:97px;" data-toggle="modal" data-target="#newupload">New Upload</button>
+       <td colspan="5"></td>
+        <td>
+            <button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#newupload">New Upload</button>
         </td>
     </tr>
   </tbody>
@@ -350,7 +351,8 @@ else{
     </tr>
 <?php       } ?>
     <tr>
-        <td colspan="4"><button type="button" class="btn btn-primary" style="float:right;position:absolute;right:226px;" data-toggle="modal" data-target="#addclass">ADD CLASS</button>
+       <td colspan="2"></td>
+        <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addclass">ADD CLASS</button>
         </td>
     </tr>
   </tbody>
@@ -751,52 +753,52 @@ else{
    <tr>
       <th>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
-          <label class="custom-control-label" for="tableDefaultCheck1">Subject 1</label>
+          <input type="checkbox" class="custom-control-input" id="Check1">
+          <label class="custom-control-label" for="Check1">Subject 1</label>
         </div>
       </th>
       <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2">
-          <label class="custom-control-label" for="tableDefaultCheck2">Subject 2</label>
+          <input type="checkbox" class="custom-control-input" id="Check2">
+          <label class="custom-control-label" for="Check2">Subject 2</label>
         </div>
       </th>
     </tr>
     <tr>
        <th>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck3">
-          <label class="custom-control-label" for="tableDefaultCheck3">Subject 3</label>
+          <input type="checkbox" class="custom-control-input" id="Check3">
+          <label class="custom-control-label" for="Check3">Subject 3</label>
         </div>
       </th>
       <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck4">
-          <label class="custom-control-label" for="tableDefaultCheck4">Subject 4</label>
+          <input type="checkbox" class="custom-control-input" id="Check4">
+          <label class="custom-control-label" for="Check4">Subject 4</label>
         </div>
       </th>
     </tr>
     <tr>
        <th>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck5">
-          <label class="custom-control-label" for="tableDefaultCheck5">Subject 5</label>
+          <input type="checkbox" class="custom-control-input" id="Check5">
+          <label class="custom-control-label" for="Check5">Subject 5</label>
         </div>
       </th>
       <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck6" >
-          <label class="custom-control-label" for="tableDefaultCheck6">Subject 6</label>
+          <input type="checkbox" class="custom-control-input" id="Check6" >
+          <label class="custom-control-label" for="Check6">Subject 6</label>
         </div>
       </th>
     </tr>
     <tr>
        <th>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck7">
-          <label class="custom-control-label" for="tableDefaultCheck7">Subject 7</label>
+          <input type="checkbox" class="custom-control-input" id="Check7">
+          <label class="custom-control-label" for="Check7">Subject 7</label>
         </div>
       </th>
       <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck8" >
-          <label class="custom-control-label" for="tableDefaultCheck8">Subject 8</label>
+          <input type="checkbox" class="custom-control-input" id="Check8" >
+          <label class="custom-control-label" for="Check8">Subject 8</label>
         </div>
       </th>
     </tr>
