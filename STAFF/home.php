@@ -349,8 +349,49 @@ else{
 <!--Stastictis page -->
         <div class="container-fluid" id="statistics" name="section" style="display: inline;">
 
-          <!-- Page Heading -->
-          Stastictis page
+          <div style="margin-left:15px;margin-right:15px;">
+         <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Number of Videos Uploaded</h5>
+            <b><p class="card-text">Number</p></b>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Totla Number of Classes</h5>
+            <b><p class="card-text">Number</p></b>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+     <br>
+      <div  style="margin-left:15px;margin-right:15px;">
+         <div class="row">
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Totla Number of Subjects</h5>
+            <b><p class="card-text">Number</p></b>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="col-sm-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Total Number Of xxxxx</h5>
+            <b><p class="card-text">Number</p></b>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
         </div>    
 <!--profile edit -->
         <div class="container-fluid" id="profile" name="section" style="display: none;">
