@@ -113,7 +113,7 @@ else{
         
         document.getElementById('link_edit_submit').onclick = function(){
             var ajax = new XMLHttpRequest();
-            params = encodeURIComponent('chapter')+'='+encodeURIComponent(chapter.value)+'&'+
+            var params = encodeURIComponent('chapter')+'='+encodeURIComponent(chapter.value)+'&'+
                 encodeURIComponent('title')+'='+encodeURIComponent(title.value)+'&'+
                 encodeURIComponent('link')+'='+encodeURIComponent(link.value)+'&'+
                 encodeURIComponent('id')+'='+encodeURIComponent(vidid);
@@ -121,8 +121,8 @@ else{
                 //exit if data not ready
                 if (!(this.readyState == 4 && this.status == 200)) return;
                 var result = this.responseText.split('<br>');
-                if (result[0] == 'edit success'){
-                    for (x of result) console.log(x);
+                for (x of result) console.log(x);
+                if (result[0] == 'link edit success'){
                     editonsuccess.getElementsByTagName('td')[2].innerHTML = result[2];
                     editonsuccess.getElementsByTagName('td')[3].innerHTML = result[1];
                     editonsuccess.getElementsByTagName('td')[4].innerHTML = result[3];
@@ -134,7 +134,7 @@ else{
             ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
             ajax.send(params);
-            console.log('edit : '+vidid);
+            console.log('link edit : '+vidid);
         }
     }
     function links_delete(vidid, deleteonsuccess){
@@ -156,7 +156,51 @@ else{
             console.log('link delete : '+vidid);
         };
     }
-    function class_delete(id, deleteonsuccess){
+    function classes_edit(editonsuccess, userid, subjectstring){
+        //fetch existing data
+        var checksubjects = subjectstring.split(','); //console.log(checksubjects);
+        var classname = document.getElementById('class_edit_classname');
+        var password = document.getElementById('class_edit_password');
+        var subjectboxes = document.getElementsByName('changed_subjects[]');
+        for (x of subjectboxes) x.checked = checksubjects.includes(x.value);
+        classname.value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
+        password.value = editonsuccess.getElementsByTagName('td')[1].innerHTML;
+        
+        document.getElementById('class_edit_submit').onclick = function(){
+            var subjects = [];
+            for (x of subjectboxes)
+                if (x.checked == true)
+                    subjects.push(x.value);
+//            console.log(classname.value);
+//            console.log(password.value);
+//            console.log(subjects);
+            var ajax = new XMLHttpRequest();
+            var params = encodeURIComponent('classname')+'='+encodeURIComponent(classname.value)+'&'+
+                encodeURIComponent('password')+'='+encodeURIComponent(password.value)+'&'+
+                encodeURIComponent('subjects')+'='+encodeURIComponent(subjects)+'&'+
+                encodeURIComponent('id')+'='+encodeURIComponent(userid);
+            ajax.onreadystatechange = function(){
+                //exit if data not ready
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                var result = this.responseText.split('<br>');
+                for (x of result) console.log(x);
+                if (result[0] == 'class edit success'){
+                    editonsuccess.getElementsByTagName('td')[0].innerHTML = result[1];
+                    editonsuccess.getElementsByTagName('td')[1].innerHTML = result[2];
+                    editonsuccess.getElementsByTagName('button')[0].onclick="classes_edit(this.parentElement.parentElement), "+userid+", "+result[3]+")";
+                } else {
+                    // #INCOMPLETE : display edit class error message
+                    ;
+                }
+            }
+            ajax.open("post", "class_update.php");
+            ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            ajax.send(params);
+            console.log('class edit : '+userid);
+        }
+    }
+    function classes_delete(id, deleteonsuccess){
         document.getElementById('class_delete').onclick=function(){
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function(){
@@ -490,6 +534,10 @@ else{
   <table class="table borderless" >
   <thead>
     <tr>
+<!--
+  IF YOU EDIT THE COLUMN ORDER MAKE SURE YOU EDIT THE classes_edit() ACCORDINGLY.
+  It relies on the order of columns to obtain that specific data
+   -->
 <!--      <th scope="col">SINO</th>-->
       <th scope="col">CLASS LOGIN ID</th>
       <th scope="col">PASSWORD</th>
@@ -506,8 +554,8 @@ else{
 <!--      <th scope="row">1</th>-->
       <td><?php echo $class['username']; ?></td>
       <td><?php echo $class['password']; ?></td>
-        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editclass">Edit</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="class_delete(<?php echo $class['id']; ?>, this.parentElement.parentElement)" >Delete</button>
+        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editclass" onclick="classes_edit(this.parentElement.parentElement, <?php echo $class['id'].', \''.$class['subjects'].'\''; ?>)">Edit</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="classes_delete(<?php echo $class['id']; ?>, this.parentElement.parentElement)" >Delete</button>
           </td>
     </tr>
 <?php       } ?>
@@ -808,9 +856,9 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-         <input type="text" class="form-control" placeholder="Enter new class ID" />
+         <input id="class_edit_classname" type="text" class="form-control" placeholder="Class Name" />
          <br>
-        <input type="text" class="form-control" placeholder="Enter new Password" />
+        <input id="class_edit_password" type="text" class="form-control" placeholder="Password" />
         <br>
         
        <table class="table borderless">
@@ -821,62 +869,29 @@ else{
   </thead>
   <!-- Table head -->
   <tbody>
-   <tr>
+<?php
+            $subs = getSubjects();
+            $alternate = false;
+            if ($subs == false){
+//                #INCOMPLETE : SHOW MESSAGE : NO SUBJECTS TO ADD
+            } else while ($sub = mysqli_fetch_array($subs)){
+                if (!$alternate){ ?>
+    <tr>
+<?php           } ?>
       <th>
-        <!-- Default unchecked -->
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck1">
-          <label class="custom-control-label" for="tableDefaultCheck1">Subject 1</label>
+          <input name='changed_subjects[]' value="<?php echo $sub['id']; ?>" type="checkbox" class="custom-control-input" id="SubjectEdit<?php echo $sub['id']; ?>">
+          <label class="custom-control-label" for="SubjectEdit<?php echo $sub['id']; ?>"><?php echo $sub['subjectname']; ?></label>
         </div>
       </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck2">
-          <label class="custom-control-label" for="tableDefaultCheck2">Subject 2</label>
-        </div>
-      </th>
+<?php           if ($alternate){ ?>
     </tr>
-    <tr>
-       <th>
-        <!-- Default unchecked -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck3">
-          <label class="custom-control-label" for="tableDefaultCheck3">Subject 3</label>
-        </div>
-      </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck4">
-          <label class="custom-control-label" for="tableDefaultCheck4">Subject 4</label>
-        </div>
-      </th>
+<?php           }
+                $alternate = !$alternate;
+            }
+            if ($alternate){ ?>
     </tr>
-    <tr>
-       <th>
-        <!-- Default unchecked -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck5">
-          <label class="custom-control-label" for="tableDefaultCheck5">Subject 5</label>
-        </div>
-      </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck6" >
-          <label class="custom-control-label" for="tableDefaultCheck6">Subject 6</label>
-        </div>
-      </th>
-    </tr>
-    <tr>
-       <th>
-        <!-- Default unchecked -->
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck7">
-          <label class="custom-control-label" for="tableDefaultCheck7">Subject 7</label>
-        </div>
-      </th>
-      <th><div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="tableDefaultCheck8" >
-          <label class="custom-control-label" for="tableDefaultCheck8">Subject 8</label>
-        </div>
-      </th>
-    </tr>
+<?php       } ?>
   </tbody>
 </table>
 
@@ -884,7 +899,7 @@ else{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">Update</button>
+        <button id="class_edit_submit" type="button" class="btn btn-success" data-dismiss="modal">Update</button>
       </div>
 
     </div>
@@ -925,7 +940,7 @@ else{
             $subs = getSubjects();
             $alternate = false;
             if ($subs == false){
-//                #INCOMPLETE : SHOW MESSAGE : NO SUBJECTS TO ADD
+//                #INCOMPLETE : SHOW MESSAGE : NO SUBJECTS TO ADD - copy from same line existing on top
             } else while ($sub = mysqli_fetch_array($subs)){
                 if (!$alternate){ ?>
     <tr>

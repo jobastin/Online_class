@@ -12,6 +12,8 @@ $title = $_POST['title'];
 $vlink = $_POST['vlink'];
 $chapt = $_POST['chapter'];
 
+//sterilize input?
+
 if (linkexists($class, $vlink)){ ?>
     <script>
            alert("The provided Link alredy exist");

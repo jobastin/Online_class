@@ -11,6 +11,7 @@ ADMIN
 - search for #INCOMPLETE
 - sidebar shouldn't scroll with content
 - make sure usernames got only chars%nums in db, inputs
+- make sure delete operations show delete name on popup box
 
 STUDENTS
 - display no links uploaded option

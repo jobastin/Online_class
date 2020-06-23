@@ -1,6 +1,6 @@
 <?php 
 require('../fun.php');
-if (!sessioncheck()) die('invalid authentication');
+if (!sessioncheck() or !$_SESSION['user']->isstaff) die('invalid authentication');
 if (!isset($_POST['chapter']) or !isset($_POST['title']) or !isset($_POST['link']) or !isset($_POST['id'])) die('invalid parameters');
 
 $chapter = $_POST['chapter'];
@@ -16,6 +16,6 @@ $res = mysqli_query($con, $q) or die("edit link query error");
 mysqli_close($con);
 
 if ($res){
-    die("edit success<br>".$title."<br>".$chapter."<br>".$link);
+    die("link edit success<br>".$title."<br>".$chapter."<br>".$link);
 }
 ?>

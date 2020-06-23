@@ -10,10 +10,12 @@ if (isset($_POST['subjects'])){
         if (!is_numeric($subject))
             header('Location: ../');
     }
-} else $subjects = array()
+} else $subjects = array();
 $username = $_POST['username'];
 $password = $_POST['password'];
 $password2 = $_POST['password2'];
+
+//sterilize input?
 
 if (userexists($username)){ ?>
     <script>

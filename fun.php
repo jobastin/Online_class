@@ -111,9 +111,10 @@ function userexists($username){
     else return false;
 }
 function getUsers($textonlymode=true){
-    //returns all the classes going on in school
+    //returns all the classes going on in school, with the subjects they attend
     $con = connect();
-    $res = mysqli_query($con, "select * from `user` where isstaff=0") or die("Unable to fetch Users.");
+    $q = "select `user`.`id`, `user`.`username`, `user`.`password`, `user`.`isstaff`, `user`.`isadmin`, `classes`.`subjects` from `user` left join (select `user_id`, GROUP_CONCAT(`clas`.`subj_id` separator ',') as `subjects` from `clas` group by `clas`.`user_id`) as `classes` on `user`.`id`=`classes`.`user_id` where isstaff=0 order by `user`.`username`";
+    $res = mysqli_query($con, $q) or die("Unable to fetch Users.");
     mysqli_close($con);
     
     if ($textonlymode){
