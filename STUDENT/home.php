@@ -103,7 +103,7 @@ else {
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
           <!-- Sidebar Toggle (Topbar) -->
-          <h3>St. ALOYSIUS ENGLISH MEDIUM SCHOOL TANIKALLA</h3>
+          <h3>St. ALOYSIUS ENGLISH MEDIUM SCHOOL THANIKELLA</h3>
           <ul class="navbar-nav ml-auto">
 
            
