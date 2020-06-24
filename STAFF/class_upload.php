@@ -20,12 +20,12 @@ $password2 = $_POST['password2'];
 if (userexists($username)){ ?>
     <script>
            alert("The class already exist");
-           window.location.replace("../STAFF/");
+           window.location.replace("../STAFF/#classes");
     </script>
 <?php } else if ($password != $password2){ ?>
     <script>
            alert("Password mismatch");
-           window.location.replace("../STAFF/");
+           window.location.replace("../STAFF/#classes");
     </script>
 <?php } else {
     $con = connect();
@@ -38,21 +38,21 @@ if (userexists($username)){ ?>
                 mysqli_close($con); ?>
                 <script>
                    alert("class added, Please verify subjects");
-                   window.location.replace("../staff/");
+                   window.location.replace("../STAFF/#classes");
                 </script>
 <?php           break;
             }
         } ?>
        <script>
            alert("Class Added");
-           window.location.replace("../staff/");
+           window.location.replace("../STAFF/#classes");
         </script>
 <?php
     } else { 
         mysqli_close($con); ?>
         <script>
            alert("Unable to add to Database");
-           window.location.replace("../staff/");
+           window.location.replace("../STAFF/#classes");
         </script>
 <?php
     }

@@ -16,6 +16,7 @@ ADMIN
 STUDENTS
 - display no links uploaded option
 - decide on forgot password actions
+- landing page
 
 - fade bgs on login and home
 - shows wrong password and [invalid email info] and disables login if invalid

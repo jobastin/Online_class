@@ -151,7 +151,7 @@ else{
                     // #INCOMPLETE : display db delete link error message
                 }
             };
-            ajax.open("get", "link_delete.php?id="+vidid);
+            ajax.open("get", "link_delete.php?deleteid="+vidid);
             ajax.send();
             console.log('link delete : '+vidid);
         };
@@ -219,29 +219,63 @@ else{
             console.log('class delete : '+id);
         }
     }
+    function subjects_edit(editonsuccess, subjid){
+        var subject = document.getElementById('subject_edit_subject');
+        subject.value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
+        
+        document.getElementById('subject_edit_submit').onclick = function(){
+            var ajax = new XMLHttpRequest();
+            var params = encodeURIComponent('subjectname')+'='+encodeURIComponent(subject.value)+'&'+
+                encodeURIComponent('id')+'='+encodeURIComponent(subjid);
+            ajax.onreadystatechange = function(){
+                //exit if data not ready
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                var result = this.responseText.split('<br>');
+                for (x of result) console.log(x);
+                if ((result[0]) == 'subject edit success'){
+                    editonsuccess.getElementsByTagName('td')[0].innerHTML = result[1];
+                } else {
+                    // #INCOMPLETE : display db edit subject error message
+                }
+            };
+            ajax.open("post", "subject_update.php");
+            ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            ajax.send(params);
+            console.log('subject edit : '+subjid);
+        };
+    }
+    function subjects_delete(subjid, deleteonsuccess){
+        document.getElementById('subjects_delete').onclick = function(){
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                //exit if data not ready
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                
+                console.log(this.responseText);
+                if (this.responseText == "delete success")
+                    deleteonsuccess.remove();
+                else {
+                    // #INCOMPLETE : display db delete subject link error message
+                }
+            };
+            ajax.open("get", "subject_delete.php?deleteid="+subjid);
+            ajax.send();
+            console.log('subject delete : '+subjid);
+        };
+    }
     function loadsection(){
         url = window.location.href;
 //        console.log(url.split('#')[1])
         switch (url.split('#')[1]){
-            case 'statistics':
-                show1();
-                break;
-            case 'links':
-                show3();
-                break;
-            case 'classes':
-                show4();
-                break;
-            case 'subjects':
-                show5();
-                break;
-            case 'profile':
-                show6();
-                break;
-            default:
-                break;
+            case 'statistics': show1(); break;
+            case 'links': show3(); break;
+            case 'classes': show4(); break;
+            case 'subjects': show5(); break;
+            case 'profile': show6(); break;
+            default: break;
         }
-    } 
+    }
 </script>
 <style>
     .borderless td, .borderless th {
@@ -616,28 +650,24 @@ else{
             <table class="table borderless" style="margin: auto;width: 50% !important;">
   <thead>
     <tr>
-      <th scope="col">SINO</th>
       <th scope="col">SUBJECTS</th>
       <th scope="col">ACTION</th>
     </tr>
   </thead>
   <tbody>
+<?php 
+            $allsubs = getSubjects();
+            if ($allsubs == false){
+//                #INCOMPLETE - show no subjects message
+            } else while ($row = mysqli_fetch_array($allsubs)){ ?>
     <tr>
-      <th scope="row">1</th>
-      <td>subject name</td>
+      <td><?php echo $row['subjectname']; ?></td>
       <td>
-         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject">Edit</button>
+         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject" onclick="subjects_edit(this.parentElement.parentElement, <?php echo $row['id']; ?>)">Edit</button>
          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
           </td>
     </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>subject name</td>
-      <td>
-         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject">Edit</button>
-         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
-          </td>
-    </tr>
+<?php       } ?>
     <tr>
        <td colspan="2"></td>
         <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addsubject">ADD SUBJECT</button>
@@ -832,6 +862,7 @@ else{
  <!-- subject add model -->
   <div class="modal" id="addsubject">
   <div class="modal-dialog">
+   <form action="subject_upload.php" method="post">
     <div class="modal-content">
 
       <!-- Modal Header -->
@@ -842,15 +873,16 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-        <input type="text" class="form-control" placeholder="SUBJECT NAME" />
+        <input name="subject" type="text" class="form-control" placeholder="SUBJECT NAME" />
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">ADD</button>
+        <input type="submit" class="btn btn-success" value="Add Subject" /> <!-- data-dismiss="modal" -->
       </div>
 
     </div>
+      </form>
   </div>
 </div>
   
@@ -868,12 +900,12 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="SUBJECT NAME" />
+        <input type="text" id="subject_edit_subject" class="form-control" placeholder="SUBJECT NAME" />
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">ADD</button>
+        <button type="button" id="subject_edit_submit" class="btn btn-success" data-dismiss="modal">ADD</button>
       </div>
 
     </div>

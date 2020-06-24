@@ -27,14 +27,14 @@ if (linkexists($class, $vlink)){ ?>
     if ($res){?>
        <script>
            alert("Uploaded Successfully");
-           window.location.replace("../staff/");
+           window.location.replace("../STAFF/#links");
         </script>
         <?php
       
     } else { ?>
         <script>
            alert("Unable to upload to Database");
-           window.location.replace("../staff/");
+           window.location.replace("../STAFF/#links");
         </script>
 <?php 
 //            die ("Error on database insert : ".mysqli_error($con));
