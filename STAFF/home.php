@@ -246,7 +246,7 @@ else{
         };
     }
     function subjects_delete(subjid, deleteonsuccess){
-        document.getElementById('subjects_delete').onclick = function(){
+        document.getElementById('subject_delete').onclick = function(){
             var ajax = new XMLHttpRequest();
             ajax.onreadystatechange = function(){
                 //exit if data not ready
@@ -664,7 +664,7 @@ else{
       <td><?php echo $row['subjectname']; ?></td>
       <td>
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject" onclick="subjects_edit(this.parentElement.parentElement, <?php echo $row['id']; ?>)">Edit</button>
-         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5">Delete</button>
+         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="subjects_delete(<?php echo $row['id']; ?>, this.parentElement.parentElement)">Delete</button>
           </td>
     </tr>
 <?php       } ?>
@@ -761,19 +761,19 @@ else{
          <table class="table borderless" >
     <tbody>
         <tr>
-            <th scope="row">Select class</th>
+            <th scope="row">Class</th>
             <td>
                 <input disabled name="classname" class="form-control" id="link_edit_classname" required/>
             </td>
         </tr>
         <tr>
-            <th scope="row">Select subject</th>
+            <th scope="row">Subject</th>
             <td>
                 <input disabled name="subjectname" class="form-control" id="link_edit_subjectname" required>
             </td>
         </tr>
         <tr>
-            <th scope="row">Select chapter</th>
+            <th scope="row">Chapter</th>
             <td>
                  <input name="chapter" class="form-control" type="number" min="0" id="link_edit_chapter" required>
             </td>
@@ -790,7 +790,7 @@ else{
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text" id="link_edit_link" required>
+                    <input name="vlink" class="form-control" type="text" id="link_edit_link" required title="Find the Video link by clicking on the share option underneath the YouTube video and copying the link." placeholder="example : https://youtu.be/lJIrF4YjHfQ">
                 </div>
             </td>
         </tr>
@@ -846,12 +846,12 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-        Do you want to remove this class ??
+        Do you want to remove this subject ??
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal" id="class_delete">Yes</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="subject_delete">Yes</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
       </div>
 
@@ -1073,7 +1073,7 @@ else{
           <center><table class="table-sm"  style="width:400px;height:350px;">
     <tbody>
         <tr>
-            <th scope="row">Select class</th>
+            <th scope="row">Class</th>
             <td>
                 <input list="fetchclasses" name="class" class="form-control" onchange="loadsubjects(this.value)" required/>
                 <datalist id="fetchclasses">
@@ -1086,14 +1086,14 @@ else{
             </td>
         </tr>
         <tr>
-            <th scope="row">Select subject</th>
+            <th scope="row">Subject</th>
             <td>
                 <input list="fetchsubjects" name="subject" class="form-control" requireds>
                 <datalist id="fetchsubjects"></datalist>
             </td>
         </tr>
         <tr>
-            <th scope="row">Select chapter</th>
+            <th scope="row">Chapter</th>
             <td>
                  <input name="chapter" class="form-control" type="number" required min="0">
             </td>
@@ -1110,7 +1110,7 @@ else{
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text" required>
+                    <input name="vlink" class="form-control" type="text" required title="Find the Video link by clicking on the share option underneath the YouTube video and copying the link." placeholder="example : https://youtu.be/lJIrF4YjHfQ">
                 </div>
             </td>
         </tr>
