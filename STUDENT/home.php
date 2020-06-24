@@ -129,11 +129,7 @@ else {
                 if(id!='logout')
                 var vids = allvids[id]; //gets all the links to that subject
                 if (vids.length == 0){
-                    
-                    
-//                    ### NO VIDEOS DIV OVER HERE ###
-                    
-                    
+                    alert("No Videos Uploaded");
                 }
                 //fetch all chapters for which links are available
                 var chap = [];
@@ -154,7 +150,9 @@ else {
             });
         </script>
            <B><div id="accordion" class="accordion">
-        <div class="card mb-0">
+        <div class="card mb-0" style="background-color:#DAE0E2;">
+           <center><h2>Select a subject to view Classes</h2>
+           </center>
         </div>
     </div></B>
 
