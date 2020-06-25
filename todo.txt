@@ -5,26 +5,26 @@ ADMIN
 - links :scroll table (instead of stacking below) on window width change
 - links :allow update only if changes are validated
 - class :validate new class pop-up
--- CLASS :add deletion db code, and edit code
 - class :validate passwords before adding class
-- class :make sure new classname doesn't exist
 - search for #INCOMPLETE
 - sidebar shouldn't scroll with content
-- make sure usernames got only chars%nums in db, inputs
-- make sure delete operations show delete name on popup box
+- validate usernames got only chars%nums in db, inputs
+- make sure delete operations show delete name on all modals
 
 STUDENTS
 - display no links uploaded option
 - decide on forgot password actions
-- landing page
 
-- fade bgs on login and home
-- shows wrong password and [invalid email info] and disables login if invalid
-- add encryption to passwords
-- colors and symbols
+- shows wrong password and [invalid email info] and DISABLES login if invalid
+- add encryption to passwords - UI for strong passwords, DB for encryption
+- colors and symbols standards
 - security table to log actions
 
 -------------------------------------------------------------------------------
+x CLASS :add deletion db code, and edit code
+x class :make sure new classname doesn't exist
+x landing page
+x fade bgs on login and home
 x add a classes and subjects option on sidebar
 x upload:verify datalist arrow design
 x upload:center inputs
