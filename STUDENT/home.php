@@ -56,7 +56,6 @@ else {
         ?>
         console.log(allvids);
     </script>
-
 </head>
 
 <body id="page-top">
@@ -84,7 +83,7 @@ else {
       <!-- Nav Item - Pages Collapse Menu -->
 <?php $i=0; foreach($clas as $subject){ ?>
       <li class="nav-item">
-        <a class="nav-link" href="javascript:anchorScr()" id="<?php echo $i++; ?>" >
+        <a class="nav-link" href="#" id="<?php echo $i++; ?>" >
           <i class="fa fa-book"></i>
           <span><?php echo $subject->subjectname; ?></span></a>
       </li>
@@ -143,7 +142,7 @@ else {
                 for (x of chap){
                     parent.innerHTML += '<div class="card-header collapsed" data-toggle="collapse" href="#collapse'+x+'"><a class="card-title">Chapter '+x+'</a></div>';
                     for (y of vids) if (y.chapter == x){
-                        parent.innerHTML += '<div id="collapse'+x+'" class="card-body collapse" data-parent="#accordion" ><a href="'+y.vlink+'" data-id="5Kp_1Vq6pRg" data-target="#myModalPrev" data-toggle="modal">'+y.title+'</a></div>';
+                        parent.innerHTML += '<div id="collapse'+x+'" class="card-body collapse" data-parent="#accordion" ><a href="#" onClick="re(\'' +y.vlink+ '\')">'+y.title+'</a></div>'; 
                     }
                 }
                 
@@ -211,15 +210,18 @@ else {
   <!-- Custom scripts for all pages-->
   <script src="../js/sb-admin-2.min.js"></script>
   <script>
-     // on preview show iframe
-    $('#myModalPrev').on('show.bs.modal', function (e) {
-      var idVideo = $(e.relatedTarget).data('id');
-      $('#myModalPrev .modal-body').html('<iframe width="100%" height="400px" src="https://www.youtube.com/embed/' + idVideo + '?autoplay=true" frameborder="0" allowfullscreen></iframe>');
-    });
-    //on close remove
-    $('#myModalPrev').on('hidden.bs.modal', function () {
-       $('#myModalPrev .modal-body').empty();
-    });
+    function re(url)
+    {
+    var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[2].length == 11) 
+    {
+    var idVideo = match[2];
+        $('#myModalPrev .modal-body').html('<iframe width="100%" height="400px" src="https://www.youtube.com/embed/' + idVideo + '?autoplay=true" frameborder="0" allowfullscreen></iframe>');
+    }else {
+        alert("error");
+    }
+    }
     </script>
 </body>
 </html>
