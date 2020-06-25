@@ -37,35 +37,35 @@ else{
         document.getElementById("statistics").style.display = "inline"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
-        document.getElementById("profile").style.display = "none";
+        document.getElementById("staff").style.display = "none";
     }
     function show3(){
         document.getElementById("links").style.display = "inline"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
-        document.getElementById("profile").style.display = "none";
+        document.getElementById("staff").style.display = "none";
     }
     function show4(){
         document.getElementById("links").style.display = "none"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "inline"; 
         document.getElementById("subjects").style.display = "none";
-        document.getElementById("profile").style.display = "none";
+        document.getElementById("staff").style.display = "none";
     }
     function show5(){
         document.getElementById("links").style.display = "none"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "inline";
-        document.getElementById("profile").style.display = "none";
+        document.getElementById("staff").style.display = "none";
     }
     function show6(){
         document.getElementById("links").style.display = "none"; 
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
-        document.getElementById("profile").style.display = "inline";
+        document.getElementById("staff").style.display = "inline";
     }
     function loadsubjects(classname){
         var ajax = new XMLHttpRequest();
@@ -272,7 +272,7 @@ else{
             case 'links': show3(); break;
             case 'classes': show4(); break;
             case 'subjects': show5(); break;
-            case 'profile': show6(); break;
+            case 'staff': show6(); break;
             default: break;
         }
     }
@@ -329,23 +329,23 @@ else{
       <li class="nav-item">
         <a class="nav-link"  href="#classes" onclick="show4()">
           <i class="fas fa-fw fa-cog"></i>
-          <span>EDIT CLASS</span></a>
+          <span>CLASSES</span></a>
       </li>
       <hr class="sidebar-divider my-0">
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link"  href="#subjects" onclick="show5()">
           <i class="fas fa-fw fa-cog"></i>
-          <span>EDIT SUBJECTS</span></a>
+          <span>SUBJECTS</span></a>
       </li>
       
       
       <hr class="sidebar-divider my-0">
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link"  href="#profile" onclick="show6()">
+        <a class="nav-link"  href="#staff" onclick="show6()">
           <i class="fas fa-user"></i>
-          <span>PROFILE</span></a>
+          <span>STAFF</span></a>
       </li>
       
       <hr class="sidebar-divider">
@@ -389,7 +389,11 @@ else{
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Total Number of Videos Uploaded</h5>
-            <b><p class="card-text">Number</p></b>
+            <b><p class="card-text"><?php
+            $links = getLinks();
+            if ($links) echo mysqli_num_rows($links);
+            else echo "#INCOMPLETE";
+            ?></p></b>
           </div>
         </div>
       </div>
@@ -398,7 +402,11 @@ else{
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Totla Number of Classes</h5>
-            <b><p class="card-text">Number</p></b>
+            <b><p class="card-text"><?php
+            $classes = getUsers(false);
+            if ($classes) echo mysqli_num_rows($classes);
+            else echo "#INCOMPLETE";
+            ?></p></b>
           </div>
         </div>
       </div>
@@ -411,7 +419,11 @@ else{
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Totla Number of Subjects</h5>
-            <b><p class="card-text">Number</p></b>
+            <b><p class="card-text"><?php
+            $allsubs = getSubjects();
+            if ($allsubs) echo mysqli_num_rows($allsubs);
+            else echo "#INCOMPLETE";
+            ?></p></b>
           </div>
         </div>
       </div>
@@ -428,35 +440,40 @@ else{
 </div>
         </div>    
 <!--profile edit -->
-        <div class="container-fluid" id="profile" name="section" style="display: none;">
+        <div class="container-fluid" id="staff" name="section" style="display: none;">
         <table class="table borderless" style="margin: auto;width: 50% !important;">
   <thead>
     <tr>
-      <th scope="col">SINO</th>
-      <th scope="col">ADMIN ID</th>
-      <th scope="col">ACTION</th>
+      <th scope="col">Staff username</th>
+      <th scope="col">Links Uploaded</th>
+      <th scope="col">Classes</th>
     </tr>
   </thead>
   <tbody>
+<?php
+//            isstaff and isadmin attribs also exist
+            $staffs = getStaff();
+            if ($staffs){
+                while ($row = mysqli_fetch_array($staffs)){ ?>
     <tr>
-      <th scope="row">1</th>
-      <td>Staff name</td>
+      <td><?php echo $row['username']; ?></td>
+      <td><?php echo $row['links']; ?></td>
+      <td><?php echo $row['classes']; ?></td>
+<!--
       <td>
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteprofile">Delete</button>
           </td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Staff name</td>
-      <td>
-         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
-         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteprofile">Delete</button>
-          </td>
-    </tr>
+-->
+    </tr>           
+<?php           }
+            } else {
+                #INCOMPLETE show no staff message - you have no other staff but you alone XD COMEDY
+            }
+?>
     <tr>
        <td colspan="2"></td>
-        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addprofile">ADD NEW PROFILE</button>
+        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addprofile">ADD NEW STAFF</button>
         </td>
     </tr>
   </tbody>
@@ -578,7 +595,6 @@ else{
   </thead>
   <tbody>
 <?php
-            $links = getLinks();
             if ($links == false){
 //                #INCOMPLETE NO LINKS HAVE BEEN ADDED message
             } else while ($link = mysqli_fetch_array($links)){ ?>
@@ -621,7 +637,6 @@ else{
   </thead>
   <tbody>
 <?php
-            $classes = getUsers(false);
             if ($classes == false){
 //                #INCOMPLETE NO CLASSES HAVE BEEN ADDED message
             } else while ($class = mysqli_fetch_array($classes)){ ?>
@@ -630,7 +645,7 @@ else{
       <td><?php echo $class['username']; ?></td>
       <td><?php echo $class['password']; ?></td>
         <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editclass" onclick="classes_edit(this.parentElement.parentElement, <?php echo $class['id'].', \''.$class['subjects'].'\''; ?>)">Edit</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="classes_delete(<?php echo $class['id']; ?>, this.parentElement.parentElement)" >Delete</button>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal6" onclick="classes_delete(<?php echo $class['id']; ?>, this.parentElement.parentElement)" >Delete</button>
           </td>
     </tr>
 <?php       } ?>
@@ -834,7 +849,7 @@ else{
 </div>
   
   
-<!-- EDIT CLASS >> delete model -->
+<!-- delete SUBJECTS >> delete model -->
   <div class="modal" id="myModal5">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -853,6 +868,30 @@ else{
       <div class="modal-footer">
         <button type="button" class="btn btn-success" data-dismiss="modal" id="subject_delete">Yes</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+ <!-- delete CLASS >> delete model -->
+  <div class="modal" id="myModal6">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Do you want to remove this class. All other information regarding the class will also be deleted.
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal" id="class_delete">Yes, Remove Class</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">No, Keep Class</button>
       </div>
 
     </div>
