@@ -455,13 +455,14 @@ else{
         </div>    
 <!--profile edit -->
         <div class="container-fluid" id="staff" name="section" style="display: none;">
-        <table class="table borderless" style="margin: auto;width: 50% !important;">
+        <table class="table borderless"   style="margin: auto;width: 50% !important;">
   <thead>
     <tr>
       <th scope="col">Staff username</th>
       <th scope="col">Links Uploaded</th>
       <th scope="col">Classes</th>
-      <th scope="col">Administrator</th>
+      <th scope="col" colspan="2">Administrator Privilege</th>
+      <th scope="col">Reset</th>
     </tr>
   </thead>
   <tbody>
@@ -474,7 +475,19 @@ else{
       <td><?php echo $row['username']; ?></td>
       <td><?php echo $row['links']; ?></td>
       <td><?php echo $row['classes']; ?></td>
-      <td><?php if ($row['isadmin']) echo "Yes"; else echo "No"; ?></td>
+      <td><div class="custom-control custom-checkbox">
+          <input name="yes" value="Yes" type="checkbox" class="custom-control-input" id="yes">
+          <label class="custom-control-label" for="yes">Yes</label>
+          </div>
+          </td>
+         <td>
+         <div class="custom-control custom-checkbox">
+          <input name="no" value="No" type="checkbox" class="custom-control-input" id="no">
+          <label class="custom-control-label" for="no">No</label>
+          </div>
+          </td>
+        <td>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resetpassword">Reset Password</button></td>
 <!--
       <td>
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
@@ -488,14 +501,49 @@ else{
             }
 ?>
     <tr>
-       <td colspan="2"></td>
+       <td colspan="5"></td>
         <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addprofile">ADD STAFF</button>
         </td>
     </tr>
   </tbody>
 </table>
 </div> 
+
+  <!-- staff >> reset password -->
+  <div class="modal" id="resetpassword">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+       Change Password
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+            <div class="input-group">
+                <input class="form-control" type="password" placeholder="New Password">
+            </div>
+            <br>
+            <div class="input-group">
+                <input class="form-control" type="password" placeholder="Confrim New Password">
+            </div>
+            <br>
+      </div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+   
           
+                 
+                        
+                                      
 <!-- PROFILE >> change password -->
   <div class="modal" id="changepassword">
   <div class="modal-dialog">
