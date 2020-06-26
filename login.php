@@ -48,14 +48,19 @@ if (!isset($_POST['submit'])){
         
         function checkuser(username){
             var ajax = new XMLHttpRequest();
+            var input = document.getElementById("exampleInputEmail1");
+            var login = document.getElementById("submit");
             ajax.onreadystatechange = function(){
                 if (!(this.readyState == 4 && this.status == 200)) return;
                 console.log('"'+this.responseText+'"')
                 if (this.responseText == 'true'){
-                    document.getElementById("exampleInputEmail1").style.borderColor = "green";
-                    document.getElementById("submit").disabled = false;
-                }else if (this.responseText == 'false'){
-            
+                    input.style.borderColor = "green";
+                    input.title = "this is a valid username";
+                    login.disabled = false;
+                } else {
+                    //if (this.responseText == 'false'){
+                    input.title = "This looks like an invalid username";
+                    login.disabled = true;
                 }
             }
             document.getElementById("exampleInputEmail1").style.borderColor = "red";

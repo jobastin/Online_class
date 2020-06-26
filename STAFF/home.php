@@ -374,14 +374,14 @@ else{
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Principal</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $user->username; ?></span>
                 <img class="img-profile rounded-circle " src="../img/thumpnail.png"> 
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#myModal1">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Profile
+                  Password
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal" id="logout">
@@ -461,6 +461,7 @@ else{
       <th scope="col">Staff username</th>
       <th scope="col">Links Uploaded</th>
       <th scope="col">Classes</th>
+      <th scope="col">Administrator</th>
     </tr>
   </thead>
   <tbody>
@@ -473,6 +474,7 @@ else{
       <td><?php echo $row['username']; ?></td>
       <td><?php echo $row['links']; ?></td>
       <td><?php echo $row['classes']; ?></td>
+      <td><?php if ($row['isadmin']) echo "Yes"; else echo "No"; ?></td>
 <!--
       <td>
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
@@ -487,7 +489,7 @@ else{
 ?>
     <tr>
        <td colspan="2"></td>
-        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addprofile">ADD NEW STAFF</button>
+        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addprofile">ADD STAFF</button>
         </td>
     </tr>
   </tbody>
