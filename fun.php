@@ -139,7 +139,7 @@ function getStaff(){
 function getSubjects(){
     //returns all subjects
     $con = connect();
-    $q = "select * from `subj`";
+    $q = "select * from `subj` order by `subjectname`";
     $res = mysqli_query($con, $q) or die("Unable to Fetch Subjects");
     mysqli_close($con);
     
