@@ -560,34 +560,36 @@ else{
   <div class="modal" id="addprofile">
   <div class="modal-dialog">
     <div class="modal-content">
+    <form action="staff_upload.php" method="post">
 
       <!-- Modal Header -->
       <div class="modal-header">
-       Create New Admin User
+       New Staff Member
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->
       <div class="modal-body">
-       <div class="input-group">
-                <input class="form-control" type="text" placeholder="New Admin ID">
+            <div class="input-group">
+                <input name="staffusername" class="form-control" type="text" placeholder="Username">
             </div>
             <br>
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Set Password">
+                <input name="staffpassword" class="form-control" type="text" placeholder="Set Password">
             </div>
             <br>
             <div class="custom-control custom-checkbox">
-          <input name="check3" value="admin" type="checkbox" class="custom-control-input" id="admincheck">
+          <input name="staffisadmin" value="1" type="checkbox" class="custom-control-input" id="admincheck">
           <label class="custom-control-label" for="admincheck">Admin User</label>
         </div>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+        <input type="submit" class="btn btn-success" value="CONFIRM" /><!--data-dismiss="modal"-->
       </div>
 
+        </form>
     </div>
   </div>
 </div>

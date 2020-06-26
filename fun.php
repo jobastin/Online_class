@@ -129,7 +129,7 @@ function getUsers($textonlymode=true){
 function getStaff(){
     //returns all the staff in the school
     $con = connect();
-    $q = "select `user`.`id`, `user`.`username`, `user`.`isstaff`, `user`.`isadmin`, count(`link`) as `links`, count(distinct `class_id`) as `classes` from `user` left join `vids` on `user`.id=`vids`.`staff_id` group by `username` having `isstaff`=1 and `user`.`username` != {$_SESSION['user']->id}";
+    $q = "select `user`.`id`, `user`.`username`, `user`.`isstaff`, `user`.`isadmin`, count(`link`) as `links`, count(distinct `class_id`) as `classes` from `user` left join `vids` on `user`.id=`vids`.`staff_id` group by `username` having `isstaff`=1 and `user`.`username` != {$_SESSION['user']->id} order by `user`.`username`";
     $res = mysqli_query($con, $q) or die("Unable to fetch Users");
     mysqli_close($con);
     

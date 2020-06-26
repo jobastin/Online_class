@@ -16,8 +16,8 @@ $chapt = $_POST['chapter'];
 
 if (linkexists($class, $vlink)){ ?>
     <script>
-           alert("The provided Link alredy exist");
-           window.location.replace("../STAFF/");
+           alert("The provided Link alredy exists");
+           window.location.replace("../STAFF/#links");
     </script>
 <?php } else {
     $con = connect();
@@ -29,9 +29,7 @@ if (linkexists($class, $vlink)){ ?>
            alert("Uploaded Successfully");
            window.location.replace("../STAFF/#links");
         </script>
-        <?php
-      
-    } else { ?>
+<?php } else { ?>
         <script>
            alert("Unable to upload to Database");
            window.location.replace("../STAFF/#links");
