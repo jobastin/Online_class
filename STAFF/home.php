@@ -127,7 +127,7 @@ else{
                     editonsuccess.getElementsByTagName('td')[3].innerHTML = result[1];
                     editonsuccess.getElementsByTagName('td')[4].innerHTML = result[3];
                 } else {
-                    // #INCOMPLETE : display db edit link error message
+                    alert("Database error....please try again later");
                 }
             }
             ajax.open("post", "link_update.php");
@@ -148,7 +148,7 @@ else{
                 if (this.responseText == "delete success")
                     deleteonsuccess.remove();
                 else{
-                    // #INCOMPLETE : display db delete link error message
+                     alert("Database error....please try again later");
                 }
             };
             ajax.open("get", "link_delete.php?deleteid="+vidid);
@@ -189,7 +189,7 @@ else{
                     editonsuccess.getElementsByTagName('td')[1].innerHTML = result[2];
                     editonsuccess.getElementsByTagName('button')[0].onclick="classes_edit(this.parentElement.parentElement), "+userid+", "+result[3]+")";
                 } else {
-                    // #INCOMPLETE : display edit class error message
+                     alert("Database error....please try again later");
                     ;
                 }
             }
@@ -211,7 +211,7 @@ else{
                 if (this.responseText == "delete success")
                     deleteonsuccess.remove();
                 else{
-                    // #INCOMPLETE : display db delete class error message
+                     alert("Database error....please try again later");
                 }
             };
             ajax.open("get", "class_delete.php?delete_id="+id);
@@ -317,7 +317,7 @@ else{
                 if ((result[0]) == 'subject edit success'){
                     editonsuccess.getElementsByTagName('td')[1].innerHTML = result[1];
                 } else {
-                    // #INCOMPLETE : display db edit subject error message
+                    alert("Database error....please try again later");
                 }
             };
             ajax.open("post", "subject_update.php");
@@ -338,7 +338,7 @@ else{
                 if (this.responseText == "delete success")
                     deleteonsuccess.remove();
                 else {
-                    // #INCOMPLETE : display db delete subject link error message
+                    alert("Database error....please try again later");
                 }
             };
             ajax.open("get", "subject_delete.php?deleteid="+subjid);
