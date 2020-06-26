@@ -1,7 +1,7 @@
 <?php
 require('../fun.php');
 if (!sessioncheck() or !$_SESSION['user']->isstaff) die('invalid authentication');
-if (!isset($_GET['id'])) die('invalid parameters');
+if (!isset($_GET['deleteid'])) die('invalid parameters');
 $id = $_GET['deleteid'];
 if (!is_numeric($id)) die('invalid input format');
 
