@@ -34,38 +34,48 @@ else{
   <script>
     function show1(){
         document.getElementById("links").style.display = "none"; 
+<?php if ($user->isadmin){ ?>
         document.getElementById("statistics").style.display = "inline"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
         document.getElementById("staff").style.display = "none";
+<?php } ?>
     }
     function show3(){
-        document.getElementById("links").style.display = "inline"; 
+        document.getElementById("links").style.display = "inline";
+<?php if ($user->isadmin){ ?>
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
         document.getElementById("staff").style.display = "none";
+<?php } ?>
     }
     function show4(){
-        document.getElementById("links").style.display = "none"; 
+        document.getElementById("links").style.display = "none";
+<?php if ($user->isadmin){ ?>
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "inline"; 
         document.getElementById("subjects").style.display = "none";
         document.getElementById("staff").style.display = "none";
+<?php } ?>
     }
     function show5(){
-        document.getElementById("links").style.display = "none"; 
+        document.getElementById("links").style.display = "none";
+<?php if ($user->isadmin){ ?>
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "inline";
         document.getElementById("staff").style.display = "none";
+<?php } ?>
     }
     function show6(){
-        document.getElementById("links").style.display = "none"; 
+        document.getElementById("links").style.display = "none";
+<?php if ($user->isadmin){ ?>
         document.getElementById("statistics").style.display = "none"; 
         document.getElementById("classes").style.display = "none"; 
         document.getElementById("subjects").style.display = "none";
         document.getElementById("staff").style.display = "inline";
+<?php } ?>
     }
     function loadsubjects(classname){
         var ajax = new XMLHttpRequest();
@@ -156,6 +166,7 @@ else{
             console.log('link delete : '+vidid);
         };
     }
+<?php if ($user->isadmin){ ?>
     function classes_edit(editonsuccess, userid, subjectstring){
         //fetch existing data
         var checksubjects = subjectstring.split(','); //console.log(checksubjects);
@@ -219,6 +230,7 @@ else{
             console.log('class delete : '+id);
         }
     }
+<?php } ?>
     function change_password(staffid){
         var element=document.getElementById('thefuckingpasswordchange');
         var passes = element.getElementsByTagName('input');
@@ -252,6 +264,7 @@ else{
             console.log('change password : '+staffid);
         }
     }
+<?php if ($user->isadmin){ ?>
     function reset_password(staffid){
         var passinfo = document.getElementById("reset_password_stuff");
         var pass1 = passinfo.getElementsByTagName('input')[0];
@@ -282,7 +295,7 @@ else{
             }
         }
     }
-    function makeadmin(editonsuccess, admin, staffid){        
+    function makeadmin(editonsuccess, admin, staffid){
         var params = encodeURIComponent("staffid")+'='+encodeURIComponent(staffid)+'&'+
             encodeURIComponent('admin')+'='+encodeURIComponent(admin);
         
@@ -346,15 +359,18 @@ else{
             console.log('subject delete : '+subjid);
         };
     }
+<?php } ?>
     function loadsection(){
         url = window.location.href;
 //        console.log(url.split('#')[1])
         switch (url.split('#')[1]){
-            case 'statistics': show1(); break;
             case 'links': show3(); break;
+<?php if ($user->isadmin){ ?>
+            case 'statistics': show1(); break;
             case 'classes': show4(); break;
             case 'subjects': show5(); break;
             case 'staff': show6(); break;
+<?php } ?>
             default: break;
         }
     }
@@ -386,13 +402,14 @@ else{
       <hr class="sidebar-divider my-0">
 
       <!-- Nav Item - Dashboard -->
+<?php if ($user->isadmin){ ?>
       <li class="nav-item">
         <a class="nav-link" href="#statistics"  onclick="show1()">
           <i class="fa fa-cogs"></i>
           <span>STATISTICS</span></a>
       </li>
       <hr class="sidebar-divider my-0">
-
+<?php } ?>
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link"  href="#links" onclick="show3()">
@@ -401,13 +418,14 @@ else{
       </li>
 
       <!-- Divider -->
-      <hr class="sidebar-divider">
+      <hr class="sidebar-divider my-0">
 
-      <!-- Heading -->
+<!--<!--Heading-- > 
       <div class="sidebar-heading">
         CHANGES
       </div>
-
+-->
+<?php if ($user->isadmin){ ?>
       <li class="nav-item">
         <a class="nav-link"  href="#classes" onclick="show4()">
           <i class="fas fa-fw fa-cog"></i>
@@ -431,6 +449,7 @@ else{
       </li>
       
       <hr class="sidebar-divider">
+<?php } ?>
       <!-- Heading -->
     </ul>
     </div>
@@ -474,8 +493,8 @@ else{
             </li>
           </ul>
         </nav>
-
-       
+        
+<?php if ($user->isadmin){ ?>
 <!--Stastictis page -->
         <div class="container-fluid" id="statistics" name="section" style="display: inline;">
 
@@ -534,7 +553,7 @@ else{
       </div>
     </div>
 </div>
-        </div>    
+        </div>
 <!--profile edit -->
         <div class="container-fluid" id="staff" name="section" style="display: none;">
         <table class="table borderless"   style="text-align:center;">
@@ -589,7 +608,8 @@ else{
     </tr>
   </tbody>
 </table>
-</div> 
+</div>
+<?php } ?>
 
   <!-- staff >> reset password -->
   <div class="modal" id="resetpassword">
@@ -747,6 +767,7 @@ else{
   </thead>
   <tbody>
 <?php
+            $links = getLinks();
             if ($links == false){
 //                #INCOMPLETE NO LINKS HAVE BEEN ADDED message
             } else while ($link = mysqli_fetch_array($links)){ ?>
@@ -771,7 +792,8 @@ else{
   </tbody>
 </table>
         </div> 
-                 
+        
+<?php if ($user->isadmin){ ?>        
      <!-- edit class DETAILS -->            
 <div class="container-fluid" id="classes" name="section" style="display: none;">
   <table class="table borderless" style="text-align:center;" >
@@ -809,7 +831,7 @@ else{
   </tbody>
 </table>
        
-        </div>               
+        </div>              
 
             <!-- edit subjects -->     
 <div class="container-fluid" id="subjects" name="section" style="display: none;">
@@ -848,7 +870,8 @@ else{
   </tbody>
 </table>
 
-        </div>             
+        </div>  
+<?php } ?>           
       </div>
       <!-- End of Main Content -->
 
