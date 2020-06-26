@@ -93,13 +93,13 @@ if (!isset($_POST['submit'])){
 <div class="d-md-flex h-md-100 align-items-center">
 	<div class="col-md-6 p-0 bg-indigo h-md-100" style="background-image: url(img/thumpnail.png); background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position:102px 54px;">
+  background-position:102px 56px;">
 		<div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
 		</div>
 	</div>
 	<div class="col-md-6 p-0 bg-white h-md-100 loginarea" style="background-image: url(img/img11.JPG); background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 700px auto;
+  background-size: 750px auto;
   background-position:right top;
   opacity: 1;">
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
@@ -112,8 +112,6 @@ if (!isset($_POST['submit'])){
 					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="" name="password">
 				</div>
 				<button type="submit" class="btn btn-success btn-round btn-block shadow-sm" id="submit" name="submit" disabled>Sign in</button>
-				<br>
-				<a href="#!" class="forgot-password-link" >Forgot password?</a>
 			</form>
 			
 		</div>
