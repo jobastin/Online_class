@@ -302,7 +302,8 @@ else{
     }
     function subjects_edit(editonsuccess, subjid){
         var subject = document.getElementById('subject_edit_subject');
-        subject.value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
+        console.log(editonsuccess);
+        subject.value = editonsuccess.getElementsByTagName('td')[1].innerHTML;
         
         document.getElementById('subject_edit_submit').onclick = function(){
             var ajax = new XMLHttpRequest();
@@ -314,7 +315,7 @@ else{
                 var result = this.responseText.split('<br>');
                 for (x of result) console.log(x);
                 if ((result[0]) == 'subject edit success'){
-                    editonsuccess.getElementsByTagName('td')[0].innerHTML = result[1];
+                    editonsuccess.getElementsByTagName('td')[1].innerHTML = result[1];
                 } else {
                     // #INCOMPLETE : display db edit subject error message
                 }
