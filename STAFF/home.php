@@ -384,7 +384,7 @@ else{
                   Password
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="../logout.php" data-toggle="modal" data-target="#logoutModal" id="logout">
+                <a class="dropdown-item" style="cursor:pointer;" data-toggle="modal" data-target="#logoutModal" id="logout">
                   <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                   Logout
                 </a>
