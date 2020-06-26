@@ -219,6 +219,87 @@ else{
             console.log('class delete : '+id);
         }
     }
+    function change_password(staffid){
+        var element=document.getElementById('thefuckingpasswordchange');
+        var passes = element.getElementsByTagName('input');
+        var oldpass = passes[0];
+        var pass = passes[1];
+        var pass2 = passes[2];
+
+        if (pass.value != pass2.value){
+            alert("Passwords don't match");
+            return;
+        } else {
+            var params = encodeURIComponent('setpasswordto') + '=' + encodeURIComponent(pass2.value) + '&' + encodeURIComponent('staffid') + '=' + encodeURIComponent(staffid) + '&' + encodeURIComponent('oldpassword') + '=' + encodeURIComponent(oldpass.value);
+            var ajax = new XMLHttpRequest();
+            ajax.onreadystatechange = function(){
+                if (!(this.readyState == 4 && this.status == 200)) return;
+                var result = this.responseText;
+                if (result == "password change success"){
+                    alert("Password has been changed");
+                } else if (result == 'wrong password'){
+                    alert("The password provided was incorrect");
+                } else {
+                    alert("There was an error in changing password");
+                }
+                console.log(result);
+                pass.value = pass2.value = "";
+            }
+            ajax.open("post", "changepassword.php");
+            ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+            ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            ajax.send(params);
+            console.log('change password : '+staffid);
+        }
+    }
+    function reset_password(staffid){
+        var passinfo = document.getElementById("reset_password_stuff");
+        var pass1 = passinfo.getElementsByTagName('input')[0];
+        var pass2 = passinfo.getElementsByTagName('input')[1];
+        passinfo.getElementsByTagName('button')[1].onclick = function(){
+            if (pass1.value != pass2.value){
+                alert("Passwords don't match");
+                return;
+            } else {
+                var params = encodeURIComponent('resetpasswordto')+'='+encodeURIComponent(pass2.value)+'&'+
+                    encodeURIComponent('staffid')+'='+encodeURIComponent(staffid);
+                var ajax = new XMLHttpRequest();
+                ajax.onreadystatechange = function(){
+                    if (!(this.readyState == 4 && this.status == 200 )) return;
+                    var result = this.responseText;
+                    if (result == "reset success")
+                        alert("Password reset successfully");
+                    else 
+                        alert("There was an error in reseting the password");
+                    console.log(result);
+                    pass1.value = pass2.value="";
+                }
+                ajax.open("post", "resetpass.php");
+                ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+                ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                ajax.send(params);
+                console.log('reset password : '+staffid);
+            }
+        }
+    }
+    function makeadmin(editonsuccess, admin, staffid){        
+        var params = encodeURIComponent("staffid")+'='+encodeURIComponent(staffid)+'&'+
+            encodeURIComponent('admin')+'='+encodeURIComponent(admin);
+        
+        var ajax = new XMLHttpRequest();
+        ajax.onreadystatechange = function(){
+            if (!(this.readyState == 4 && this.status == 200)) return;
+            var result = this.responseText;
+            console.log(result);
+            if (result != "update success")
+                alert("There was an error during reset of administrator permissions.")
+        }
+        ajax.open("post", "makeadmin.php");
+        ajax.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+        ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        ajax.send(params);
+        console.log('admin : '+staffid);
+    }
     function subjects_edit(editonsuccess, subjid){
         var subject = document.getElementById('subject_edit_subject');
         subject.value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
@@ -476,18 +557,18 @@ else{
       <td><?php echo $row['links']; ?></td>
       <td><?php echo $row['classes']; ?></td>
       <td><div class="custom-control custom-checkbox">
-          <input name="yes" value="Yes" type="checkbox" class="custom-control-input" id="yes">
-          <label class="custom-control-label" for="yes">Yes</label>
+          <input name="admin<?php echo $row['username']; ?>" value="Yes" type="radio" class="custom-control-input" id="yesradio<?php echo $row['username']; ?>" <?php if ($row['isadmin']) echo "checked"; ?> onclick="makeadmin(this.parentElement.parentElement.parentElement, true, <?php echo $row['id']; ?>)" >
+          <label class="custom-control-label" for="yesradio<?php echo $row['username']; ?>">Yes</label>
           </div>
           </td>
          <td>
          <div class="custom-control custom-checkbox">
-          <input name="no" value="No" type="checkbox" class="custom-control-input" id="no">
-          <label class="custom-control-label" for="no">No</label>
+          <input name="admin<?php echo $row['username']; ?>" value="No" type="radio" class="custom-control-input" id="noradio<?php echo $row['username']; ?>" <?php if (!$row['isadmin']) echo "checked"; ?> onclick="makeadmin(this.parentElement.parentElement.parentElement, false, <?php echo $row['id']; ?>)" >
+          <label class="custom-control-label" for="noradio<?php echo $row['username']; ?>">No</label>
           </div>
           </td>
         <td>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resetpassword">Reset Password</button></td>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resetpassword" onclick="reset_password(<?php echo $row['id']; ?>)">Reset Password</button></td>
 <!--
       <td>
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
@@ -512,7 +593,7 @@ else{
   <!-- staff >> reset password -->
   <div class="modal" id="resetpassword">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content" id="reset_password_stuff">
 
       <!-- Modal Header -->
       <div class="modal-header">
@@ -523,11 +604,11 @@ else{
       <!-- Modal body -->
       <div class="modal-body">
             <div class="input-group">
-                <input class="form-control" type="password" placeholder="New Password">
+                <input class="form-control reset_password" type="password" placeholder="New Password">
             </div>
             <br>
             <div class="input-group">
-                <input class="form-control" type="password" placeholder="Confrim New Password">
+                <input class="form-control reset_password" type="password" placeholder="Confrim New Password">
             </div>
             <br>
       </div>
@@ -802,7 +883,7 @@ else{
    <!-- Profile Modal-->
 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content" id="thefuckingpasswordchange">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -824,7 +905,7 @@ else{
             <br>
         </div>
         <div class="modal-footer">
-          <a class="btn btn-primary" href="login.html">Save</a>
+          <a class="btn btn-primary" href="#" onclick="change_password(<?php echo $user->id; ?>)">Save</a>
         </div>
       </div>
     </div>

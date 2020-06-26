@@ -232,7 +232,7 @@ else {
         $('#myModalPrev').on('hidden.bs.modal', function () {
        $('#myModalPrev .modal-body').empty();
     });
-    }else {
+    } else {
         alert("NO VIDEO UPLOADED");
     }
     }
