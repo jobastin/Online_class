@@ -461,7 +461,7 @@ else{
       <th scope="col">Staff username</th>
       <th scope="col">Links Uploaded</th>
       <th scope="col">Classes</th>
-      <th scope="col" colspan="2">Administrator Privilege</th>
+      <th scope="col" colspan="2" title="Administrators have more control than other staff.">Administrator</th>
       <th scope="col">Reset</th>
     </tr>
   </thead>
@@ -476,13 +476,13 @@ else{
       <td><?php echo $row['links']; ?></td>
       <td><?php echo $row['classes']; ?></td>
       <td><div class="custom-control custom-checkbox">
-          <input name="yes" value="Yes" type="checkbox" class="custom-control-input" id="yes">
+          <input name="admin<?php echo $row['username']?>" value="Yes" type="radio" class="custom-control-input" <?php if ($row['isadmin']) echo "checked"; ?> >
           <label class="custom-control-label" for="yes">Yes</label>
           </div>
-          </td>
+        </td>
          <td>
          <div class="custom-control custom-checkbox">
-          <input name="no" value="No" type="checkbox" class="custom-control-input" id="no">
+          <input name="admin<?php echo $row['username']?>" value="No" type="radio" class="custom-control-input" <?php if (!$row['isadmin']) echo "checked"; ?> >
           <label class="custom-control-label" for="no">No</label>
           </div>
           </td>
