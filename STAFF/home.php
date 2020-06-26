@@ -455,7 +455,7 @@ else{
         </div>    
 <!--profile edit -->
         <div class="container-fluid" id="staff" name="section" style="display: none;">
-        <table class="table borderless"   style="margin: auto;width: 50% !important;">
+        <table class="table borderless"   style="text-align:center;">
   <thead>
     <tr>
       <th scope="col">Staff username</th>
@@ -765,13 +765,7 @@ else{
   </tbody>
 </table>
 
-        </div> 
-                  
-                  
-                  
-                  
-
-                  
+        </div>             
       </div>
       <!-- End of Main Content -->
 
