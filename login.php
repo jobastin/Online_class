@@ -53,6 +53,7 @@ if (!isset($_POST['submit'])){
                 console.log('"'+this.responseText+'"')
                 if (this.responseText == 'true'){
                     document.getElementById("exampleInputEmail1").style.borderColor = "green";
+                    document.getElementById("submit").disabled = false;
                 }else if (this.responseText == 'false'){
             
                 }
@@ -105,7 +106,7 @@ if (!isset($_POST['submit'])){
 				<div class="form-group">
 					<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required="" name="password">
 				</div>
-				<button type="submit" class="btn btn-success btn-round btn-block shadow-sm" name="submit">Sign in</button>
+				<button type="submit" class="btn btn-success btn-round btn-block shadow-sm" id="submit" name="submit" disabled>Sign in</button>
 				<br>
 				<a href="#!" class="forgot-password-link" >Forgot password?</a>
 			</form>
