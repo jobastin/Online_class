@@ -692,7 +692,7 @@ else{
                  
      <!-- edit class DETAILS -->            
 <div class="container-fluid" id="classes" name="section" style="display: none;">
-  <table class="table borderless" >
+  <table class="table borderless" style="text-align:center;" >
   <thead>
     <tr>
 <!--
@@ -732,11 +732,13 @@ else{
             <!-- edit subjects -->     
 <div class="container-fluid" id="subjects" name="section" style="display: none;">
 
-            <table class="table borderless" style="margin: auto;width: 50% !important;">
+            <table class="table borderless"  style="text-align:center;">
   <thead>
     <tr>
+      <th></th>
       <th scope="col">SUBJECTS</th>
-      <th scope="col">ACTION</th>
+      <th scope="col" style="text-align:left">ACTION</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -746,16 +748,18 @@ else{
 //                #INCOMPLETE - show no subjects message
             } else while ($row = mysqli_fetch_array($allsubs)){ ?>
     <tr>
+     <td></td>
       <td><?php echo $row['subjectname']; ?></td>
-      <td>
+      <td style="text-align:left">
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject" onclick="subjects_edit(this.parentElement.parentElement, <?php echo $row['id']; ?>)">Edit</button>
          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="subjects_delete(<?php echo $row['id']; ?>, this.parentElement.parentElement)">Delete</button>
           </td>
+          <td></td>
     </tr>
 <?php       } ?>
     <tr>
        <td colspan="2"></td>
-        <td><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addsubject">ADD SUBJECT</button>
+        <td style="text-align:left"><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addsubject">ADD SUBJECT</button>
         </td>
     </tr>
   </tbody>
