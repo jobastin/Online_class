@@ -817,7 +817,7 @@ else{
   <thead>
     <tr>
       <th></th>
-      <th scope="col">SUBJECTS</th>
+      <th scope="col" style="text-align:right">SUBJECTS</th>
       <th scope="col" style="text-align:left">ACTION</th>
       <th></th>
     </tr>
@@ -830,7 +830,7 @@ else{
             } else while ($row = mysqli_fetch_array($allsubs)){ ?>
     <tr>
      <td></td>
-      <td><?php echo $row['subjectname']; ?></td>
+      <td style="text-align:right"><?php echo $row['subjectname']; ?></td>
       <td style="text-align:left">
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#editsubject" onclick="subjects_edit(this.parentElement.parentElement, <?php echo $row['id']; ?>)">Edit</button>
          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal5" onclick="subjects_delete(<?php echo $row['id']; ?>, this.parentElement.parentElement)">Delete</button>
@@ -841,6 +841,7 @@ else{
     <tr>
        <td colspan="2"></td>
         <td style="text-align:left"><button type="button" class="btn btn-primary"  data-toggle="modal" data-target="#addsubject">ADD SUBJECT</button>
+        <tr></tr>
         </td>
     </tr>
   </tbody>
