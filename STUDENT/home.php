@@ -128,7 +128,11 @@ else {
                 if(id!='logout')
                 var vids = allvids[id]; //gets all the links to that subject
                 if (vids.length == 0){
-                    alert("No Videos Uploaded");
+                    document.getElementById("accordion2").style.display = "inline"; 
+                    //var iv = document.getElementById('accordion');
+                    //iv.innerHTML += ' ';
+                    //iv.innerHTML += '<center><h3>No chapters Added<h3></center>';
+                    //document.getElementById("accordion").innerText = "\tNo chapters Uploaded";   
                 }
                 //fetch all chapters for which links are available
                 var chap = [];
@@ -140,6 +144,7 @@ else {
                 var parent = document.getElementsByClassName('card')[0];
                 parent.innerHTML = "";
                 for (x of chap){
+                    document.getElementById("accordion2").style.display = "none";
                     parent.innerHTML += '<div class="card-header collapsed" data-toggle="collapse" href="#collapse'+x+'"><a class="card-title">Chapter '+x+'</a></div>';
                     for (y of vids) if (y.chapter == x){
                         parent.innerHTML += '<div id="collapse'+x+'" class="card-body collapse" data-parent="#accordion" ><a  href="#" data-toggle="modal" data-target="#myModalPrev"  onClick="re(\'' +y.vlink+ '\')">'+y.title+'</a></div>'; 
@@ -151,6 +156,12 @@ else {
            <B><div id="accordion" class="accordion">
         <div class="card mb-0" style="background-color:#DAE0E2;">
            <center><h2>Select a subject to view Classes</h2>
+           </center>
+        </div>
+    </div></B>
+        <B><div id="accordion2" style="display: none;">
+        <div class="card mb-0" style="background-color:#DAE0E2;">
+           <center><h2>No chapters added</h2>
            </center>
         </div>
     </div></B>
@@ -195,7 +206,7 @@ else {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body embed-responsive embed-responsive-16by9">
-                   VIDEO YET TO UPLOAD
+                   
                 </div>
             </div>
         </div>
