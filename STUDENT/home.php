@@ -195,7 +195,7 @@ else {
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-body embed-responsive embed-responsive-16by9">
-                    Modal Content
+                   VIDEO YET TO UPLOAD
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@ else {
        $('#myModalPrev .modal-body').empty();
     });
     }else {
-        alert("error");
+        alert("NO VIDEO UPLOADED");
     }
     }
     </script>
