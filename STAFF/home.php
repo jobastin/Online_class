@@ -580,7 +580,8 @@ else{
           </div>
           </td>
         <td>
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resetpassword" onclick="reset_password(<?php echo $row['id']; ?>)">Reset Password</button></td>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#resetpassword" onclick="reset_password(<?php echo $row['id']; ?>)">Reset Password</button>
+            </td>
 <!--
       <td>
          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#changepassword">Change Password</button>
@@ -694,7 +695,7 @@ else{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFIRM</button>
       </div>
 
     </div>
@@ -716,7 +717,7 @@ else{
       <!-- Modal body -->
       <div class="modal-body">
             <div class="input-group">
-                <input name="staffusername" class="form-control" type="text" placeholder="Username">
+                <input name="staffusername" class="form-control" type="text" placeholder="Username" id="staffname1" oninput="check4()">
             </div>
             <br>
             <div class="input-group">
@@ -731,7 +732,7 @@ else{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <input type="submit" class="btn btn-success" value="CONFIRM" /><!--data-dismiss="modal"-->
+        <input type="submit" class="btn btn-success" value="CONFIRM" id="t1" disabled/><!--data-dismiss="modal"-->
       </div>
 
         </form>
@@ -983,7 +984,7 @@ else{
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text" id="link_edit_link" required title="Find the Video link by clicking on the share option underneath the YouTube video and copying the link." placeholder="example : https://youtu.be/lJIrF4YjHfQ">
+                    <input name="vlink" class="form-control" type="text" id="link_edit_link" required title="Find the Video link by clicking on the share option underneath the YouTube video and copying the link." placeholder="example : https://youtu.be/lJIrF4YjHfQ" oninput="check2()">
                 </div>
             </td>
         </tr>
@@ -1213,7 +1214,8 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-         <input type="text" class="form-control" placeholder="Class Name" name="username"/>
+         <input type="text" class="form-control" placeholder="Class Name" name="username" id="classname1" oninput=check3() />
+         <span><b>&nbsp;&nbsp;&nbsp;Class name should not have space in between</b></span>
          <br>
         <input type="text" class="form-control" placeholder="Password" name="password"/>
         <br>
@@ -1260,7 +1262,7 @@ else{
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <input type="submit" class="btn btn-success" value="ADD CLASS" /><!-- data-dismiss="modal" -->
+        <input type="submit" class="btn btn-success" value="ADD CLASS" id="addclass1" disabled /><!-- data-dismiss="modal" -->
       </div>
 
   </form>
@@ -1322,13 +1324,13 @@ else{
             <th scope="row">Video Link</th>
             <td>
                 <div class="dropdown">
-                    <input name="vlink" class="form-control" type="text" required title="Find the Video link by clicking on the share option underneath the YouTube video and copying the link." placeholder="example : https://youtu.be/lJIrF4YjHfQ">
+                    <input name="vlink" class="form-control" type="text" required id="ylink1" title="Find the Video link by clicking on the share option underneath the YouTube video and copying the link." placeholder="example : https://youtu.be/lJIrF4YjHfQ" oninput="check1()">
                 </div>
             </td>
         </tr>
         <tr>
            <td colspan="2">
-                <center><input class="btn btn-success btn-primary btn-lg form-control" type="submit"  value="Upload"></center>
+                <center><input class="btn btn-success btn-primary btn-lg form-control" id="up1" type="submit"  value="Upload" disabled></center>
             </td>
         </tr>
     </tbody>
@@ -1340,7 +1342,83 @@ else{
 
   </div>
 </div>
-
+    <script>
+    function check1()
+  {
+  var n=document.getElementById("ylink1");
+  var letter=/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  if((n.value == "") || (!n.value.match(letter)) )
+  {
+    document.getElementById("ylink1").style.borderColor = "red";
+        ylink1.focus();
+        return false;
+}
+  else if(n.value.match(letter))
+  {
+      document.getElementById("ylink1").style.borderColor = "green";
+     up1.disabled = false;
+      return false;
+  }
+}
+        
+  function check2()
+  {
+  var n=document.getElementById("link_edit_link");
+  var letter=/^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  if((n.value == "") || (!n.value.match(letter)) )
+  {
+    document.getElementById("link_edit_link").style.borderColor = "red";
+      link_edit_submit.disabled = true;
+       link_edit_link.focus();
+        return false;
+}
+  else if(n.value.match(letter))
+  {
+      document.getElementById("link_edit_link").style.borderColor = "green";
+      link_edit_submit.disabled = false;
+      return false;
+  }
+}
+        
+function check3()
+  {
+  var n=document.getElementById("classname1");
+  var letter=/^[a-zA-Z0-9]*$/;
+  if((n.value == "") || (!n.value.match(letter)) )
+  {
+    document.getElementById("classname1").style.borderColor = "red";
+       classname1.focus();
+      addclass1.disabled = true;
+        return false;
+}
+  else if(n.value.match(letter))
+  {
+      document.getElementById("classname1").style.borderColor = "green";
+      addclass1.disabled = false;
+      return false;
+  }
+}
+        
+function check4()
+  {
+  var n=document.getElementById("staffname1");
+  var letter=/^[a-zA-Z0-9]*$/;
+  if((n.value == "") || (!n.value.match(letter)) )
+  {
+    document.getElementById("staffname1").style.borderColor = "red";
+       classname1.focus();
+      t1.disabled = true;
+        return false;
+}
+  else if(n.value.match(letter))
+  {
+      document.getElementById("staffname1").style.borderColor = "green";
+      t1.disabled = false;
+      return false;
+  }
+}
+       
+    </script>
   <!-- Bootstrap core JavaScript-->
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
