@@ -97,11 +97,9 @@ if (!isset($_POST['submit'])){
 		<div class="text-white d-md-flex align-items-center h-100 p-5 text-center justify-content-center">
 		</div>
 	</div>
-	<div class="col-md-6 p-0 bg-white h-md-100 loginarea" style="background-image: url(img/img11.JPG); background-repeat: no-repeat;
+	<div class="col-md-6 p-0 bg-white h-md-100 loginarea" style="background-image: url(img/background.JPG); background-repeat: no-repeat;
   background-attachment: fixed;
-  background-size: 750px auto;
-  background-position:right top;
-  opacity: 1;">
+  background-size: cover;">
 		<div class="d-md-flex align-items-center h-md-100 p-5 justify-content-center">
 			<form class="border rounded p-5" style="background-color: white;opacity: 1;" action="login.php" method="post">
 				<h3 class="mb-4 text-center">Sign In</h3>
