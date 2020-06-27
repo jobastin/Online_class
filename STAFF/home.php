@@ -776,10 +776,12 @@ else{
         <td style="text-align:center;"><?php echo $link['chapter']; ?></td>
         <td><?php echo $link['title']; ?></td>
         <td><?php echo $link['link']; ?></td>
-        <td>
+        <?php
+            if (($user->isadmin) or ($link['staff_id']==$user->id)) {
+        ?><td>
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal3" onclick="links_edit(this.parentElement.parentElement, <?php echo $link['vids_id']; ?>)">Edit</button>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal4" onclick="links_delete(<?php echo $link['vids_id']; ?>, this.parentElement.parentElement)">Delete</button>
-        </td>
+        </td><?php } ?>
     </tr>                
 <?php       } ?>
     <tr>
@@ -1214,8 +1216,7 @@ else{
 
       <!-- Modal body -->
       <div class="modal-body">
-         <input type="text" class="form-control" placeholder="Class Name" name="username" id="classname1" oninput=check3() />
-         <span><b>&nbsp;&nbsp;&nbsp;Class name should not have space in between</b></span>
+         <input type="text" class="form-control" placeholder="Class Name" name="username" id="classname1" oninput=check3() title="Class name should not have space in between"/>
          <br>
         <input type="text" class="form-control" placeholder="Password" name="password"/>
         <br>
@@ -1225,7 +1226,7 @@ else{
        <table class="table borderless">
   <thead>
     <tr>
-        <td colspan="2"><h4><b>Subjects To Included</b></h4></td>
+        <td colspan="2"><h4><b>Assign Subjects</b></h4></td>
     </tr>
   </thead>
   <!-- Table head -->

@@ -150,7 +150,7 @@ function getLinks(){
     //returns ALL the links published in school - COULD be restricted to staff id
     //vids_id, classname, subjectname, title, link, chapter
     $con = connect();
-    $q = "select `vids`.`id` as `vids_id`, `username` as `classname`, `subjectname`, `vids`.`title`, `vids`.`link`, `vids`.`chapter` from `user` inner join `clas` on `user`.`id`=`clas`.`user_id` inner join `subj` on `subj`.`id`=`clas`.`subj_id` inner join `vids` on `clas`.`id` = `vids`.`class_id` order by `username`, `subjectname`, `chapter`";
+    $q = "select `vids`.`id` as `vids_id`, `vids`.`staff_id`, `username` as `classname`, `subjectname`, `vids`.`title`, `vids`.`link`, `vids`.`chapter` from `user` inner join `clas` on `user`.`id`=`clas`.`user_id` inner join `subj` on `subj`.`id`=`clas`.`subj_id` inner join `vids` on `clas`.`id` = `vids`.`class_id` order by `username`, `subjectname`, `chapter`";
     $res = mysqli_query($con, $q) or die('Unable to Fetch Links');
     mysqli_close($con);
 
