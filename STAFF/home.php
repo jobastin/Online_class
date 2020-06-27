@@ -507,7 +507,7 @@ else{
             <b><p class="card-text"><?php
             $links = getLinks();
             if ($links) echo mysqli_num_rows($links);
-            else echo "#INCOMPLETE";
+            else echo "Add some videos to get the count";
             ?></p></b>
           </div>
         </div>
@@ -520,7 +520,7 @@ else{
             <b><p class="card-text"><?php
             $classes = getUsers(false);
             if ($classes) echo mysqli_num_rows($classes);
-            else echo "#INCOMPLETE";
+            else echo "Add classes to get the count";
             ?></p></b>
           </div>
         </div>
@@ -537,20 +537,12 @@ else{
             <b><p class="card-text"><?php
             $allsubs = getSubjects();
             if ($allsubs) echo mysqli_num_rows($allsubs);
-            else echo "#INCOMPLETE";
+            else echo "Add subjects to get the count";
             ?></p></b>
           </div>
         </div>
       </div>
       <br>
-      <div class="col-sm-6">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Total Number Of xxxxx</h5>
-            <b><p class="card-text">Number</p></b>
-          </div>
-        </div>
-      </div>
     </div>
 </div>
         </div>
@@ -597,8 +589,11 @@ else{
 -->
     </tr>           
 <?php           }
-            } else {
-                #INCOMPLETE show no staff message - you have no other staff but you alone XD COMEDY
+            } else { ?>
+<tr>
+    <td style="text-align:center;" colspan="6"><h3>Click on<b>ADD STAFF</b>to create a new staff user</h3></td>
+</tr>
+            <?php
             }
 ?>
     <tr>
@@ -629,13 +624,13 @@ else{
             </div>
             <br>
             <div class="input-group">
-                <input class="form-control reset_password" type="password" placeholder="Confrim New Password">
+                <input class="form-control reset_password" type="password" placeholder="Confirm New Password">
             </div>
             <br>
       </div>
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFIRM</button>
       </div>
 
     </div>
@@ -668,14 +663,14 @@ else{
             </div>
             <br>
             <div class="input-group">
-                <input class="form-control" type="password" placeholder="Confrim New Password">
+                <input class="form-control" type="password" placeholder="Confirm New Password">
             </div>
             <br>
       </div>
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-dismiss="modal">CONFRIM</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">CONFIRM</button>
       </div>
 
     </div>
@@ -768,13 +763,16 @@ else{
   <tbody>
 <?php
             $links = getLinks();
-            if ($links == false){
-//                #INCOMPLETE NO LINKS HAVE BEEN ADDED message
+            if ($links == false){?>
+<tr>
+    <td style="text-align:center;" colspan="6"><h3>Click on<b> NEW UPLOAD </b>to add videos</h3></td>
+</tr>
+            <?php
             } else while ($link = mysqli_fetch_array($links)){ ?>
     <tr>
         <td><?php echo $link['classname']; ?></td>
         <td><?php echo $link['subjectname']; ?></td>
-        <td><?php echo $link['chapter']; ?></td>
+        <td style="text-align:center;"><?php echo $link['chapter']; ?></td>
         <td><?php echo $link['title']; ?></td>
         <td><?php echo $link['link']; ?></td>
         <td>
@@ -811,14 +809,17 @@ else{
   </thead>
   <tbody>
 <?php
-            if ($classes == false){
-//                #INCOMPLETE NO CLASSES HAVE BEEN ADDED message
+            if ($classes == false){ ?>
+<tr>
+    <td style="text-align:center;" colspan="6"><h3>No classes are added click on,<b> ADD CLASS </b>to add new class</h3></td>
+</tr>
+            <?php
             } else while ($class = mysqli_fetch_array($classes)){ ?>
     <tr>
 <!--      <th scope="row">1</th>-->
       <td><?php echo $class['username']; ?></td>
       <td><?php echo $class['password']; ?></td>
-        <td><button type="button" class="btn btn-info" data-toggle="modal" data-target="#editclass" onclick="classes_edit(this.parentElement.parentElement, <?php echo $class['id'].', \''.$class['subjects'].'\''; ?>)">Edit</button>
+        <td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#editclass" onclick="classes_edit(this.parentElement.parentElement, <?php echo $class['id'].', \''.$class['subjects'].'\''; ?>)">Edit</button>
           <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal6" onclick="classes_delete(<?php echo $class['id']; ?>, this.parentElement.parentElement)" >Delete</button>
           </td>
     </tr>
@@ -848,8 +849,11 @@ else{
   <tbody>
 <?php 
             $allsubs = getSubjects();
-            if ($allsubs == false){
-//                #INCOMPLETE - show no subjects message
+            if ($allsubs == false){?>
+<tr>
+    <td style="text-align:center;" colspan="6"><h3>No Subjects are added click on,<b> ADD SUBJECT </b>to add new subject</h3></td>
+</tr>
+            <?php
             } else while ($row = mysqli_fetch_array($allsubs)){ ?>
     <tr>
      <td></td>
@@ -925,7 +929,7 @@ else{
             </div>
             <br>
             <div class="input-group">
-                <input class="form-control" type="password" placeholder="Confrim New Password">
+                <input class="form-control" type="password" placeholder="Confirm New Password">
             </div>
             <br>
         </div>
@@ -1158,8 +1162,11 @@ else{
 <?php
             $subs = getSubjects();
             $alternate = false;
-            if ($subs == false){
-//                #INCOMPLETE : SHOW MESSAGE : NO SUBJECTS TO ADD
+            if ($subs == false){?>
+<tr>
+    <td style="text-align:center;"><h5>Click on Subjects,<b> ADD SUBJECT</b>to add new subject</h5></td>
+</tr>
+            <?php
             } else while ($sub = mysqli_fetch_array($subs)){
                 if (!$alternate){ ?>
     <tr>
@@ -1176,7 +1183,6 @@ else{
                 $alternate = !$alternate;
             }
             if ($alternate){ ?>
-    </tr>
 <?php       } ?>
   </tbody>
 </table>
@@ -1225,8 +1231,11 @@ else{
 <?php
             $subs = getSubjects();
             $alternate = false;
-            if ($subs == false){
-//                #INCOMPLETE : SHOW MESSAGE : NO SUBJECTS TO ADD - copy from same line existing on top
+            if ($subs == false){?>
+<tr>
+    <td style="text-align:center;"><h5>Click on Subjects,<b> ADD SUBJECT</b>to add new subject</h5></td>
+</tr>
+            <?php
             } else while ($sub = mysqli_fetch_array($subs)){
                 if (!$alternate){ ?>
     <tr>
@@ -1243,7 +1252,6 @@ else{
                 $alternate = !$alternate;
             }
             if ($alternate){ ?>
-    </tr>
 <?php       } ?>
   </tbody>
 </table>
@@ -1261,15 +1269,6 @@ else{
 </div> 
 
   
-    
-     
-
-     
-     
-     
-     
-     
-     
      
 <!-- UPLOAD >>>upload new video -->     
 <div id="newupload" class="modal fade " role="dialog">
