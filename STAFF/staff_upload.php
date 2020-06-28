@@ -14,7 +14,6 @@ else $staffisad = 0;
 
 //sterilize input?
 
-print_r($_POST);
 if ($_POST['staffisadmin'] === "1")
     echo "success";
 if (false){ //userexists($staffuser)){ ?>

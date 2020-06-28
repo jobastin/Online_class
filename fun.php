@@ -3,10 +3,10 @@ $loginpage = "login.php";
 
 function connect($caller="fun"){
     //helps to connect to whicheveer database is being used
-    $server = "localhost";
-    $db = "onlineclass";
-    $user = "root";
-    $pw = "";
+    $server = "sql223.main-hosting.eu";
+    $db = "u724577472_onlineclass";
+    $user = "u724577472_theadmin";
+    $pw = "5&gry49:";
     $con = mysqli_connect($server, $user, $pw, $db) or die("$caller : Unable to connect to db.");
     return $con;
 }
@@ -26,11 +26,11 @@ function signin($username, $password){
         session_start();
         $_SESSION['user'] = new user($row['id'], $row['username'], $row['isstaff'], $row['isadmin']);
         if ($_SESSION['user']->isstaff()){
-            header('Location: staff/');
+            header('Location: STAFF/');
             return;
         }
         else{
-            header('Location: student/');
+            header('Location: STUDENT/');
             return;
         }
     } else
