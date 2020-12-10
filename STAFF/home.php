@@ -114,7 +114,7 @@ else{
         var chapter = document.getElementById('link_edit_chapter');
         var title = document.getElementById('link_edit_title');
         var link = document.getElementById('link_edit_link');
-        document.getElementById('link_edit_classname').value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
+        document.getElementById('f').value = editonsuccess.getElementsByTagName('td')[0].innerHTML;
         document.getElementById('link_edit_subjectname').value = editonsuccess.getElementsByTagName('td')[1].innerHTML;
         document.getElementById('link_edit_vidid').value = vidid;
         chapter.value = editonsuccess.getElementsByTagName('td')[2].innerHTML;

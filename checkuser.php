@@ -7,7 +7,6 @@ if (preg_match('/^[a-zA-Z0-9]+$/', $user)){
     $res = mysqli_query($con, "select * from user where
     username='$user';");
     mysqli_close($con);
-    
     if(mysqli_num_rows($res)){
         echo "true";
     } else {

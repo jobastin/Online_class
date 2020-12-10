@@ -47,6 +47,7 @@ function sessioncheck(){
     }
 }
 function sessiondelete(){
+    
     //deletes session information
     session_start();
     if (isset($_SESSION['user'])){
